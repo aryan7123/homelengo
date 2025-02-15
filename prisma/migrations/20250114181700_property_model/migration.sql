@@ -1,0 +1,32 @@
+-- CreateTable
+CREATE TABLE "Property" (
+    "id" SERIAL NOT NULL,
+    "title" VARCHAR(255) NOT NULL,
+    "description" TEXT NOT NULL,
+    "fullAddress" VARCHAR(255) NOT NULL,
+    "zipCode" VARCHAR(255) NOT NULL,
+    "country" VARCHAR(255) NOT NULL,
+    "provinceState" VARCHAR(255) NOT NULL,
+    "neighbourhood" VARCHAR(255) NOT NULL,
+    "location" VARCHAR(255) NOT NULL,
+    "price" VARCHAR(255) NOT NULL,
+    "unitPrice" TEXT,
+    "beforePrice" TEXT,
+    "afterPrice" TEXT,
+    "propertyType" VARCHAR(255) NOT NULL,
+    "propertyStatus" VARCHAR(255) NOT NULL,
+    "propertyLabel" VARCHAR(255) NOT NULL,
+    "size" VARCHAR(255) NOT NULL,
+    "landArea" VARCHAR(255) NOT NULL,
+    "propertyId" VARCHAR(255) NOT NULL,
+    "rooms" VARCHAR(255) NOT NULL,
+    "bedrooms" VARCHAR(255) NOT NULL,
+    "bathrooms" VARCHAR(255) NOT NULL,
+    "garage" VARCHAR(255) NOT NULL,
+    "garageSize" VARCHAR(255) NOT NULL,
+    "yearBuilt" VARCHAR(255) NOT NULL,
+    "amenities" TEXT[],
+    "photos" TEXT[],
+
+    CONSTRAINT "Property_pkey" PRIMARY KEY ("id")
+);
