@@ -50,6 +50,17 @@ const page = () => {
     }
   }
 
+  const deleteProperty = async(propertyId: number) => {
+    try {
+      const response = await axios.delete('/api/delete-property', { data: { id: propertyId } });
+      if(response.data.message === "Property Removed Successfully") {
+        await fetchProperties();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     fetchProperties();
   }, []);
@@ -125,7 +136,7 @@ const page = () => {
                         <CrosshairIcon size={15} className='text-[#A3ABB0]'/>
                         <span>Sold</span>
                       </button>
-                      <button type="button" className="flex items-center gap-1">
+                      <button onClick={() => deleteProperty(property?.id)} type="button" className="flex items-center gap-1">
                         <DeleteIcon size={15} className='text-[#A3ABB0]'/>
                         <span>Delete</span>
                       </button>
