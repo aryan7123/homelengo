@@ -30,7 +30,7 @@ const PropertiesClient = () => {
   const filteredProperties = properties.filter(
     (property) =>
       property.title.toLowerCase().includes(searchText.toLowerCase()) &&
-      (selectStatus === "All" || property.status === selectStatus),
+      ((selectStatus === "" || selectStatus === "All") || property.status === selectStatus),
   )
 
   const handleSelectStatus = (value: string) => {
@@ -119,7 +119,7 @@ const PropertiesClient = () => {
                   <TableCell className="flex items-start gap-5">
                     <Image
                       className="rounded-lg"
-                      src={property.photos[0] || "/placeholder.svg"}
+                      src={property.photos[0]}
                       width={168}
                       height={100}
                       alt={property.title}
