@@ -8,7 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import axios from "axios"
 import Image from "next/image"
 import { Pencil, Trash2, Target } from "lucide-react"
-
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination"
 interface Property {
   id: number
   title: string
@@ -22,9 +22,12 @@ const PropertiesClient = () => {
   const [btnTextMap, setBtnTextMap] = useState<{ [key: number]: boolean }>({})
   const [searchText, setSearchText] = useState("")
   const [selectStatus, setSelectStatus] = useState("")
+  const [currentPage, setCurrentPage] = useState(1)
+  const propertiesPerPage = 5
 
   const handleSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value)
+    setCurrentPage(1)
   }
 
   const filteredProperties = properties.filter(
@@ -35,6 +38,7 @@ const PropertiesClient = () => {
 
   const handleSelectStatus = (value: string) => {
     setSelectStatus(value)
+    setCurrentPage(1)
   }
 
   const fetchProperties = async () => {
@@ -72,6 +76,15 @@ const PropertiesClient = () => {
   useEffect(() => {
     fetchProperties()
   }, [])
+
+  const indexOfLastProperty = currentPage * propertiesPerPage
+  const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage
+  const currentProperties = filteredProperties.slice(indexOfFirstProperty, indexOfLastProperty)
+  const totalPages = Math.ceil(filteredProperties.length / propertiesPerPage)
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber)
+  }
 
   return (
     <div className="max-w-7xl mx-auto md:px-[120px] px-6 transition-[padding] duration-300 py-10">
@@ -114,7 +127,7 @@ const PropertiesClient = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredProperties.map((property) => (
+              {currentProperties.map((property) => (
                 <TableRow key={property.id}>
                   <TableCell className="flex items-start gap-5">
                     <Image
@@ -166,6 +179,21 @@ const PropertiesClient = () => {
             </TableBody>
           </Table>
         </div>
+
+        {totalPages > 1 && (
+          <Pagination>
+            <PaginationContent>
+              <PaginationPrevious onClick={() => handlePageChange(Math.max(1, currentPage - 1))} />
+              {[...Array(totalPages)].map((_, index) => (
+                <PaginationItem key={index}>
+                  <PaginationLink onClick={() => handlePageChange(index + 1)}>{index + 1}</PaginationLink>
+                </PaginationItem>
+              ))}
+              <PaginationNext onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))} />
+            </PaginationContent>
+          </Pagination>
+        )}
+
       </div>
     </div>
   )
