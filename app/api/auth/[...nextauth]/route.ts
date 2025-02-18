@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         return {
-          id: user.id.toString(), // Ensure ID is returned as a string
+          id: user.id.toString(),
           email: user.email,
           name: user.username,
         };
@@ -49,13 +49,13 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }: { token: any; user?: { id: number } }) {
       if (user) {
-        token.id = user.id.toString(); // Explicitly set `id` as a string
+        token.id = user.id.toString();
       }
       return token;
     },
     async session({ session, token }: { session: any; token: { id?: string } }) {
       if (session.user) {
-        session.user.id = token.id ?? ""; // Ensure `id` exists
+        session.user.id = token.id ?? "";
       }
       return session;
     },
