@@ -11,10 +11,10 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
-      name: 'Credentials',
+      name: "Credentials",
       credentials: {
         email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email }
+          where: { email: credentials.email },
         });
 
         if (!user) {
@@ -36,26 +36,26 @@ export const authOptions: NextAuthOptions = {
         }
 
         return {
-          id: user.id,
+          id: user.id.toString(), // Ensure ID is returned as a string
           email: user.email,
           name: user.username,
         };
-      }
-    })
+      },
+    }),
   ],
   session: {
-    strategy: 'jwt',
+    strategy: "jwt",
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: any; user?: { id: number } }) {
       if (user) {
-        token.id = user.id;
+        token.id = user.id.toString(); // Explicitly set `id` as a string
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: { id?: string } }) {
       if (session.user) {
-        session.user.id = token.id as string;
+        session.user.id = token.id ?? ""; // Ensure `id` exists
       }
       return session;
     },
