@@ -9,6 +9,7 @@ import axios from "axios"
 import Image from "next/image"
 import { Pencil, Trash2, Target } from "lucide-react"
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination"
+import Link from "next/link";
 interface Property {
   id: number
   title: string
@@ -97,9 +98,7 @@ const PropertiesClient = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="All">All</SelectItem>
-              <SelectItem value="Approved">Approved</SelectItem>
               <SelectItem value="Pending">Pending</SelectItem>
-              <SelectItem value="Hidden">Hidden</SelectItem>
               <SelectItem value="Sold">Sold</SelectItem>
             </SelectContent>
           </Select>
@@ -153,10 +152,10 @@ const PropertiesClient = () => {
                     </button>
                   </TableCell>
                   <TableCell className="flex flex-col gap-2.5">
-                    <button type="button" className="flex items-center gap-1">
+                    <Link href={`/dashboard/edit-property/${property.id}`} type="button" className="flex items-center gap-1">
                       <Pencil size={15} className="text-[#A3ABB0]" />
                       <span>Edit</span>
-                    </button>
+                    </Link>
                     <button
                       onClick={() => updateStatus(property.id, "Sold")}
                       type="button"
