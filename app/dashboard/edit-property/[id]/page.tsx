@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Session } from 'next-auth';
 import { CopyIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from "@/components/ui/textarea";
+import { useParams } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -14,19 +15,19 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from '@/components/ui/checkbox';
 import axios from 'axios';
-import { useParams } from 'next/navigation';
 
-interface AddPropertyPageProps {
+interface EditPropertyPageProps {
   sidebarProps?: {
     showSidebar: boolean;
     handleSidebar: () => void;
     session: Session | null;
-  };
+  }
 }
 
-const page = ({ sidebarProps }: AddPropertyPageProps) => {
+const page = ({ sidebarProps }: EditPropertyPageProps) => {
 
   const { id } = useParams();
+  const [propertyDetails, setPropertyDetails] = useState([]);
 
   const [propertyData, setPropertyData] = useState({
     title: '',
@@ -85,6 +86,15 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
     amenities
   } = propertyData;
 
+  const fetchPropertyById = async() => {
+    try {
+      const request = await axios.post('/api/single-property', { propertyId: id });
+      setPropertyDetails(request.data.property);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const selectedFiles = Array.from(e.target.files);
@@ -94,7 +104,7 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
         photos: selectedFiles, // Store actual File objects
       }));
     }
-  };  
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -145,6 +155,10 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
       }
     }
   }
+
+  useEffect(() => {
+    fetchPropertyById()
+  }, []);
 
   return (
     <>
