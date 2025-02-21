@@ -155,10 +155,22 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
       }
     }
   }
-
+  // Update propertyData when propertyDetails changes
   useEffect(() => {
-    fetchPropertyById()
-  }, []);
+    if (propertyDetails) {
+      setPropertyData((prevData) => ({
+        ...prevData,
+        ...propertyDetails,
+      }));
+    }
+  }, [propertyDetails]);
+
+  // Fetch data on component mount
+  useEffect(() => {
+    if (id) {
+      fetchPropertyById();
+    }
+  }, [id]);
 
   return (
     <>
