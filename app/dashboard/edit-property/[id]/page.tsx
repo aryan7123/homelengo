@@ -122,7 +122,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
     }))
   }
 
-  const handleSubmitProperty = async () => {
+  const handleEditProperty = async () => {
     try {
       const formData = new FormData();
       Object.entries(propertyData).forEach(([key, value]) => {
@@ -142,19 +142,20 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
         }
       });
 
-      const response = await axios.post("/api/add-property", formData, {
+      const response = await axios.post("/api/edit-property", { formData, id }, {
         headers: { "Content-Type": "multipart/form-data" }
       });
 
       console.log(response.data)
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.error("Error submitting property:", error.response?.data || error.message)
+        console.error("Error updating property:", error.response?.data || error.message)
       } else {
         console.error("An unexpected error occurred:", error)
       }
     }
   }
+
   // Update propertyData when propertyDetails changes
   useEffect(() => {
     if (propertyDetails) {
@@ -522,7 +523,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                 </div>
               </div>
             </div>
-            <button onClick={handleSubmitProperty} type="button" className='bg-[#1563df] text-white font-medium text-base rounded-full w-44 mt-5 py-3.5 transition-colors hover:bg-[#0e49a6]'>Add Property</button>
+            <button onClick={handleEditProperty} type="button" className='bg-[#1563df] text-white font-medium text-base rounded-full w-44 mt-5 py-3.5 transition-colors hover:bg-[#0e49a6]'>Add Property</button>
           </form>
         </div>
       </section>
