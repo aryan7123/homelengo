@@ -131,7 +131,7 @@ const PropertiesClient = () => {
                   <TableCell className="flex items-start gap-5">
                     <Image
                       className="rounded-lg"
-                      src={property.photos[0]}
+                      src={property?.photos[0]}
                       width={168}
                       height={100}
                       alt={property.title}
