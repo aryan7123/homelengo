@@ -86,7 +86,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
     amenities
   } = propertyData;
 
-  const fetchPropertyById = async() => {
+  const fetchPropertyById = async () => {
     try {
       const request = await axios.post('/api/single-property', { propertyId: id });
       setPropertyDetails(request.data.property);
@@ -98,7 +98,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const selectedFiles = Array.from(e.target.files);
-  
+
       setPropertyData((prevData) => ({
         ...prevData,
         photos: selectedFiles, // Store actual File objects
@@ -125,9 +125,9 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
   const handleEditProperty = async () => {
     try {
       const formData = new FormData();
+
       Object.entries(propertyData).forEach(([key, value]) => {
         if (key === "photos" && value) {
-          // Append each file directly to FormData
           (value as File[]).forEach((file) => {
             formData.append("photos", file);
           });
@@ -135,26 +135,32 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
           value.forEach((amenity) => {
             formData.append("amenities[]", amenity);
           });
-        }
-         else if (value !== null && value !== undefined) {
-          // Append other fields as strings
+        } else if (value !== null && value !== undefined) {
           formData.append(key, value.toString());
         }
       });
 
-      const response = await axios.post("/api/edit-property", { formData, id }, {
+      // Ensure ID from URL is correctly included in the FormData
+      if (id) {
+        formData.append("id", id.toString());
+      } else {
+        console.error("Error: ID is missing from URL");
+        return;
+      }
+
+      const response = await axios.post("/api/edit-property", formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
 
-      console.log(response.data)
+      console.log(response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.error("Error updating property:", error.response?.data || error.message)
+        console.error("Error updating property:", error.response?.data || error.message);
       } else {
-        console.error("An unexpected error occurred:", error)
+        console.error("An unexpected error occurred:", error);
       }
     }
-  }
+  };
 
   // Update propertyData when propertyDetails changes
   useEffect(() => {
@@ -384,7 +390,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                   <h4 className='text-[#161e2d] text-base font-semibold mb-4'>Home Safety</h4>
                   <div className="flex items-center space-x-2 mb-3">
                     <Checkbox id="smoke_alarm" className='accent-[#1563df]' checked={amenities.includes("smoke_alarm")}
-                     onCheckedChange={(checked) => handleCheckboxChange("smoke_alarm", checked as boolean)}
+                      onCheckedChange={(checked) => handleCheckboxChange("smoke_alarm", checked as boolean)}
                     />
                     <label
                       htmlFor="smoke_alarm"
@@ -394,8 +400,8 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="self_check" className='accent-[#1563df]' checked={amenities.includes("self_check")} 
-                     onCheckedChange={(checked) => handleCheckboxChange("self_check", checked as boolean)}
+                    <Checkbox id="self_check" className='accent-[#1563df]' checked={amenities.includes("self_check")}
+                      onCheckedChange={(checked) => handleCheckboxChange("self_check", checked as boolean)}
                     />
                     <label
                       htmlFor="self_check"
@@ -405,8 +411,8 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="carbon_alarm" className='accent-[#1563df]' checked={amenities.includes("carbon_alarm")} 
-                      onCheckedChange={(checked) => handleCheckboxChange("carbon_alarm", checked as boolean)} 
+                    <Checkbox id="carbon_alarm" className='accent-[#1563df]' checked={amenities.includes("carbon_alarm")}
+                      onCheckedChange={(checked) => handleCheckboxChange("carbon_alarm", checked as boolean)}
                     />
                     <label
                       htmlFor="carbon_alarm"
@@ -416,8 +422,8 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="cameras" className='accent-[#1563df]' checked={amenities.includes("cameras")} 
-                     onCheckedChange={(checked) => handleCheckboxChange("cameras", checked as boolean)}
+                    <Checkbox id="cameras" className='accent-[#1563df]' checked={amenities.includes("cameras")}
+                      onCheckedChange={(checked) => handleCheckboxChange("cameras", checked as boolean)}
                     />
                     <label
                       htmlFor="cameras"
@@ -430,7 +436,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                 <div className='flex flex-col'>
                   <h4 className='text-[#161e2d] text-base font-semibold mb-4'>Bedroom</h4>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="hangers" className='accent-[#1563df]' checked={amenities.includes("hangers")} 
+                    <Checkbox id="hangers" className='accent-[#1563df]' checked={amenities.includes("hangers")}
                       onCheckedChange={(checked) => handleCheckboxChange("hangers", checked as boolean)}
                     />
                     <label
@@ -441,7 +447,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="pillows" className='accent-[#1563df]' checked={amenities.includes("pillows")} 
+                    <Checkbox id="pillows" className='accent-[#1563df]' checked={amenities.includes("pillows")}
                       onCheckedChange={(checked) => handleCheckboxChange("pillows", checked as boolean)}
                     />
                     <label
@@ -452,8 +458,8 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="tv_cable" className='accent-[#1563df]' checked={amenities.includes("tv_cable")} 
-                    onCheckedChange={(checked) => handleCheckboxChange("tv_cable", checked as boolean)}
+                    <Checkbox id="tv_cable" className='accent-[#1563df]' checked={amenities.includes("tv_cable")}
+                      onCheckedChange={(checked) => handleCheckboxChange("tv_cable", checked as boolean)}
                     />
                     <label
                       htmlFor="tv_cable"
@@ -463,7 +469,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="beds" className='accent-[#1563df]' checked={amenities.includes("beds")} 
+                    <Checkbox id="beds" className='accent-[#1563df]' checked={amenities.includes("beds")}
                       onCheckedChange={(checked) => handleCheckboxChange("beds", checked as boolean)}
                     />
                     <label
@@ -477,7 +483,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                 <div className='flex flex-col'>
                   <h4 className='text-[#161e2d] text-base font-semibold mb-4'>Kitchen</h4>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="refrigerator" className='accent-[#1563df]' checked={amenities.includes("refrigerator")} 
+                    <Checkbox id="refrigerator" className='accent-[#1563df]' checked={amenities.includes("refrigerator")}
                       onCheckedChange={(checked) => handleCheckboxChange("refrigerator", checked as boolean)}
                     />
                     <label
@@ -488,7 +494,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="dishwasher" className='accent-[#1563df]' checked={amenities.includes("dishwasher")} 
+                    <Checkbox id="dishwasher" className='accent-[#1563df]' checked={amenities.includes("dishwasher")}
                       onCheckedChange={(checked) => handleCheckboxChange("dishwasher", checked as boolean)}
                     />
                     <label
@@ -499,7 +505,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="microwave" className='accent-[#1563df]' checked={amenities.includes("microwave")} 
+                    <Checkbox id="microwave" className='accent-[#1563df]' checked={amenities.includes("microwave")}
                       onCheckedChange={(checked) => handleCheckboxChange("microwave", checked as boolean)}
                     />
                     <label
@@ -510,7 +516,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="coffee_maker" className='accent-[#1563df]' checked={amenities.includes("coffee_maker")} 
+                    <Checkbox id="coffee_maker" className='accent-[#1563df]' checked={amenities.includes("coffee_maker")}
                       onCheckedChange={(checked) => handleCheckboxChange("coffee_maker", checked as boolean)}
                     />
                     <label
@@ -523,7 +529,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                 </div>
               </div>
             </div>
-            <button onClick={handleEditProperty} type="button" className='bg-[#1563df] text-white font-medium text-base rounded-full w-44 mt-5 py-3.5 transition-colors hover:bg-[#0e49a6]'>Add Property</button>
+            <button onClick={handleEditProperty} type="button" className='bg-[#1563df] text-white font-medium text-base rounded-full w-44 mt-5 py-3.5 transition-colors hover:bg-[#0e49a6]'>Update Property</button>
           </form>
         </div>
       </section>
