@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Tabs,
   TabsContent,
@@ -14,12 +16,25 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input"
 import { SearchIcon, LocateIcon } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 export default function Home() {
+
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsVisible((prev) => !prev);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -110,6 +125,17 @@ export default function Home() {
         </div>
         <div className="absolute top-0 left-0 bottom-0 right-0 bg-[#161e2d] opacity-30 content-['']"></div>
       </section>
+      <motion.section 
+        className="w-full bg-white"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
+      >
+        <div className="max-w-7xl mx-auto px-6 py-12 md:px-0">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quod nostrum alias, quisquam repudiandae, omnis eaque fugit, exercitationem pariatur maiores est. Reprehenderit natus voluptatem delectus. Omnis numquam porro nulla ad, debitis sapiente suscipit odio quidem est rem amet ipsum adipisci facilis quia sint nihil nisi quae itaque tenetur, hic iste? Quaerat perferendis eaque facilis, laborum vero labore quia, natus, illum ullam at nobis. Voluptate, omnis. Totam, officiis eaque, rerum commodi magnam sunt recusandae officia fugiat laudantium aliquid et possimus voluptatem! Minus ipsam ratione beatae. Id itaque voluptatibus, illo quaerat, assumenda eligendi repellat iusto quam laboriosam exercitationem, delectus expedita eaque quos. Repellat id eveniet minus error corrupti sed eius ut deserunt molestiae fugiat, facere atque voluptas soluta similique deleniti quasi voluptatibus aut animi necessitatibus delectus harum voluptatem labore, maiores perferendis. Inventore iusto sed blanditiis sequi, dolores ab quae adipisci. Dolor vero rem voluptatibus neque beatae iure sint porro sit similique eveniet, aspernatur quibusdam architecto? Rerum optio repellat commodi assumenda veniam? Consectetur vel asperiores iure incidunt dolor excepturi quod in nostrum repudiandae perferendis atque repellat, tempore eum quia et numquam tempora ratione id! Voluptate doloribus eaque labore quaerat est molestiae deserunt! Provident pariatur, possimus cupiditate numquam nulla deleniti nam dolor quidem nostrum perspiciatis natus iusto optio eligendi nobis. Consectetur quia quisquam dignissimos recusandae dolores delectus nam debitis similique laboriosam quaerat illo, in esse! Est impedit deleniti rerum dolor exercitationem a et ullam! Est commodi, architecto ab autem dignissimos dolore enim rerum velit placeat asperiores libero. Obcaecati eos, tempora sed laboriosam assumenda nulla molestiae voluptates deserunt nesciunt similique voluptas temporibus dicta enim adipisci corporis ab iusto ex quo quis hic, voluptatem nisi sunt. Reprehenderit, nisi officia voluptates perferendis obcaecati iusto voluptatibus animi distinctio libero natus deserunt temporibus qui? Cum voluptatem reprehenderit veniam porro atque ullam totam molestias ad tenetur ratione maiores possimus, error autem, dolore commodi fugit adipisci. Quos soluta labore non unde doloremque, distinctio sed quod quidem quas illo corrupti dicta autem, exercitationem fugiat nobis! Neque quas quam architecto libero consequuntur magnam quis reiciendis! Perferendis recusandae eligendi atque iste maiores ipsa quidem dolorem quos voluptas ut. Praesentium ipsa, hic ipsam veritatis non eligendi aliquid atque quidem qui similique sit et reiciendis iusto excepturi velit nesciunt, dolorem perferendis. Et molestiae architecto aspernatur quasi quae nam dolore quidem animi nobis necessitatibus voluptatum tenetur eum velit odit doloribus, quas enim qui voluptatibus repudiandae. Cumque, numquam temporibus! Velit eaque delectus, minima sapiente quam, ullam nemo optio quasi culpa sunt labore. Perferendis doloribus quae quia quidem odit provident debitis aspernatur omnis id deleniti voluptas repellendus explicabo voluptatem numquam ea tempora voluptatum, animi eos quas veniam vitae iste voluptatibus. Alias ab, excepturi aut pariatur dignissimos sapiente corrupti quis aperiam magni facere expedita ex saepe neque consequatur adipisci est dolores blanditiis sed minima eos odit. Temporibus non esse corporis sunt voluptate magni, quam eum ab error, ducimus repellat ut inventore unde reiciendis quod aspernatur iure dicta? Quae possimus quidem debitis voluptatem magni rerum nobis dolore vero officia aperiam numquam odit, molestias quasi vitae eveniet, praesentium architecto modi minima recusandae.
+        </div>
+      </motion.section>
       <Footer />
     </>
   );
