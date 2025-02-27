@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 
 @layer base {
@@ -143,5 +143,9 @@ body {
 }
 
 .dashboard-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.property-tablist::-webkit-scrollbar {
   display: none;
 }
