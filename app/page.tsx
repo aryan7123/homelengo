@@ -25,12 +25,11 @@ import Footer from "./components/Footer";
 import axios from "axios";
 
 export default function Home() {
-
   const [propertyType, setPropertyType] = useState('');
 
-  const fetchPropertyType = async(value: string) => {
+  const fetchPropertyType = async(propertyValue: string) => {
     try {
-      const request = await axios.post('/api/fetch-property-type', value);
+      const request = await axios.post('/api/fetch-property-type', { propertyValue });
       console.log(request);
 
     } catch (error) {
@@ -140,14 +139,14 @@ export default function Home() {
             <span className="uppercase text-[#1563df] font-medium text-sm mb-3">Featured Properties</span>
             <h3 className="capitalize font-semibold text-3xl md:text-4xl text-[#161e2d]">recommended for you</h3>
           </div>
-          <Tabs defaultValue="all" className="w-[inherit] mt-10">
+          <Tabs defaultValue="All" className="w-[inherit] mt-10">
             <TabsList className="flex w-full flex-nowrap justify-start md:justify-center gap-2 md:gap-3 lg:gap-5 bg-transparent overflow-x-auto overflow-y-hidden scrollbar-hide pb-2 property-tablist">
-              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="all" onClick={() => fetchPropertyType('all')}>View All</TabsTrigger>
-              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="apartment" onClick={() => fetchPropertyType('apartment')}>Apartment</TabsTrigger>
-              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="villa" onClick={() => fetchPropertyType('villa')}>Villa</TabsTrigger>
-              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="office" onClick={() => fetchPropertyType('office')}>Office</TabsTrigger>
-              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="townhouse" onClick={() => fetchPropertyType('townhouse')}>Townhouse</TabsTrigger>
-              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="studio" onClick={() => fetchPropertyType('studio')}>Studio</TabsTrigger>
+              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="All" onClick={() => fetchPropertyType('All')}>View All</TabsTrigger>
+              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="Apartment" onClick={() => fetchPropertyType('Apartment')}>Apartment</TabsTrigger>
+              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="Villa" onClick={() => fetchPropertyType('Villa')}>Villa</TabsTrigger>
+              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="Office" onClick={() => fetchPropertyType('Office')}>Office</TabsTrigger>
+              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="Townhouse" onClick={() => fetchPropertyType('Townhouse')}>Townhouse</TabsTrigger>
+              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="Studio" onClick={() => fetchPropertyType('Studio')}>Studio</TabsTrigger>
             </TabsList>
             <TabsContent value={propertyType}>
               
