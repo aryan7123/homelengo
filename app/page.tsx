@@ -22,18 +22,21 @@ import { Input } from "@/components/ui/input"
 import { SearchIcon, LocateIcon } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import axios from "axios";
 
 export default function Home() {
 
-  const [isVisible, setIsVisible] = useState(true);
+  const [propertyType, setPropertyType] = useState('');
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsVisible((prev) => !prev);
-    }, 3000);
+  const fetchPropertyType = async(value: string) => {
+    try {
+      const request = await axios.post('/api/fetch-property-type', value);
+      console.log(request);
 
-    return () => clearInterval(interval);
-  }, []);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -139,13 +142,16 @@ export default function Home() {
           </div>
           <Tabs defaultValue="all" className="w-[inherit] mt-10">
             <TabsList className="flex w-full flex-nowrap justify-start md:justify-center gap-2 md:gap-3 lg:gap-5 bg-transparent overflow-x-auto overflow-y-hidden scrollbar-hide pb-2 property-tablist">
-              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="all">View All</TabsTrigger>
-              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="apartment">Apartment</TabsTrigger>
-              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="villa">Villa</TabsTrigger>
-              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="office">Office</TabsTrigger>
-              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="townhouse">Townhouse</TabsTrigger>
-              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="studio">Studio</TabsTrigger>
+              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="all" onClick={() => fetchPropertyType('all')}>View All</TabsTrigger>
+              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="apartment" onClick={() => fetchPropertyType('apartment')}>Apartment</TabsTrigger>
+              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="villa" onClick={() => fetchPropertyType('villa')}>Villa</TabsTrigger>
+              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="office" onClick={() => fetchPropertyType('office')}>Office</TabsTrigger>
+              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="townhouse" onClick={() => fetchPropertyType('townhouse')}>Townhouse</TabsTrigger>
+              <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="studio" onClick={() => fetchPropertyType('studio')}>Studio</TabsTrigger>
             </TabsList>
+            <TabsContent value={propertyType}>
+              
+            </TabsContent>
           </Tabs>
         </div>
       </motion.section>
