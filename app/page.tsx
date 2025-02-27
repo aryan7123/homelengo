@@ -30,8 +30,7 @@ export default function Home() {
   const fetchPropertyType = async(propertyValue: string) => {
     try {
       const request = await axios.post('/api/fetch-property-type', { propertyValue });
-      console.log(request);
-
+      setPropertyType(request.data.properties);
     } catch (error) {
       console.log(error);
     }
