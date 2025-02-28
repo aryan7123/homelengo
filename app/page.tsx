@@ -150,7 +150,9 @@ export default function Home() {
               <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="Studio" onClick={() => fetchPropertyType('Studio')}>Studio</TabsTrigger>
             </TabsList>
             <TabsContent value={propertyType}>
-              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+              </div>
             </TabsContent>
           </Tabs>
         </div>
