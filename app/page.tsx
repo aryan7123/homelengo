@@ -26,11 +26,13 @@ import axios from "axios";
 
 export default function Home() {
   const [propertyType, setPropertyType] = useState('');
+  const [propertyTypeDetails, setPropertyTypeDetails] = useState([]);
 
   const fetchPropertyType = async(propertyValue: string) => {
     try {
       const request = await axios.post('/api/fetch-property-type', { propertyValue });
-      setPropertyType(request.data.properties);
+      setPropertyTypeDetails(request.data.properties);
+      setPropertyType(propertyValue);
     } catch (error) {
       console.log(error);
     }
