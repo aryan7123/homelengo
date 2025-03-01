@@ -20,7 +20,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input"
 import Image from "next/image";
-import { SearchIcon, LocateIcon } from "lucide-react";
+import { SearchIcon, MapPin } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import axios from "axios";
@@ -80,7 +80,7 @@ export default function Home() {
                     <label htmlFor="type" className="text-[#a3abb0]">Location</label>
                     <div className="flex items-center justify-between">
                       <Input type="text" placeholder="Search Location" className="border-none outline-none focus:ring-0 focus:ring-offset-0 shadow-none transition-colors" />
-                      <LocateIcon size={18} className="mr-5" />
+                      <MapPin size={18} className="mr-5" />
                     </div>
                   </div>
                   <div className="flex flex-col gap-2 w-full md:w-1/4">
@@ -116,7 +116,7 @@ export default function Home() {
                     <label htmlFor="type" className="text-[#a3abb0]">Location</label>
                     <div className="flex items-center justify-between">
                       <Input type="text" placeholder="Search Location" className="border-none outline-none focus:ring-0 focus:ring-offset-0 shadow-none transition-colors" />
-                      <LocateIcon size={18} className="mr-5" />
+                      <MapPin size={18} className="mr-5" />
                     </div>
                   </div>
                   <div className="flex flex-col gap-2 w-full md:w-1/4">
@@ -161,7 +161,7 @@ export default function Home() {
                   <p className="text-gray-500">Loading properties...</p>
                 </div>
               ) : propertyTypeDetails.length > 0 ? (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
@@ -169,18 +169,38 @@ export default function Home() {
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                 >
                   {propertyTypeDetails.map((item, index) => (
-                    <div key={index} className="shadow-md border border-[#e4e4e4] rounded-2xl">
-                      <div className="relative overflow-hidden rounded-2xl">
+                    <div key={index} className="shadow-md border border-[#e4e4e4] rounded-t-2xl cursor-pointer">
+                      <div className="relative overflow-hidden rounded-t-2xl">
+                        <div className="absolute inset-0 bg-black/30 z-10"></div>
                         <Image
                           src={item?.photos[0]}
                           alt={item?.title}
-                          width={500}
-                          height={300}
-                          className="object-cover w-full h-[200px]"
+                          width={400}
+                          height={400}
+                          className="object-cover w-full h-[250px]"
                         />
-                      </div>
-                      <div className="top-0 left-0 bottom-0 right-0 absolute">
-
+                        <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4 text-white z-20">
+                          <p className="text-sm flex items-center gap-1">
+                            <MapPin size={14} className="text-white" />
+                            {item?.location}, {item?.country}
+                          </p>
+                        </div>
+                        <div className="absolute top-0 w-full h-full left-0 z-20">
+                          <div className="pl-5 pt-3 w-full flex items-center justify-start gap-3">
+                            <button
+                              className="bg-[#1563df] font-medium text-white text-sm p-2 rounded-2xl"
+                              type="button"
+                            >
+                              Featured
+                            </button>
+                            <button
+                              className="bg-[#0000004d] font-medium text-white text-sm p-2 rounded-2xl transition-colors hover:bg-[#1563df]"
+                              type="button"
+                            >
+                              {item?.propertyStatus}
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ))}
