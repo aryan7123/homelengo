@@ -19,6 +19,7 @@ import {
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input"
+import Image from "next/image";
 import { SearchIcon, LocateIcon } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -27,14 +28,19 @@ import axios from "axios";
 export default function Home() {
   const [propertyType, setPropertyType] = useState('');
   const [propertyTypeDetails, setPropertyTypeDetails] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const fetchPropertyType = async(propertyValue: string) => {
+  const fetchPropertyType = async (propertyValue: string) => {
+    setLoading(true);
     try {
       const request = await axios.post('/api/fetch-property-type', { propertyValue });
       setPropertyTypeDetails(request.data.properties);
       setPropertyType(propertyValue);
     } catch (error) {
       console.log(error);
+    }
+    finally {
+      setLoading(false);
     }
   }
 
@@ -149,10 +155,39 @@ export default function Home() {
               <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="Townhouse" onClick={() => fetchPropertyType('Townhouse')}>Townhouse</TabsTrigger>
               <TabsTrigger role="presentation" className="relative rounded-full text-sm font-medium py-2 px-4 min-w-[100px] flex-shrink-0 md:flex-shrink md:w-auto lg:min-w-[128px] whitespace-nowrap data-[state=active]:bg-[#1563df] data-[state=active]:text-white data-[state=inactive]:bg-[#f7f7f7] data-[state=inactive]:text-[#161e2d] transition-all" value="Studio" onClick={() => fetchPropertyType('Studio')}>Studio</TabsTrigger>
             </TabsList>
-            <TabsContent value={propertyType}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-              </div>
+            <TabsContent value={propertyType} className="mt-10">
+              {loading ? (
+                <div className="flex justify-center items-center h-32">
+                  <p className="text-gray-500">Loading properties...</p>
+                </div>
+              ) : propertyTypeDetails.length > 0 ? (
+                <motion.div 
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
+                  {propertyTypeDetails.map((item, index) => (
+                    <div key={index} className="shadow-md border border-[#e4e4e4] rounded-2xl">
+                      <div className="relative overflow-hidden rounded-2xl">
+                        <Image
+                          src={item?.photos[0]}
+                          alt={item?.title}
+                          width={500}
+                          height={300}
+                          className="object-cover w-full h-[200px]"
+                        />
+                      </div>
+                      <div className="top-0 left-0 bottom-0 right-0 absolute">
+
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+              ) : (
+                <div className="text-center text-gray-500">No properties found.</div>
+              )}
             </TabsContent>
           </Tabs>
         </div>
