@@ -206,21 +206,30 @@ export default function Home() {
                           </div>
                         </div>
                       </div>
-                      <div className="p-5">
+                      <div className="p-5 rounded-b-2xl overflow-hidden bg-white">
                         <h3 className="text-[#161e2d] text-sm md:text-lg font-medium">{item?.title}</h3>
-                        <div className="flex items-center gap-4 mt-3">
-                          <div className="flex items-center gap-1">
-                            <BedDouble size={18} className="text-[#a3abb0]" />
-                            <span className="text-[#a3abb0] text-sm">Beds: <small className="text-[#1e1e2d] text-sm font-bold">{item?.bedrooms}</small></span>
+                        <div className="mt-3">
+                          <div className="flex items-center gap-4 border-b border-[#e4e4e4] pb-5">
+                            <div className="flex items-center gap-1">
+                              <BedDouble size={18} className="text-[#a3abb0]" />
+                              <span className="text-[#a3abb0] text-sm">
+                                Beds: <small className="text-[#1e1e2d] text-sm font-bold">{item?.bedrooms}</small>
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Bath size={18} className="text-[#a3abb0]" />
+                              <span className="text-[#a3abb0] text-sm">
+                                Baths: <small className="text-[#1e1e2d] text-sm font-bold">{item?.bathrooms}</small>
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <LandPlot size={18} className="text-[#a3abb0]" />
+                              <span className="text-[#a3abb0] text-sm">
+                                Sqft: <small className="text-[#1e1e2d] text-sm font-bold">{item?.size}</small>
+                              </span>
+                            </div>
                           </div>
-                          <div className="flex items-center gap-1">
-                            <Bath size={18} className="text-[#a3abb0]" />
-                            <span className="text-[#a3abb0] text-sm">Baths: <small className="text-[#1e1e2d] text-sm font-bold">{item?.bathrooms}</small></span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <LandPlot size={18} className="text-[#a3abb0]" />
-                            <span className="text-[#a3abb0] text-sm">Sqft: <small className="text-[#1e1e2d] text-sm font-bold">{item?.size}</small></span>
-                          </div>
+                          <h4 className="text-[#1e1e2d] text-lg font-semibold pt-5">Price: ${item?.price}</h4>
                         </div>
                       </div>
                     </div>
