@@ -20,7 +20,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input"
 import Image from "next/image";
-import { SearchIcon, MapPin } from "lucide-react";
+import { SearchIcon, MapPin, BedDouble, Bath, LandPlot } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import axios from "axios";
@@ -206,11 +206,28 @@ export default function Home() {
                           </div>
                         </div>
                       </div>
+                      <div className="p-5">
+                        <h3 className="text-[#161e2d] text-sm md:text-lg font-medium">{item?.title}</h3>
+                        <div className="flex items-center gap-4 mt-3">
+                          <div className="flex items-center gap-1">
+                            <BedDouble size={18} className="text-[#a3abb0]" />
+                            <span className="text-[#a3abb0] text-sm">Beds: <small className="text-[#1e1e2d] text-sm font-bold">{item?.bedrooms}</small></span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Bath size={18} className="text-[#a3abb0]" />
+                            <span className="text-[#a3abb0] text-sm">Baths: <small className="text-[#1e1e2d] text-sm font-bold">{item?.bathrooms}</small></span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <LandPlot size={18} className="text-[#a3abb0]" />
+                            <span className="text-[#a3abb0] text-sm">Sqft: <small className="text-[#1e1e2d] text-sm font-bold">{item?.size}</small></span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </motion.div>
               ) : (
-                <div className="text-center text-gray-500">No properties found.</div>
+                <div className="text-center text-base text-gray-500">No properties found.</div>
               )}
             </TabsContent>
           </Tabs>
