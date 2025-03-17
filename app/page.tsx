@@ -242,6 +242,20 @@ export default function Home() {
           </Tabs>
         </div>
       </motion.section>
+      <motion.section 
+        className="w-full bg-white"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
+        >
+          <div className="max-w-7xl mx-auto px-6 py-12 md:px-0">
+            <div className="text-center flex flex-col justify-center items-center">
+              <span className="uppercase text-[#1563df] font-medium text-sm mb-3">Explore Cities</span>
+              <h3 className="capitalize font-semibold text-3xl md:text-4xl text-[#161e2d]">Our Location For You</h3>
+            </div>
+          </div>
+      </motion.section>
       <Footer />
     </>
   );
