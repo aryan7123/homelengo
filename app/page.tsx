@@ -16,6 +16,14 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input"
@@ -26,6 +34,29 @@ import Footer from "./components/Footer";
 import axios from "axios";
 
 export default function Home() {
+  const locations = [
+    {
+      name: "Greater London",
+      image: "/banner/location-1.jpg"
+    },
+    {
+      name: "Birmingham",
+      image: "/banner/location-4.jpg"
+    },
+    {
+      name: "Liverpool",
+      image: "/banner/location-3.jpg"
+    },
+    {
+      name: "Cambridge",
+      image: "/banner/location-5.jpg"
+    },
+    {
+      name: "Reading",
+      image: "/banner/location-6.jpg"
+    }
+  ];
+
   const [propertyType, setPropertyType] = useState('');
   const [propertyTypeDetails, setPropertyTypeDetails] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -242,19 +273,49 @@ export default function Home() {
           </Tabs>
         </div>
       </motion.section>
-      <motion.section 
+      <motion.section
         className="w-full bg-white"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 1.5, ease: "easeInOut" }}
-        >
-          <div className="max-w-7xl mx-auto px-6 py-12 md:px-0">
-            <div className="text-center flex flex-col justify-center items-center">
-              <span className="uppercase text-[#1563df] font-medium text-sm mb-3">Explore Cities</span>
-              <h3 className="capitalize font-semibold text-3xl md:text-4xl text-[#161e2d]">Our Location For You</h3>
-            </div>
+      >
+        <div className="max-w-7xl mx-auto px-6 py-12 md:px-0">
+          <div className="text-center flex flex-col justify-center items-center">
+            <span className="uppercase text-[#1563df] font-medium text-sm mb-3">Explore Cities</span>
+            <h3 className="capitalize font-semibold text-3xl md:text-4xl text-[#161e2d]">Our Location For You</h3>
           </div>
+          <div className="w-[inherit] mt-10">
+            <Carousel className="w-full mx-auto max-w-5xl">
+              <CarouselContent className="-ml-1">
+                {locations.map((item, index) => (
+                  <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/3">
+                    <div className="p-1">
+                      <div className="rounded-2xl overflow-hidden">
+                        <div className="flex aspect-square items-center justify-center px-6 pt-0 pb-6">
+                          <div className="relative">
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              width={250}
+                              height={350}
+                              className="rounded-2xl"
+                            />
+                            <div className="text-center w-[220px] rounded-xl overflow-hidden ml-3.5 flex items-center justify-center p-4 absolute bottom-[30px] bg-white">
+                              <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+          </div>
+        </div>
       </motion.section>
       <Footer />
     </>
