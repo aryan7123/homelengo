@@ -28,7 +28,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input"
 import Image from "next/image";
-import { SearchIcon, MapPin, BedDouble, Bath, LandPlot } from "lucide-react";
+import { SearchIcon, MapPin, BedDouble, Bath, LandPlot, ArrowRight } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import axios from "axios";
@@ -301,8 +301,11 @@ export default function Home() {
                               height={350}
                               className="rounded-2xl"
                             />
-                            <div className="text-center w-[220px] rounded-xl overflow-hidden ml-3.5 flex items-center justify-center p-4 absolute bottom-[30px] bg-white">
+                            <div className="text-center w-[220px] rounded-xl overflow-hidden ml-3.5 flex items-center justify-between p-4 absolute bottom-[10px] bg-white">
                               <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
+                              <div className="w-11 h-11 flex items-center justify-center rounded-full border border-[#a3abb0] transition-colors hover:bg-[#1563df] hover:text-white cursor-pointer">
+                                <ArrowRight size={20} />
+                              </div>
                             </div>
                           </div>
                         </div>
