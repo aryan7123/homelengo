@@ -301,7 +301,7 @@ export default function Home() {
                               height={350}
                               className="rounded-2xl"
                             />
-                            <div className="text-center w-[220px] rounded-xl overflow-hidden ml-3.5 flex items-center justify-between p-4 absolute bottom-[10px] bg-white">
+                            <div className="text-center w-[220px] rounded-xl overflow-hidden ml-[15px] flex items-center justify-between p-4 absolute bottom-[10px] bg-white">
                               <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
                               <div className="w-11 h-11 flex items-center justify-center rounded-full border border-[#a3abb0] transition-colors hover:bg-[#1563df] hover:text-white cursor-pointer">
                                 <ArrowRight size={20} />
@@ -317,6 +317,58 @@ export default function Home() {
               <CarouselPrevious />
               <CarouselNext />
             </Carousel>
+          </div>
+        </div>
+      </motion.section>
+      <motion.section
+        className="w-full bg-white"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
+      >
+        <div className="max-w-7xl mx-auto px-6 py-12 md:px-0">
+          <div className="text-center flex flex-col justify-center items-center">
+            <span className="uppercase text-[#1563df] font-medium text-sm mb-3">Our Services</span>
+            <h3 className="capitalize font-semibold text-3xl md:text-4xl text-[#161e2d]">What We Do?</h3>
+          </div>
+          <div className="w-[inherit] mt-10 flex md:flex-row flex-col items-center justify-between gap-6">
+            <div className="w-full flex flex-col px-6 py-8 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl">
+              <motion.img 
+                src="/banner/home-1.png"
+                width={200}
+                height={200}
+                alt="buy new home"
+                whileHover={{ rotateY: 360 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              />
+              <h3 className="text-[#161e2d] text-2xl font-medium mt-5">Buy a New Home</h3>
+              <span className="text-[#5c6368] mt-5 text-center text-[15px]">Discover your dream home effortlessly. Explore diverse properties and expert guidance for a seamless buying experience.</span>
+            </div>
+            <div className="w-full flex flex-col px-6 py-8 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl">
+              <motion.img 
+                src="/banner/home-2.png"
+                width={200}
+                height={200}
+                alt="sell new home"
+                whileHover={{ rotateY: 360 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              />
+              <h3 className="text-[#161e2d] text-2xl font-medium mt-5">Sell a Home</h3>
+              <span className="text-[#5c6368] mt-5 text-center text-[15px]">Sell confidently with expert guidance and effective strategies, showcasing your property's best features for a successful sale.</span>
+            </div>
+            <div className="w-full flex flex-col px-6 py-8 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl">
+              <motion.img 
+                src="/banner/home-3.png"
+                width={200}
+                height={200}
+                alt="rent new home"
+                whileHover={{ rotateY: 360 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              />
+              <h3 className="text-[#161e2d] text-2xl font-medium mt-5">Rent a Home</h3>
+              <span className="text-[#5c6368] mt-5 text-center text-[15px]">Discover your perfect rental effortlessly. Explore a diverse variety of listings tailored precisely to suit your unique lifestyle needs.</span>
+            </div>
           </div>
         </div>
       </motion.section>
