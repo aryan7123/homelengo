@@ -333,7 +333,7 @@ export default function Home() {
             <h3 className="capitalize font-semibold text-3xl md:text-4xl text-[#161e2d]">What We Do?</h3>
           </div>
           <div className="w-[inherit] mt-10 flex md:flex-row flex-col items-center justify-between gap-6">
-            <div className="w-full flex flex-col px-6 py-8 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl">
+            <div className="w-full flex flex-col px-6 py-10 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl">
               <motion.img 
                 src="/banner/home-1.png"
                 width={200}
@@ -344,8 +344,12 @@ export default function Home() {
               />
               <h3 className="text-[#161e2d] text-2xl font-medium mt-5">Buy a New Home</h3>
               <span className="text-[#5c6368] mt-5 text-center text-[15px]">Discover your dream home effortlessly. Explore diverse properties and expert guidance for a seamless buying experience.</span>
+              <button type="button" className="flex mt-5 items-center justify-center rounded-full transition-all py-3 px-11 gap-2 border border-[#1563df]">
+                <span className="text-base font-medium text-[#161e2d]">Learn More</span>
+                <ArrowRight size={20} className="text-[#161e2d]"/>
+              </button>
             </div>
-            <div className="w-full flex flex-col px-6 py-8 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl">
+            <div className="w-full flex flex-col px-6 py-10 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl">
               <motion.img 
                 src="/banner/home-2.png"
                 width={200}
@@ -356,8 +360,12 @@ export default function Home() {
               />
               <h3 className="text-[#161e2d] text-2xl font-medium mt-5">Sell a Home</h3>
               <span className="text-[#5c6368] mt-5 text-center text-[15px]">Sell confidently with expert guidance and effective strategies, showcasing your property's best features for a successful sale.</span>
+              <button type="button" className="flex mt-5 items-center justify-center rounded-full transition-all py-3 px-11 gap-2 border border-[#1563df]">
+                <span className="text-base font-medium text-[#161e2d]">Learn More</span>
+                <ArrowRight size={20} className="text-[#161e2d]"/>
+              </button>
             </div>
-            <div className="w-full flex flex-col px-6 py-8 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl">
+            <div className="w-full flex flex-col px-6 py-10 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl">
               <motion.img 
                 src="/banner/home-3.png"
                 width={200}
@@ -368,6 +376,10 @@ export default function Home() {
               />
               <h3 className="text-[#161e2d] text-2xl font-medium mt-5">Rent a Home</h3>
               <span className="text-[#5c6368] mt-5 text-center text-[15px]">Discover your perfect rental effortlessly. Explore a diverse variety of listings tailored precisely to suit your unique lifestyle needs.</span>
+              <button type="button" className="flex mt-5 items-center justify-center rounded-full transition-all py-3 px-11 gap-2 border border-[#1563df]">
+                <span className="text-base font-medium text-[#161e2d]">Learn More</span>
+                <ArrowRight size={20} className="text-[#161e2d]"/>
+              </button>
             </div>
           </div>
         </div>
