@@ -192,7 +192,6 @@ const PropertiesClient = () => {
             </PaginationContent>
           </Pagination>
         )}
-
       </div>
     </div>
   )
