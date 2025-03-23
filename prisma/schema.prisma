@@ -49,4 +49,6 @@ model Property {
   amenities      String[]
   photos         String[]
   status         String   @db.VarChar(255) @default("Pending")
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
 }
