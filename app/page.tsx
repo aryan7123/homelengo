@@ -32,6 +32,7 @@ import { SearchIcon, MapPin, BedDouble, Bath, LandPlot, ArrowRight } from "lucid
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import axios from "axios";
+import Link from "next/link";
 
 export default function Home() {
   const locations = [
@@ -204,7 +205,7 @@ export default function Home() {
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                 >
                   {propertyTypeDetails.map((item, index) => (
-                    <div key={index} className="shadow-md border border-[#e4e4e4] rounded-t-2xl cursor-pointer">
+                    <Link href={`/property-details/${item.id}`} key={index} className="shadow-md border border-[#e4e4e4] rounded-t-2xl cursor-pointer">
                       <div className="relative overflow-hidden rounded-t-2xl">
                         <div className="absolute inset-0 bg-black/30 z-10"></div>
                         <Image
@@ -263,7 +264,7 @@ export default function Home() {
                           <h4 className="text-[#1e1e2d] text-lg font-semibold pt-5">Price: ${item?.price}</h4>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </motion.div>
               ) : (
