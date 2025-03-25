@@ -50,5 +50,5 @@ model Property {
   photos         String[]
   status         String   @default("Pending") @db.VarChar(255)
   createdAt      DateTime @default(now())
-  updatedAt      DateTime @default(now()) @updatedAt
+  updatedAt      DateTime @updatedAt
 }
