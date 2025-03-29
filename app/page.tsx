@@ -205,7 +205,7 @@ export default function Home() {
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                 >
                   {propertyTypeDetails.map((item, index) => (
-                    <Link href={`/property-details/${item.id}`} key={index} className="shadow-md border border-[#e4e4e4] rounded-t-2xl cursor-pointer">
+                    <Link href={`/property-details/${item?.id}`} key={index} className="shadow-md border border-[#e4e4e4] rounded-t-2xl cursor-pointer">
                       <div className="relative overflow-hidden rounded-t-2xl">
                         <div className="absolute inset-0 bg-black/30 z-10"></div>
                         <Image

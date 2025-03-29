@@ -6,22 +6,59 @@ import Footer from '@/app/components/Footer'
 import { useParams } from 'next/navigation'
 import axios from 'axios'
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 import { Printer, MapPin, SlidersHorizontal, Star, BedDouble, Bath, LandPlot, Heart, Share2, Move3d, House, Warehouse, BathIcon, CropIcon, HammerIcon, RulerIcon } from "lucide-react";
 interface RatingProps {
   onRatingSelect?: (ratings: number[]) => void;
 }
 
 const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
+  const { data: session } = useSession();
   const { id } = useParams();
   const [propertyDetails, setPropertyDetails] = useState([]);
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+  const [message, setMessage] = useState('');
+  const [postComment, setPostComment] = useState('');
 
   const handleStarClick = (starValue: number) => {
     const newRating = starValue === rating ? 0 : starValue;
     setRating(newRating);
     onRatingSelect?.(newRating);
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setPostComment(e.target.value);
+  }
+
+  const handlePostComment = async () => {
+    try {
+      setMessage('');
+      if (session?.user) {
+        if (!session?.user?.name) {
+          setMessage('Please enter the name of the user');
+        }
+        else if (rating === 0) {
+          setMessage('Please select a rating');
+        }
+        else {
+          const request = await axios.post('/api/post-review', { name: session.user.name, postComment, rating, propertyId: propertyDetails.id, userId: Number(session.user.id) });
+          console.log(request);
+          if (request.data.message === 'Review submitted successfully') {
+            setMessage('Review submitted successfully');
+          }
+          else {
+            setMessage('Review cannot be submitted');
+          }
+        }
+      }
+      else {
+        setMessage('Please login to post a comment and review the property');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     const fetchPropertyById = async () => {
@@ -196,7 +233,7 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
               <div className='w-full flex md:flex-row flex-col gap-5 md:items-center items-start justify-start'>
                 <div className='w-full md:w-1/2 gap-2.5 flex flex-col justify-start'>
                   <label htmlFor="name" className='text-xs font-semibold text-[#161e2d]'>Name</label>
-                  <input className='bg-white w-full rounded-full border border-[#e4e4e4] outline-none px-5 py-4 text-sm text-[#161e2d]' type="text" name='name' id='name' placeholder='Your Name' />
+                  <input className='bg-white w-full rounded-full border border-[#e4e4e4] outline-none px-5 py-4 text-sm text-[#161e2d]' type="text" value={session?.user?.name ?? ''} name='name' id='name' placeholder='Your Name' />
                 </div>
                 <div className='w-full md:w-1/2 flex flex-col justify-start gap-2.5'>
                   <label htmlFor="name" className='text-xs font-semibold text-[#161e2d]'>Review</label>
@@ -220,10 +257,15 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
               <div className='w-full pt-5 flex md:flex-row flex-col gap-5 md:items-center items-start justify-start'>
                 <div className='w-full md:w-1/2 gap-2.5 flex flex-col justify-start'>
                   <label htmlFor="comment" className='text-xs font-semibold text-[#161e2d]'>Comment</label>
-                  <textarea rows={4} className='bg-white resize-none w-full rounded-2xl border border-[#e4e4e4] outline-none p-5 text-sm text-[#161e2d]' name='comment' id='comment' placeholder='Write a Comment' />
+                  <textarea onChange={handleChange} value={postComment} rows={4} className='bg-white resize-none w-full rounded-2xl border border-[#e4e4e4] outline-none p-5 text-sm text-[#161e2d]' name='comment' id='comment' placeholder='Write a Comment' />
                 </div>
               </div>
-              <div className='mt-5 text-red-600 font-medium text-sm'></div>
+              <button onClick={handlePostComment} type="button" className='w-full mt-5 bg-[#1563df] border border-[#1563df] rounded-full text-white font-semibold text-base py-3 transition-colors hover:bg-[#0e49a6]'>
+                Post Comment
+              </button>
+              {message && (
+                <div className={`mt-5 ${message === 'Review submitted successfully' ? "text-green-600" : "text-red-600"} font-medium text-sm`}>{message}</div>
+              )}
             </div>
           </section>
         </div>
