@@ -217,7 +217,7 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
               </div>
             </div>
           </section>
-          <section className='py-12 border-b border-[#e4e4e4]'>
+          <section className='w-[inherit] py-12 border-b border-[#e4e4e4]'>
             <h3 className='text-2xl font-semibold text-[#161e2d] mb-4'>Amenities and Features</h3>
             <ul className='flex md:flex-row flex-col items-start md:gap-16 gap-4 md:items-center ml-4'>
               {propertyDetails?.amenities?.map((item, index) => (
@@ -227,6 +227,12 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
               ))}
             </ul>
           </section>
+
+          <section className='w-[inherit] py-12 border-b border-[#e4e4e4]'>
+            <h3 className='text-2xl font-semibold text-[#161e2d] mb-4'>Guest Review</h3>
+            
+          </section>
+
           <section className='w-[inherit] py-12 border-b border-[#e4e4e4]'>
             <h3 className='text-2xl font-semibold text-[#161e2d] mb-4'>Leave a Comment</h3>
             <div className='bg-[#f7f7f7] w-full p-5 rounded-lg'>
