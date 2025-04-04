@@ -88,7 +88,7 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
   
       setPropertyData((prevData) => ({
         ...prevData,
-        photos: selectedFiles, // Store actual File objects
+        photos: selectedFiles,
       }));
     }
   };  

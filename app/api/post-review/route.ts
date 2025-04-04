@@ -1,6 +1,6 @@
 "use server";
 
-import { PrismaClient, Review } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
@@ -8,15 +8,29 @@ const prisma = new PrismaClient();
 export async function POST(request: NextRequest) {
   try {
     const response = await request.json();
-    const { name, postComment, rating, propertyId, userId } = response;
+    const { username, postComment, rating, propertyId, userId } = response;
 
-    const newReview: Review = await prisma.review.create({
+    const existingReview = await prisma.review.findFirst({
+      where: {
+        propertyId: propertyId,
+        userId: userId,
+      },
+    });
+
+    if (existingReview) {
+      return NextResponse.json({ message: "You have already submitted a review for this property" });
+    }
+
+    const newReview = await prisma.review.create({
       data: {
-        username: name ?? "",
-        comment: postComment ?? "",
+        username,
+        comment: postComment,
         rating,
-        propertyId,
-        userId,
+        property: { connect: { id: propertyId } },
+        user: { connect: { id: userId } },
+      },
+      include: {
+        user: true,
       },
     });
 

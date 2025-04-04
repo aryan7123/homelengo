@@ -42,13 +42,13 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
           setMessage('Please select a rating');
         }
         else {
-          const request = await axios.post('/api/post-review', { name: session.user.name, postComment, rating, propertyId: propertyDetails.id, userId: Number(session.user.id) });
+          const request = await axios.post('/api/post-review', { username: session.user.name, postComment, rating, propertyId: propertyDetails.id, userId: Number(session.user.id) });
           console.log(request);
           if (request.data.message === 'Review submitted successfully') {
             setMessage('Review submitted successfully');
           }
           else {
-            setMessage('Review cannot be submitted');
+            setMessage(request.data.message);
           }
         }
       }

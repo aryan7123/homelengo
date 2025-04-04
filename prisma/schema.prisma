@@ -64,4 +64,5 @@ model Review {
   property   Property @relation(fields: [propertyId], references: [id])
   userId     Int
   user       User     @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
 }
