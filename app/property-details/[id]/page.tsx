@@ -15,11 +15,13 @@ interface RatingProps {
 const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
   const { data: session } = useSession();
   const { id } = useParams();
+
   const [propertyDetails, setPropertyDetails] = useState([]);
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [message, setMessage] = useState('');
   const [postComment, setPostComment] = useState('');
+  const [reviews, setReviews] = useState([]);
 
   const handleStarClick = (starValue: number) => {
     const newRating = starValue === rating ? 0 : starValue;
@@ -70,6 +72,19 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
       }
     }
     fetchPropertyById();
+  }, []);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const request = await axios.post('/api/get-reviews', { propertyId: id });
+        setReviews(request.data.reviews);
+        console.log(reviews);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchReviews();
   }, []);
 
   return (
@@ -230,7 +245,11 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
 
           <section className='w-[inherit] py-12 border-b border-[#e4e4e4]'>
             <h3 className='text-2xl font-semibold text-[#161e2d] mb-4'>Guest Review</h3>
-            
+            {reviews && reviews.map((item, index) => (
+              <div key={index} className="w-full flex items-center justify-between">
+                
+              </div>
+            ))}
           </section>
 
           <section className='w-[inherit] py-12 border-b border-[#e4e4e4]'>
