@@ -60,7 +60,7 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  }  
 
   useEffect(() => {
     const fetchPropertyById = async () => {
@@ -78,14 +78,22 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
     const fetchReviews = async () => {
       try {
         const request = await axios.post('/api/get-reviews', { propertyId: id });
-        setReviews(request.data.reviews);
-        console.log(reviews);
+        setReviews(request.data.review);
       } catch (error) {
         console.log(error);
       }
     }
     fetchReviews();
   }, []);
+
+  function formatSimpleDate(isoString: string) {
+    const date = new Date(isoString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
 
   return (
     <>
@@ -243,11 +251,31 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
             </ul>
           </section>
 
-          <section className='w-[inherit] py-12 border-b border-[#e4e4e4]'>
-            <h3 className='text-2xl font-semibold text-[#161e2d] mb-4'>Guest Review</h3>
+          <section className='w-[inherit] py-12'>
+            <h3 className='text-2xl font-semibold text-[#161e2d]'>Guest Review</h3>
             {reviews && reviews.map((item, index) => (
-              <div key={index} className="w-full flex items-center justify-between">
-                
+              <div key={index} className="w-full py-7 flex flex-col gap-4 items-start justify-start border-b border-[#e4e4e4]">
+                <div className='w-[inherit] flex items-start justify-between'>
+                  <div className="flex flex-col items-start gap-2">
+                    <h3 className='capitalize text-[#161e2d] font-semibold text-lg'>{item?.username}</h3>
+                    <p className='text-xs text-[#5c6368] font-medium'>
+                      {formatSimpleDate(item?.createdAt)}
+                    </p>
+                  </div>
+                  <div className='flex items-center justify-center'>
+                    {[...Array(5)].map((_, i) => {
+                        const starValue = i + 1;
+                        return (
+                          <Star
+                            key={starValue}
+                            size={18}
+                            className={`${item?.rating >= starValue ? "fill-yellow-400 text-yellow-400" : "fill-gray-400 text-gray-400" }`}
+                          />
+                        );
+                      })}
+                  </div>
+                </div>
+                <p className='text-sm'>{item?.comment}</p>
               </div>
             ))}
           </section>
