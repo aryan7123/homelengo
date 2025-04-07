@@ -102,19 +102,24 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
     setPropertyData(prev => ({ ...prev, [name]: value }));
   }
 
-  const handleCheckboxChange = (id: string, checked: boolean) => {
-    setPropertyData((prevData) => ({
-      ...prevData,
-      amenities: checked ? [...prevData.amenities, id] : prevData.amenities.filter((amenity) => amenity !== id),
-    }))
-  }
+  const handleCheckboxChange = (label: string, checked: boolean) => {
+    setPropertyData((prevData) => {
+      const updatedAmenities = checked
+        ? [...prevData.amenities, label]
+        : prevData.amenities.filter((item) => item !== label);
+  
+      return {
+        ...prevData,
+        amenities: updatedAmenities,
+      };
+    });
+  };  
 
   const handleSubmitProperty = async () => {
     try {
       const formData = new FormData();
       Object.entries(propertyData).forEach(([key, value]) => {
         if (key === "photos" && value) {
-          // Append each file directly to FormData
           (value as File[]).forEach((file) => {
             formData.append("photos", file);
           });
@@ -122,9 +127,8 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
           value.forEach((amenity) => {
             formData.append("amenities[]", amenity);
           });
-        }
+        }        
          else if (value !== null && value !== undefined) {
-          // Append other fields as strings
           formData.append(key, value.toString());
         }
       });
@@ -353,8 +357,8 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
                 <div className='flex flex-col'>
                   <h4 className='text-[#161e2d] text-base font-semibold mb-4'>Home Safety</h4>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="smoke_alarm" className='accent-[#1563df]' checked={amenities.includes("smoke_alarm")}
-                     onCheckedChange={(checked) => handleCheckboxChange("smoke_alarm", checked as boolean)}
+                    <Checkbox id="smoke_alarm" className='accent-[#1563df]' checked={amenities.includes("Smoke Alarm")}
+                     onCheckedChange={(checked) => handleCheckboxChange("Smoke Alarm", checked as boolean)}
                     />
                     <label
                       htmlFor="smoke_alarm"
@@ -364,8 +368,8 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="self_check" className='accent-[#1563df]' checked={amenities.includes("self_check")} 
-                     onCheckedChange={(checked) => handleCheckboxChange("self_check", checked as boolean)}
+                    <Checkbox id="self_check" className='accent-[#1563df]' checked={amenities.includes("Self check-in with lockbox")} 
+                     onCheckedChange={(checked) => handleCheckboxChange("Self check-in with lockbox", checked as boolean)}
                     />
                     <label
                       htmlFor="self_check"
@@ -375,8 +379,8 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="carbon_alarm" className='accent-[#1563df]' checked={amenities.includes("carbon_alarm")} 
-                      onCheckedChange={(checked) => handleCheckboxChange("carbon_alarm", checked as boolean)} 
+                    <Checkbox id="carbon_alarm" className='accent-[#1563df]' checked={amenities.includes('Carbon monoxide alarm')} 
+                      onCheckedChange={(checked) => handleCheckboxChange("Carbon monoxide alarm", checked as boolean)} 
                     />
                     <label
                       htmlFor="carbon_alarm"
@@ -386,8 +390,8 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="cameras" className='accent-[#1563df]' checked={amenities.includes("cameras")} 
-                     onCheckedChange={(checked) => handleCheckboxChange("cameras", checked as boolean)}
+                    <Checkbox id="cameras" className='accent-[#1563df]' checked={amenities.includes("Security cameras")} 
+                     onCheckedChange={(checked) => handleCheckboxChange("Security cameras", checked as boolean)}
                     />
                     <label
                       htmlFor="cameras"
@@ -400,8 +404,8 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
                 <div className='flex flex-col'>
                   <h4 className='text-[#161e2d] text-base font-semibold mb-4'>Bedroom</h4>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="hangers" className='accent-[#1563df]' checked={amenities.includes("hangers")} 
-                      onCheckedChange={(checked) => handleCheckboxChange("hangers", checked as boolean)}
+                    <Checkbox id="hangers" className='accent-[#1563df]' checked={amenities.includes("Hangers")}
+                      onCheckedChange={(checked) => handleCheckboxChange("Hangers", checked as boolean)}
                     />
                     <label
                       htmlFor="hangers"
@@ -411,8 +415,8 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="pillows" className='accent-[#1563df]' checked={amenities.includes("pillows")} 
-                      onCheckedChange={(checked) => handleCheckboxChange("pillows", checked as boolean)}
+                    <Checkbox id="pillows" className='accent-[#1563df]' checked={amenities.includes("Extra pillows & blankets")} 
+                      onCheckedChange={(checked) => handleCheckboxChange("Extra pillows & blankets", checked as boolean)}
                     />
                     <label
                       htmlFor="pillows"
@@ -422,8 +426,8 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="tv_cable" className='accent-[#1563df]' checked={amenities.includes("tv_cable")} 
-                    onCheckedChange={(checked) => handleCheckboxChange("tv_cable", checked as boolean)}
+                    <Checkbox id="tv_cable" className='accent-[#1563df]' checked={amenities.includes("TV with standard cable")} 
+                    onCheckedChange={(checked) => handleCheckboxChange("TV with standard cable", checked as boolean)}
                     />
                     <label
                       htmlFor="tv_cable"
@@ -433,8 +437,8 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="beds" className='accent-[#1563df]' checked={amenities.includes("beds")} 
-                      onCheckedChange={(checked) => handleCheckboxChange("beds", checked as boolean)}
+                    <Checkbox id="beds" className='accent-[#1563df]' checked={amenities.includes("Bed linens")}
+                      onCheckedChange={(checked) => handleCheckboxChange("Bed linens", checked as boolean)}
                     />
                     <label
                       htmlFor="beds"
@@ -447,8 +451,8 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
                 <div className='flex flex-col'>
                   <h4 className='text-[#161e2d] text-base font-semibold mb-4'>Kitchen</h4>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="refrigerator" className='accent-[#1563df]' checked={amenities.includes("refrigerator")} 
-                      onCheckedChange={(checked) => handleCheckboxChange("refrigerator", checked as boolean)}
+                    <Checkbox id="refrigerator" className='accent-[#1563df]' checked={amenities.includes("Refrigerator")}
+                      onCheckedChange={(checked) => handleCheckboxChange("Refrigerator", checked as boolean)}
                     />
                     <label
                       htmlFor="refrigerator"
@@ -458,8 +462,8 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="dishwasher" className='accent-[#1563df]' checked={amenities.includes("dishwasher")} 
-                      onCheckedChange={(checked) => handleCheckboxChange("dishwasher", checked as boolean)}
+                    <Checkbox id="dishwasher" className='accent-[#1563df]' checked={amenities.includes("Dishwasher")} 
+                      onCheckedChange={(checked) => handleCheckboxChange("Dishwasher", checked as boolean)}
                     />
                     <label
                       htmlFor="dishwasher"
@@ -469,8 +473,8 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="microwave" className='accent-[#1563df]' checked={amenities.includes("microwave")} 
-                      onCheckedChange={(checked) => handleCheckboxChange("microwave", checked as boolean)}
+                    <Checkbox id="microwave" className='accent-[#1563df]' checked={amenities.includes("Microwave")} 
+                      onCheckedChange={(checked) => handleCheckboxChange("Microwave", checked as boolean)}
                     />
                     <label
                       htmlFor="microwave"
@@ -480,8 +484,8 @@ const page = ({ sidebarProps }: AddPropertyPageProps) => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="coffee_maker" className='accent-[#1563df]' checked={amenities.includes("coffee_maker")} 
-                      onCheckedChange={(checked) => handleCheckboxChange("coffee_maker", checked as boolean)}
+                    <Checkbox id="coffee_maker" className='accent-[#1563df]' checked={amenities.includes('Coffee maker')} 
+                      onCheckedChange={(checked) => handleCheckboxChange("Coffee maker", checked as boolean)}
                     />
                     <label
                       htmlFor="coffee_maker"
