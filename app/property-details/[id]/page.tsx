@@ -60,7 +60,7 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
     } catch (error) {
       console.log(error);
     }
-  }  
+  }
 
   useEffect(() => {
     const fetchPropertyById = async () => {
@@ -151,13 +151,15 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
             </div>
           </div>
           <div className="w-full pt-12">
-            <Image
-              className='w-full rounded-2xl'
-              src={propertyDetails?.photos?.[0]}
-              alt={propertyDetails?.title}
-              width={800}
-              height={600}
-            />
+            {propertyDetails?.photos?.[0] ? (
+              <Image
+                className="w-full rounded-2xl"
+                src={propertyDetails.photos[0]}
+                alt={propertyDetails?.title || 'Property image'}
+                width={800}
+                height={600}
+              />
+            ) : null}
           </div>
           <section className='py-12 border-b border-[#e4e4e4]'>
             <h3 className='text-2xl font-semibold text-[#161e2d] mb-4'>Description</h3>
@@ -264,15 +266,15 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
                   </div>
                   <div className='flex items-center justify-center'>
                     {[...Array(5)].map((_, i) => {
-                        const starValue = i + 1;
-                        return (
-                          <Star
-                            key={starValue}
-                            size={18}
-                            className={`${item?.rating >= starValue ? "fill-yellow-400 text-yellow-400" : "fill-gray-400 text-gray-400" }`}
-                          />
-                        );
-                      })}
+                      const starValue = i + 1;
+                      return (
+                        <Star
+                          key={starValue}
+                          size={16}
+                          className={`${item?.rating >= starValue ? "fill-yellow-400 text-yellow-400" : "fill-gray-400 text-gray-400"}`}
+                        />
+                      );
+                    })}
                   </div>
                 </div>
                 <p className='text-sm'>{item?.comment}</p>
@@ -286,7 +288,7 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
               <div className='w-full flex md:flex-row flex-col gap-5 md:items-center items-start justify-start'>
                 <div className='w-full md:w-1/2 gap-2.5 flex flex-col justify-start'>
                   <label htmlFor="name" className='text-xs font-semibold text-[#161e2d]'>Name</label>
-                  <input className='bg-white w-full rounded-full border border-[#e4e4e4] outline-none px-5 py-4 text-sm text-[#161e2d]' type="text" value={session?.user?.name ?? ''} name='name' id='name' placeholder='Your Name' />
+                  <input readOnly className='bg-white w-full rounded-full border border-[#e4e4e4] outline-none px-5 py-4 text-sm text-[#161e2d]' type="text" value={session?.user?.name ?? ''} name='name' id='name' placeholder='Your Name' />
                 </div>
                 <div className='w-full md:w-1/2 flex flex-col justify-start gap-2.5'>
                   <label htmlFor="name" className='text-xs font-semibold text-[#161e2d]'>Review</label>

@@ -4,8 +4,7 @@ import React, { useState, ReactNode } from "react";
 import { useSession } from "next-auth/react";
 import Sidebar from "../components/Sidebar";
 import { redirect } from 'next/navigation';
-import Loader from "../components/Loader";
-
+import Loading from "../loading";
 interface DashboardLayoutProps {
   children: ReactNode;
 }
@@ -32,7 +31,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   });
 
   if (status === "loading") {
-    return <Loader />
+    return <Loading />
   }
 
   if (!session) {
