@@ -82,9 +82,28 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
     bathrooms,
     garage,
     garageSize,
+    amenities,
     yearBuilt,
-    amenities
   } = propertyData;
+
+  const AMENITY_LABELS: Record<string, string> = {
+    smoke_alarm: "Smoke Alarm",
+    self_check: "Self check-in with lockbox",
+    carbon_alarm: "Carbon monoxide alarm",
+    cameras: "Security cameras",
+    hangers: "Hangers",
+    pillows: "Extra pillows & blankets",
+    tv_cable: "TV with standard cable",
+    beds: "Bed linens",
+    refrigerator: "Refrigerator",
+    dishwasher: "Dishwasher",
+    microwave: "Microwave",
+    coffee_maker: "Coffee maker"
+  };
+
+  const AMENITY_LABELS_REVERSE = Object.fromEntries(
+    Object.entries(AMENITY_LABELS).map(([k, v]) => [k, v])
+  );
 
   const fetchPropertyById = async () => {
     try {
@@ -127,7 +146,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
       };
     });
   };
-
+  
   const handleEditProperty = async () => {
     try {
       const formData = new FormData();
@@ -169,12 +188,18 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
 
   useEffect(() => {
     if (propertyDetails) {
+      const mappedAmenities = propertyDetails.amenities?.map(
+        (key: string) => AMENITY_LABELS[key] || key
+      );
+  
       setPropertyData((prevData) => ({
         ...prevData,
         ...propertyDetails,
+        amenities: mappedAmenities || [],
       }));
     }
   }, [propertyDetails]);
+  
 
   useEffect(() => {
     if (id) {
@@ -388,148 +413,25 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
             </div>
             <div className='bg-white shadow-md rounded-2xl p-8 mt-5'>
               <h3 className='text-[#161e2d] text-2xl font-semibold mb-5'>Amenities</h3>
-              <div className='w-full flex md:flex-row flex-col md:items-center md:justify-between gap-7 items-start justify-start mb-7'>
-                <div className='flex flex-col'>
-                  <h4 className='text-[#161e2d] text-base font-semibold mb-4'>Home Safety</h4>
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="smoke_alarm" className='accent-[#1563df]' checked={amenities.includes("Smoke Alarm")}
-                      onCheckedChange={(checked) => handleCheckboxChange("smoke_alarm", checked as boolean)}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-4">
+                {Object.entries(AMENITY_LABELS).map(([key, label]) => (
+                  <div className="flex items-center space-x-2" key={key}>
+                    <Checkbox
+                      id={key}
+                      className="accent-[#1563df]"
+                      checked={amenities.includes(label)}
+                      onCheckedChange={(checked) =>
+                        handleCheckboxChange(label, checked as boolean)
+                      }
                     />
                     <label
-                      htmlFor="smoke_alarm"
+                      htmlFor={key}
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      Smoke Alarm
+                      {label}
                     </label>
                   </div>
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="self_check" className='accent-[#1563df]' checked={amenities.includes("self_check")}
-                      onCheckedChange={(checked) => handleCheckboxChange("self_check", checked as boolean)}
-                    />
-                    <label
-                      htmlFor="self_check"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Self check-in with lockbox
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="carbon_alarm" className='accent-[#1563df]' checked={amenities.includes("carbon_alarm")}
-                      onCheckedChange={(checked) => handleCheckboxChange("carbon_alarm", checked as boolean)}
-                    />
-                    <label
-                      htmlFor="carbon_alarm"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Carbon monoxide alarm
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="cameras" className='accent-[#1563df]' checked={amenities.includes("cameras")}
-                      onCheckedChange={(checked) => handleCheckboxChange("cameras", checked as boolean)}
-                    />
-                    <label
-                      htmlFor="cameras"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Security cameras
-                    </label>
-                  </div>
-                </div>
-                <div className='flex flex-col'>
-                  <h4 className='text-[#161e2d] text-base font-semibold mb-4'>Bedroom</h4>
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="hangers" className='accent-[#1563df]' checked={amenities.includes("hangers")}
-                      onCheckedChange={(checked) => handleCheckboxChange("hangers", checked as boolean)}
-                    />
-                    <label
-                      htmlFor="hangers"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Hangers
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="pillows" className='accent-[#1563df]' checked={amenities.includes("pillows")}
-                      onCheckedChange={(checked) => handleCheckboxChange("pillows", checked as boolean)}
-                    />
-                    <label
-                      htmlFor="pillows"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Extra pillows & blankets
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="tv_cable" className='accent-[#1563df]' checked={amenities.includes("tv_cable")}
-                      onCheckedChange={(checked) => handleCheckboxChange("tv_cable", checked as boolean)}
-                    />
-                    <label
-                      htmlFor="tv_cable"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      TV with standard cable
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="beds" className='accent-[#1563df]' checked={amenities.includes("beds")}
-                      onCheckedChange={(checked) => handleCheckboxChange("beds", checked as boolean)}
-                    />
-                    <label
-                      htmlFor="beds"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Bed linens
-                    </label>
-                  </div>
-                </div>
-                <div className='flex flex-col'>
-                  <h4 className='text-[#161e2d] text-base font-semibold mb-4'>Kitchen</h4>
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="refrigerator" className='accent-[#1563df]' checked={amenities.includes("refrigerator")}
-                      onCheckedChange={(checked) => handleCheckboxChange("refrigerator", checked as boolean)}
-                    />
-                    <label
-                      htmlFor="refrigerator"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Refrigerator
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="dishwasher" className='accent-[#1563df]' checked={amenities.includes("dishwasher")}
-                      onCheckedChange={(checked) => handleCheckboxChange("dishwasher", checked as boolean)}
-                    />
-                    <label
-                      htmlFor="dishwasher"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Dishwasher
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="microwave" className='accent-[#1563df]' checked={amenities.includes("microwave")}
-                      onCheckedChange={(checked) => handleCheckboxChange("microwave", checked as boolean)}
-                    />
-                    <label
-                      htmlFor="microwave"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Microwave
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="coffee_maker" className='accent-[#1563df]' checked={amenities.includes("coffee_maker")}
-                      onCheckedChange={(checked) => handleCheckboxChange("coffee_maker", checked as boolean)}
-                    />
-                    <label
-                      htmlFor="coffee_maker"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Coffee maker
-                    </label>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
             <button onClick={handleEditProperty} type="button" className='bg-[#1563df] text-white font-medium text-base rounded-full w-44 mt-5 py-3.5 transition-colors hover:bg-[#0e49a6]'>Update Property</button>
