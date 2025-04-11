@@ -58,9 +58,9 @@ export async function POST(req: NextRequest) {
     // Process multiple files correctly
     if (files.length > 0) {
       for (const file of files) {
-        if (!file) continue; // Skip if no file
+        if (!file) continue;
 
-        console.log(`Processing file: ${file.name}`); // Debugging
+        console.log(`Processing file: ${file.name}`);
 
         try {
           const bytes = await file.arrayBuffer();

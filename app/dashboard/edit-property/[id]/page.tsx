@@ -101,7 +101,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
 
       setPropertyData((prevData) => ({
         ...prevData,
-        photos: selectedFiles, // Store actual File objects
+        photos: selectedFiles,
       }));
     }
   };
@@ -115,12 +115,18 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
     setPropertyData(prev => ({ ...prev, [name]: value }));
   }
 
-  const handleCheckboxChange = (id: string, checked: boolean) => {
-    setPropertyData((prevData) => ({
-      ...prevData,
-      amenities: checked ? [...prevData.amenities, id] : prevData.amenities.filter((amenity) => amenity !== id),
-    }))
-  }
+  const handleCheckboxChange = (label: string, checked: boolean) => {
+    setPropertyData((prevData) => {
+      const updatedAmenities = checked
+        ? [...prevData.amenities, label]
+        : prevData.amenities.filter((item) => item !== label);
+  
+      return {
+        ...prevData,
+        amenities: updatedAmenities,
+      };
+    });
+  };
 
   const handleEditProperty = async () => {
     try {
@@ -140,7 +146,6 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
         }
       });
 
-      // Ensure ID from URL is correctly included in the FormData
       if (id) {
         formData.append("id", id.toString());
       } else {
@@ -162,7 +167,6 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
     }
   };
 
-  // Update propertyData when propertyDetails changes
   useEffect(() => {
     if (propertyDetails) {
       setPropertyData((prevData) => ({
@@ -172,7 +176,6 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
     }
   }, [propertyDetails]);
 
-  // Fetch data on component mount
   useEffect(() => {
     if (id) {
       fetchPropertyById();
@@ -389,7 +392,7 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
                 <div className='flex flex-col'>
                   <h4 className='text-[#161e2d] text-base font-semibold mb-4'>Home Safety</h4>
                   <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox id="smoke_alarm" className='accent-[#1563df]' checked={amenities.includes("smoke_alarm")}
+                    <Checkbox id="smoke_alarm" className='accent-[#1563df]' checked={amenities.includes("Smoke Alarm")}
                       onCheckedChange={(checked) => handleCheckboxChange("smoke_alarm", checked as boolean)}
                     />
                     <label
