@@ -191,7 +191,6 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
       const mappedAmenities = propertyDetails.amenities?.map(
         (key: string) => AMENITY_LABELS[key] || key
       );
-  
       setPropertyData((prevData) => ({
         ...prevData,
         ...propertyDetails,
