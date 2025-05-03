@@ -31,6 +31,16 @@ const page = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const propertiesPerPage = 5
 
+  console.log(session?.user?.id);
+
+  const fetchTotalReviews = async() => {
+    try {
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value)
     setCurrentPage(1)
@@ -97,7 +107,8 @@ const page = () => {
   }, [status, router])
 
   useEffect(() => {
-    fetchProperties()
+    fetchProperties();
+    fetchTotalReviews();
   }, [])
 
   if (!session) {
