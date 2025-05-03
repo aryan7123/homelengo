@@ -28,14 +28,14 @@ const page = () => {
   const [btnTextMap, setBtnTextMap] = useState<{ [key: number]: boolean }>({})
   const [searchText, setSearchText] = useState("")
   const [selectStatus, setSelectStatus] = useState("")
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalReviews, setTotalReviews] = useState('');
   const propertiesPerPage = 5
-
-  console.log(session?.user?.id);
 
   const fetchTotalReviews = async() => {
     try {
-      
+      const req = await axios.post('/api/fetch-reviews', { userId: session?.user?.id });
+      console.log(req);
     } catch (error) {
       console.log(error);
     }
