@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import Image from "next/image"
 import { register } from "../api/register/route";
 import { useState } from "react"
+import { Eye, EyeOff } from 'lucide-react';
 
 interface RegisterModalProps {
     isOpen: boolean;
@@ -22,6 +23,17 @@ type FieldErrors = {
 }
 
 export function RegisterModal({ isOpen, onClose, onLoginClick }: RegisterModalProps) {
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const handleFirstPassword = () => {
+        setShowPassword(!showPassword);
+    }
+
+    const handleSecondPassword = () => {
+        setShowConfirmPassword(!showConfirmPassword);
+    }
 
     const handleLoginClick = () => {
         onClose();
@@ -95,24 +107,38 @@ export function RegisterModal({ isOpen, onClose, onLoginClick }: RegisterModalPr
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="password">Password</Label>
-                            <Input
-                                name="password"
-                                className="rounded-full px-4 py-6 text-sm text-[#161e2d] outline-[#1563df]"
-                                type="password"
-                                id="password"
-                                placeholder="Your Password"
-                            />
+                            <div className="relative">
+                                <Input
+                                    name="password"
+                                    className="rounded-full px-4 py-6 text-sm text-[#161e2d] outline-[#1563df]"
+                                    type={showPassword ? "text" : "password"}
+                                    id="password"
+                                    placeholder="Your Password"
+                                />
+                                {showPassword ? (
+                                    <EyeOff onClick={handleFirstPassword} size={20} className="absolute right-4 top-[13px] cursor-pointer" />
+                                ) : (
+                                    <Eye onClick={handleFirstPassword} size={20} className="absolute right-4 top-[13px] cursor-pointer" />
+                                )}
+                            </div>
                             {errors.password && <p className="text-red-600 text-sm">{errors.password}</p>}
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="confirm_password">Confirm Password</Label>
-                            <Input
-                                name="confirmPassword"
-                                className="rounded-full px-4 py-6 text-sm text-[#161e2d] outline-[#1563df]"
-                                type="password"
-                                id="confirm_password"
-                                placeholder="Your Password"
-                            />
+                            <div className="relative">
+                                <Input
+                                    name="confirmPassword"
+                                    className="rounded-full px-4 py-6 text-sm text-[#161e2d] outline-[#1563df]"
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    id="confirm_password"
+                                    placeholder="Your Password"
+                                />
+                                {showConfirmPassword ? (
+                                    <EyeOff onClick={handleSecondPassword} size={20} className="absolute right-4 top-[13px] cursor-pointer" />
+                                ) : (
+                                    <Eye onClick={handleSecondPassword} size={20} className="absolute right-4 top-[13px] cursor-pointer" />
+                                )}
+                            </div>
                             {errors.confirmPassword && <p className="text-red-600 text-sm my-3">{errors.confirmPassword}</p>}
                         </div>
                         {successMessage && (

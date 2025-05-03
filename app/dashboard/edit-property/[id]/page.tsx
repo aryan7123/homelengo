@@ -198,7 +198,6 @@ const page = ({ sidebarProps }: EditPropertyPageProps) => {
       }));
     }
   }, [propertyDetails]);
-  
 
   useEffect(() => {
     if (id) {
