@@ -9,6 +9,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation";
 import { login } from "../api/login/route";
 import { signIn } from "next-auth/react";
+import { Eye, EyeOff } from 'lucide-react';
 
 interface LoginModalProps {
     isOpen: boolean;
@@ -28,9 +29,15 @@ export function LoginModal({ isOpen, onClose, onRegisterClick }: LoginModalProps
         onRegisterClick();
     };
 
+    const [showPassword, setShowPassword] = useState(false);
     const [errors, setErrors] = useState<FieldErrors>({});
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const router = useRouter();
+
+
+    const handleFirstPassword = () => {
+        setShowPassword(!showPassword);
+    }
 
     const handleSubmit = async () => {
         const form = document.querySelector('form') as HTMLFormElement
@@ -86,7 +93,20 @@ export function LoginModal({ isOpen, onClose, onRegisterClick }: LoginModalProps
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="password">Password</Label>
-                            <Input name="password" className="rounded-full px-4 py-6 text-sm text-[#161e2d] outline-[#1563df]" id="password" type="password" placeholder="Your Password" />
+                            <div className="relative">
+                                <Input
+                                    name="password"
+                                    className="rounded-full px-4 py-6 text-sm text-[#161e2d] outline-[#1563df]"
+                                    type={showPassword ? "text" : "password"}
+                                    id="password"
+                                    placeholder="Your Password"
+                                />
+                                {showPassword ? (
+                                    <EyeOff onClick={handleFirstPassword} size={20} className="absolute right-4 top-4 cursor-pointer" />
+                                ) : (
+                                    <Eye onClick={handleFirstPassword} size={20} className="absolute right-4 top-4 cursor-pointer" />
+                                )}
+                            </div>
                             {errors.password && <p className="text-red-600 text-sm">{errors.password}</p>}
                         </div>
                         {successMessage && (
