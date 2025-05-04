@@ -29,13 +29,13 @@ const page = () => {
   const [searchText, setSearchText] = useState("")
   const [selectStatus, setSelectStatus] = useState("")
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalReviews, setTotalReviews] = useState('');
+  const [totalRatings, setTotalRatings] = useState('');
   const propertiesPerPage = 5
 
   const fetchTotalReviews = async() => {
     try {
-      const req = await axios.post('/api/fetch-reviews', { userId: session?.user?.id });
-      console.log(req);
+      const req = await axios.post('/api/add-total-reviews', { userId: session?.user?.id });
+      setTotalRatings(req.data.ratings);
     } catch (error) {
       console.log(error);
     }
@@ -152,7 +152,7 @@ const page = () => {
             </div>
             <div className='flex flex-col gap-2'>
               <h3 className='text-[#5c6368] font-semibold text-base'>Reviews</h3>
-              <span className='text-[#161e2d] font-semibold text-4xl'>1.483</span>
+              <span className='text-[#161e2d] font-semibold text-4xl'>{totalRatings}</span>
             </div>
           </div>
         </div>
