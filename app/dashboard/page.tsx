@@ -143,7 +143,7 @@ const page = () => {
             </div>
             <div className='flex flex-col gap-2'>
               <h3 className='text-[#5c6368] font-semibold text-base'>Favoruites</h3>
-              <span className='text-[#161e2d] font-semibold text-4xl'>06</span>
+              <span className='text-[#161e2d] font-semibold text-4xl'>6</span>
             </div>
           </div>
           <div className='w-full flex items-center md:justify-center justify-start gap-3 md:w-1/4 shadow rounded-2xl bg-white p-5'>

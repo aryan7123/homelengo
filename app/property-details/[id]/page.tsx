@@ -95,6 +95,14 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
     });
   }
 
+  const propertyLikeBtn = async() => {
+    try {
+      
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <>
       <Navbar />
@@ -136,7 +144,7 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
               </div>
             </div>
             <div className='flex items-center justify-center gap-3.5 md:ml-auto'>
-              <button className='text-[#5c6368] border border-[#e4e4e4] rounded-xl w-10 h-10 flex items-center justify-center transition-colors hover:bg-[#1563df] hover:text-white'>
+              <button onClick={propertyLikeBtn} className='text-[#5c6368] border border-[#e4e4e4] rounded-xl w-10 h-10 flex items-center justify-center transition-colors hover:bg-[#1563df] hover:text-white'>
                 <Heart size={18} />
               </button>
               <button className='text-[#5c6368] border border-[#e4e4e4] rounded-xl w-10 h-10 flex items-center justify-center transition-colors hover:bg-[#1563df] hover:text-white'>
