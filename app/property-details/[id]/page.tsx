@@ -97,7 +97,8 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
 
   const propertyLikeBtn = async() => {
     try {
-      
+      const req = await axios.post("/api/like-property", { propertyId: id, userId: session?.user?.id });
+      console.log(req);
     } catch (error) {
       console.error(error);
     }
