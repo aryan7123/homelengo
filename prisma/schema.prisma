@@ -14,12 +14,12 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String @db.VarChar(255)
-  email    String @unique @db.VarChar(255)
-  password String @db.VarChar(255)
-  reviews  Review[]
-  likedProperty String[]  
+  id              Int        @id @default(autoincrement())
+  username        String     @db.VarChar(255)
+  email           String     @unique @db.VarChar(255)
+  password        String     @db.VarChar(255)
+  reviews         Review[]
+  likedProperties Property[] @relation("UserLikes")
 }
 
 model Property {
@@ -51,6 +51,7 @@ model Property {
   amenities      String[]
   photos         String[]
   reviews        Review[]
+  likedByUsers   User[]   @relation("UserLikes")
   status         String   @default("Pending") @db.VarChar(255)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
@@ -58,8 +59,8 @@ model Property {
 
 model Review {
   id         Int      @id @default(autoincrement())
-  username   String?   @db.VarChar(255)
-  rating     Int      
+  username   String?  @db.VarChar(255)
+  rating     Int
   comment    String?  @db.Text
   propertyId Int
   property   Property @relation(fields: [propertyId], references: [id])
