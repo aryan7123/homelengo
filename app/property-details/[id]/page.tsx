@@ -39,6 +39,7 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
   const [message, setMessage] = useState("");
   const [postComment, setPostComment] = useState("");
   const [reviews, setReviews] = useState([]);
+  const [liked, setLiked] = useState(false);
 
   const handleStarClick = (starValue: number) => {
     const newRating = starValue === rating ? 0 : starValue;
@@ -132,6 +133,7 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
         userId: Number(session?.user?.id),
       });
       console.log(res.data);
+      setLiked(true);
     } catch (error) {
       console.error("Error liking property:", error);
     }
@@ -198,6 +200,7 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
             </div>
             <div className="flex items-center justify-center gap-3.5 md:ml-auto">
               <button
+                disabled={liked ? true : false}
                 onClick={propertyLikeBtn}
                 className="text-[#5c6368] border border-[#e4e4e4] rounded-xl w-10 h-10 flex items-center justify-center transition-colors hover:bg-[#1563df] hover:text-white"
               >
