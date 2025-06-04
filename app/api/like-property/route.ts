@@ -9,10 +9,6 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    if (!body || typeof body !== 'object') {
-      return NextResponse.json({ message: "Invalid or missing JSON body" }, { status: 400 });
-    }
-
     const { propertyId, userId } = body;
 
     if(propertyId && userId) {

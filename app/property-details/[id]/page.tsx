@@ -122,11 +122,6 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
   }
 
   const propertyLikeBtn = async () => {
-    if (!session?.user?.id) {
-      console.log("User not logged in.");
-      return;
-    }
-
     try {
       const res = await axios.post("/api/like-property", {
         propertyId: Number(id),
