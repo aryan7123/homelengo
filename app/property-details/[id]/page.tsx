@@ -134,6 +134,21 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
     }
   };
 
+  useEffect(() => {
+    const fetchLikedProperty = async () => {
+      try {
+        const res = await axios.post("/api/fetch-like-property", {
+          userId: session?.user?.id,
+        });
+
+        console.log(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchLikedProperty();
+  }, []);
+
   return (
     <>
       <Navbar />
