@@ -30,7 +30,7 @@ interface RatingProps {
 }
 
 const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const { id } = useParams();
 
   const [propertyDetails, setPropertyDetails] = useState([]);
@@ -135,19 +135,23 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
   };
 
   useEffect(() => {
-    const fetchLikedProperty = async () => {
-      try {
-        const res = await axios.post("/api/fetch-like-property", {
-          userId: session?.user?.id,
-        });
-
-        console.log(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchLikedProperty();
-  }, []);
+  if (status === "loading") return;
+    if (session?.user?.id) {
+      const fetchLikedProperty = async () => {
+        try {
+          const res = await axios.post("/api/fetch-like-property", {
+            propertyId: Number(id),
+            userId: Number(session?.user?.id)
+          });
+          
+          console.log(res.data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchLikedProperty();
+    }
+  }, [session]);
 
   return (
     <>
