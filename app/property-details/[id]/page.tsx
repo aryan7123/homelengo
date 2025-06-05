@@ -143,8 +143,8 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
             propertyId: Number(id),
             userId: Number(session?.user?.id)
           });
-          
           console.log(res.data);
+          setLiked(true);
         } catch (error) {
           console.log(error);
         }
@@ -214,9 +214,8 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
             </div>
             <div className="flex items-center justify-center gap-3.5 md:ml-auto">
               <button
-                disabled={liked ? true : false}
                 onClick={propertyLikeBtn}
-                className="text-[#5c6368] border border-[#e4e4e4] rounded-xl w-10 h-10 flex items-center justify-center transition-colors hover:bg-[#1563df] hover:text-white"
+                className={`${liked ? "bg-red-600 text-white" : "bg-transparent text-[#5c6368] hover:bg-[#1563df]"} border border-[#e4e4e4] rounded-xl w-10 h-10 flex items-center justify-center transition-colors hover:text-white`}
               >
                 <Heart size={18} />
               </button>

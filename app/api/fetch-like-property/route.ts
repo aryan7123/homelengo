@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (user && property) {
-      return NextResponse.json(user.likedProperties, { status: 200 });
+      return NextResponse.json({likedProperties: user.likedProperties, message: "You have liked this property"});
     } else {
       return NextResponse.json({ message: "You have not liked this property" });
     }
