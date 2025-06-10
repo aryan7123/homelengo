@@ -140,7 +140,6 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
         propertyId: Number(id),
         userId: Number(session?.user?.id),
       });
-      console.log(res.data);
       setLiked(false);
     } catch (error) {
       console.error("Error disliking property:", error);
@@ -156,7 +155,6 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
             propertyId: Number(id),
             userId: Number(session?.user?.id)
           });
-          console.log(res.data);
           setLiked(res.data.liked);
         } catch (error) {
           console.log(error);

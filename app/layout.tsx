@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Homelengo - A Real Estate Company",
   description: "Homelengo - A Real Estate Company",
+  icons: {
+    icon: "/favicon.png",
+  }
 };
 
 export default function RootLayout({
