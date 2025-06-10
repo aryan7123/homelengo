@@ -134,6 +134,19 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
     }
   };
 
+  const removePropertyLikeBtn = async() => {
+    try {
+      const res = await axios.post("/api/remove-property-like", {
+        propertyId: Number(id),
+        userId: Number(session?.user?.id),
+      });
+      console.log(res.data);
+      setLiked(false);
+    } catch (error) {
+      console.error("Error disliking property:", error);
+    }
+  }
+
   useEffect(() => {
   if (status === "loading") return;
     if (session?.user?.id) {
@@ -151,7 +164,7 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
       };
       fetchLikedProperty();
     }
-  }, [session]);
+  }, [id, session, status]);
 
   return (
     <>
@@ -214,7 +227,7 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
             </div>
             <div className="flex items-center justify-center gap-3.5 md:ml-auto">
               <button
-                onClick={propertyLikeBtn}
+                onClick={() => (liked ? removePropertyLikeBtn() : propertyLikeBtn())}
                 className={`${liked ? "bg-red-600 text-white" : "bg-transparent text-[#5c6368] hover:bg-[#1563df]"} border border-[#e4e4e4] rounded-xl w-10 h-10 flex items-center justify-center transition-colors hover:text-white`}
               >
                 <Heart size={18} />
