@@ -144,7 +144,7 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
             userId: Number(session?.user?.id)
           });
           console.log(res.data);
-          setLiked(true);
+          setLiked(res.data.liked);
         } catch (error) {
           console.log(error);
         }
