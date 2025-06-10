@@ -14,28 +14,26 @@ export async function POST(request: NextRequest) {
       where: { id: Number(userId) },
       select: {
         likedProperties: {
-          select: {
-            id: true,
-          },
+          select: { id: true },
         },
       },
     });
 
-    const property = await prisma.property.findUnique({
-      where: { id: Number(propertyId) },
-      select: {
-        likedByUsers: {
-          select: {
-            id: true,
-          },
-        },
-      },
-    });
+    const hasLiked = user?.likedProperties.some(
+      (property) => property.id === Number(propertyId)
+    );
 
-    if (user && property) {
-      return NextResponse.json({likedProperties: user.likedProperties, message: "You have liked this property"});
+    if (hasLiked) {
+      return NextResponse.json({
+        liked: true,
+        likedProperties: user?.likedProperties,
+        message: "You have liked this property",
+      });
     } else {
-      return NextResponse.json({ message: "You have not liked this property" });
+      return NextResponse.json({
+        liked: false,
+        message: "You have not liked this property",
+      });
     }
   } catch (error) {
     console.error(error);
