@@ -30,6 +30,7 @@ const page = () => {
   const [selectStatus, setSelectStatus] = useState("")
   const [currentPage, setCurrentPage] = useState(1);
   const [totalRatings, setTotalRatings] = useState('');
+  const [favoruites, setFavoruites] = useState('');
   const propertiesPerPage = 5
 
   const fetchTotalReviews = async() => {
@@ -111,6 +112,22 @@ const page = () => {
     fetchTotalReviews();
   }, []);
 
+  useEffect(() => {
+    if (session?.user?.id) {
+      const favoruiteProperty = async () => {
+        try {
+          const res = await axios.post("/api/favoruite-property", {
+            userId: Number(session?.user?.id)
+          });
+          setFavoruites(res.data.properties.length);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      favoruiteProperty();
+    }
+  }, [session]);
+
   if (!session) {
     return null
   }
@@ -143,7 +160,7 @@ const page = () => {
             </div>
             <div className='flex flex-col gap-2'>
               <h3 className='text-[#5c6368] font-semibold text-base'>Favoruites</h3>
-              <span className='text-[#161e2d] font-semibold text-4xl'>6</span>
+              <span className='text-[#161e2d] font-semibold text-4xl'>{favoruites}</span>
             </div>
           </div>
           <div className='w-full flex items-center md:justify-center justify-start gap-3 md:w-1/4 shadow rounded-2xl bg-white p-5'>
