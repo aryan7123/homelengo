@@ -104,12 +104,12 @@ const page = () => {
     if (status === 'unauthenticated') {
       router.push('/')
     }
-  }, [status, router])
+  }, [status, router]);
 
   useEffect(() => {
     fetchProperties();
     fetchTotalReviews();
-  }, [])
+  }, []);
 
   if (!session) {
     return null
