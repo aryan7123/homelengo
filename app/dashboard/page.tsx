@@ -202,9 +202,6 @@ const page = () => {
             </div>
           </div>
           <div className="overflow-x-auto">
-            <div className='mt-4'>
-              <h5 className='font-semibold'><span className='text-[#1563df]'>{properties.length}</span> Results Found</h5>
-            </div>
             <Table className="mt-4 min-w-max w-full">
               <TableHeader className="bg-[#161e2d]">
                 <TableRow>
