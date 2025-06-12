@@ -61,7 +61,6 @@ export function RegisterModal({ isOpen, onClose, onLoginClick }: RegisterModalPr
             setTimeout(() => {
                 setSuccessMessage(null);
                 onClose();
-                // router.push('/dashboard');
             }, 1500);
         }
     }
