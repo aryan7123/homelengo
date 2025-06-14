@@ -6,12 +6,12 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 
 type UserFields = {
-  fullName: string | null,
-  description: string | null,
-  occupation: string | null,
-  phoneNumber: number | null,
-  address: string | null
-}
+  fullName: string | null;
+  description: string | null;
+  occupation: string | null;
+  phoneNumber: string | null;
+  address: string | null;
+};
 
 const page = () => {
   const { data: session } = useSession();
@@ -25,9 +25,26 @@ const page = () => {
     confirm_password: "",
   });
 
-  const [inputFields, setInputFields] = useState<UserFields>({});
+  const [inputFields, setInputFields] = useState<UserFields>({
+    fullName: null,
+    description: null,
+    occupation: null,
+    phoneNumber: null,
+    address: null,
+  });
 
   const { old_password, new_password, confirm_password } = passwords;
+  const { fullName, description, occupation, phoneNumber, address } = inputFields;
+
+  const handleUserInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setInputFields((prev) => ({
+      ...prev,
+      [name]: value || null,
+    }));
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -43,19 +60,35 @@ const page = () => {
     if (field === "confirm") setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleUpdatePassword = async() => {
+  const handleUpdatePassword = async () => {
     try {
       const req = await axios.post("/api/update-password", {
         userId: session?.user?.id,
         old_password,
         new_password,
-        confirm_password
+        confirm_password,
       });
       console.log(req.data);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  const handleUpdateUserDetails = async () => {
+    try {
+      const req = await axios.post("/api/account-details", {
+        userId: session?.user?.id,
+        fullName,
+        description,
+        occupation,
+        phoneNumber,
+        address,
+      });
+      console.log(req.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -66,14 +99,16 @@ const page = () => {
           </h3>
           <form className="w-full">
             <div className="flex flex-col gap-2 mb-7">
-              <label className="text-xs font-semibold" htmlFor="full_name">
+              <label className="text-xs font-semibold" htmlFor="fullName">
                 Full Name: *
               </label>
               <input
                 className="w-full border border-[#e4e4e4] pl-4 py-2.5 rounded-[99px] bg-white text-[#161e2d] font-medium text-sm outline-none focus:border-[#1563df]"
                 type="text"
-                name="full_name"
-                id="full_name"
+                name="fullName"
+                id="fullName"
+                value={fullName || ""}
+                onChange={handleUserInput}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -83,7 +118,9 @@ const page = () => {
               <textarea
                 className="w-full h-28 resize-none border border-[#e4e4e4] pl-4 py-2.5 rounded-2xl bg-white text-[#161e2d] font-medium text-sm outline-none focus:border-[#1563df]"
                 name="description"
+                value={description || ""}
                 id="description"
+                onChange={handleUserInput}
               />
             </div>
             <div className="w-full mt-7 flex md:flex-row md:gap-0 gap-2 flex-col md:items-center items-start justify-between">
@@ -95,18 +132,22 @@ const page = () => {
                   className="md:w-[320px] w-full border border-[#e4e4e4] pl-4 py-2.5 rounded-[99px] bg-white text-[#161e2d] font-medium text-sm outline-none focus:border-[#1563df]"
                   type="text"
                   name="occupation"
+                  value={occupation || ""}
                   id="occupation"
+                  onChange={handleUserInput}
                 />
               </div>
               <div className="w-[inherit] flex flex-col gap-2">
-                <label className="text-xs font-semibold" htmlFor="phone_number">
+                <label className="text-xs font-semibold" htmlFor="phoneNumber">
                   Phone Number: *
                 </label>
                 <input
                   className="md:w-[320px] w-full border border-[#e4e4e4] pl-4 py-2.5 rounded-[99px] bg-white text-[#161e2d] font-medium text-sm outline-none focus:border-[#1563df]"
                   type="tel"
-                  name="phone_number"
-                  id="phone_number"
+                  name="phoneNumber"
+                  value={phoneNumber || ""}
+                  id="phoneNumber"
+                  onChange={handleUserInput}
                 />
               </div>
               <div className="w-[inherit] flex flex-col gap-2">
@@ -118,10 +159,13 @@ const page = () => {
                   type="text"
                   name="address"
                   id="address"
+                  value={address || ""}
+                  onChange={handleUserInput}
                 />
               </div>
             </div>
             <button
+              onClick={handleUpdateUserDetails}
               type="button"
               className="bg-[#1563df] text-white font-medium text-base rounded-full w-44 mt-7 py-3.5 transition-colors hover:bg-[#0e49a6]"
             >
