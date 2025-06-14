@@ -2,8 +2,19 @@
 
 import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+
+type UserFields = {
+  fullName: string | null,
+  description: string | null,
+  occupation: string | null,
+  phoneNumber: number | null,
+  address: string | null
+}
 
 const page = () => {
+  const { data: session } = useSession();
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -13,6 +24,8 @@ const page = () => {
     new_password: "",
     confirm_password: "",
   });
+
+  const [inputFields, setInputFields] = useState<UserFields>({});
 
   const { old_password, new_password, confirm_password } = passwords;
 
@@ -29,6 +42,20 @@ const page = () => {
     if (field === "new") setShowNewPassword(!showNewPassword);
     if (field === "confirm") setShowConfirmPassword(!showConfirmPassword);
   };
+
+  const handleUpdatePassword = async() => {
+    try {
+      const req = await axios.post("/api/update-password", {
+        userId: session?.user?.id,
+        old_password,
+        new_password,
+        confirm_password
+      });
+      console.log(req.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -189,6 +216,7 @@ const page = () => {
               </div>
             </div>
             <button
+              onClick={handleUpdatePassword}
               type="button"
               className="bg-[#1563df] text-white font-medium text-base rounded-full w-44 mt-7 py-3.5 transition-colors hover:bg-[#0e49a6]"
             >

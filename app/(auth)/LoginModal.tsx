@@ -34,7 +34,6 @@ export function LoginModal({ isOpen, onClose, onRegisterClick }: LoginModalProps
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const router = useRouter();
 
-
     const handleFirstPassword = () => {
         setShowPassword(!showPassword);
     }
