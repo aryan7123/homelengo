@@ -18,6 +18,11 @@ model User {
   username        String     @db.VarChar(255)
   email           String     @unique @db.VarChar(255)
   password        String     @db.VarChar(255)
+  fullName        String?    @db.VarChar(255)
+  description     String?    @db.Text
+  occupation      String?    @db.VarChar(255)
+  phoneNumber     Int?
+  address         String?    @db.VarChar(255)
   reviews         Review[]
   likedProperties Property[] @relation("UserLikes")
 }
