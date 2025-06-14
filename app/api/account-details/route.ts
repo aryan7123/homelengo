@@ -11,31 +11,27 @@ export async function POST(req: NextRequest) {
     const { userId, fullName, description, occupation, phoneNumber, address } = body;
 
     const user = await prisma.user.findUnique({
-      where: {
-        id: Number(userId),
-      },
+      where: { id: Number(userId) },
     });
 
     if (user) {
       const updateUserDetails = await prisma.user.update({
-        where: {
-            id: Number(userId)
-        },
+        where: { id: Number(userId) },
         data: {
-            fullName: fullName,
-            description: description,
-            occupation: occupation,
-            phoneNumber: Number(phoneNumber),
-            address: address
-        }
+          fullName,
+          description,
+          occupation,
+          phoneNumber: parseInt(phoneNumber),
+          address,
+        },
       });
 
-      return NextResponse.json({ updateUserDetails, message: "Details updated sucessfully" });
-    }
-    else {
-        return NextResponse.json({ message: "Details cannot be upadted" });
+      return NextResponse.json({ updateUserDetails, message: "Details updated successfully" });
+    } else {
+      return NextResponse.json({ message: "User not found" });
     }
   } catch (error) {
-    console.log(error);
+    console.error("API Error:", error);
   }
 }
+

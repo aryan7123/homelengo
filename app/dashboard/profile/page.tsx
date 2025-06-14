@@ -6,11 +6,11 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 
 type UserFields = {
-  fullName: string | null;
-  description: string | null;
-  occupation: string | null;
-  phoneNumber: string | null;
-  address: string | null;
+  fullName: string;
+  description: string;
+  occupation: string;
+  phoneNumber: string;
+  address: string;
 };
 
 const page = () => {
@@ -26,11 +26,11 @@ const page = () => {
   });
 
   const [inputFields, setInputFields] = useState<UserFields>({
-    fullName: null,
-    description: null,
-    occupation: null,
-    phoneNumber: null,
-    address: null,
+    fullName: "",
+    description: "",
+    occupation: "",
+    phoneNumber: "",
+    address: "",
   });
 
   const { old_password, new_password, confirm_password } = passwords;
@@ -76,17 +76,25 @@ const page = () => {
 
   const handleUpdateUserDetails = async () => {
     try {
-      const req = await axios.post("/api/account-details", {
-        userId: session?.user?.id,
-        fullName,
-        description,
-        occupation,
-        phoneNumber,
-        address,
-      });
-      console.log(req.data);
+      const res = await axios.post(
+        "/api/account-details",
+        {
+          userId: session?.user?.id,
+          fullName,
+          description,
+          occupation,
+          phoneNumber,
+          address,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(res.data);
     } catch (error) {
-      console.log(error);
+      console.error("Update Error:", error);
     }
   };
 
@@ -145,7 +153,7 @@ const page = () => {
                   className="md:w-[320px] w-full border border-[#e4e4e4] pl-4 py-2.5 rounded-[99px] bg-white text-[#161e2d] font-medium text-sm outline-none focus:border-[#1563df]"
                   type="tel"
                   name="phoneNumber"
-                  value={phoneNumber || ''}
+                  value={phoneNumber || ""}
                   id="phoneNumber"
                   onChange={handleUserInput}
                 />
