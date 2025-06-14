@@ -145,7 +145,7 @@ const page = () => {
                   className="md:w-[320px] w-full border border-[#e4e4e4] pl-4 py-2.5 rounded-[99px] bg-white text-[#161e2d] font-medium text-sm outline-none focus:border-[#1563df]"
                   type="tel"
                   name="phoneNumber"
-                  value={phoneNumber || ""}
+                  value={phoneNumber || ''}
                   id="phoneNumber"
                   onChange={handleUserInput}
                 />
