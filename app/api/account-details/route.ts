@@ -16,13 +16,13 @@ export async function POST(req: NextRequest) {
 
     if (user) {
       const updateUserDetails = await prisma.user.update({
-        where: { id: Number(userId) },
+        where: { id: user.id },
         data: {
           fullName,
           description,
           occupation,
-          phoneNumber: parseInt(phoneNumber),
-          address,
+          phoneNumber,
+          address
         },
       });
 
@@ -31,7 +31,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: "User not found" });
     }
   } catch (error) {
-    console.error("API Error:", error);
+    console.error(error);
   }
 }
-
