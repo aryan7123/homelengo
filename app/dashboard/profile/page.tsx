@@ -42,7 +42,7 @@ const page = () => {
     const { name, value } = e.target;
     setInputFields((prev) => ({
       ...prev,
-      [name]: value || null,
+      [name]: value,
     }));
   };
 
@@ -75,24 +75,21 @@ const page = () => {
   };
 
   const handleUpdateUserDetails = async () => {
+    if (!session?.user?.id) {
+      console.error("User is not logged in or session is not loaded");
+      return;
+    }
+    const payload = {
+      userId: session.user.id,
+      fullName,
+      description,
+      occupation,
+      phoneNumber,
+      address
+    };
     try {
-      const res = await axios.post(
-        "/api/account-details",
-        {
-          userId: session?.user?.id,
-          fullName,
-          description,
-          occupation,
-          phoneNumber,
-          address,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(res.data);
+      const res = await axios.post("/api/account-details", payload);
+      console.log("Update success:", res.data);
     } catch (error) {
       console.error("Update Error:", error);
     }
@@ -115,7 +112,7 @@ const page = () => {
                 type="text"
                 name="fullName"
                 id="fullName"
-                value={fullName || ""}
+                value={fullName}
                 onChange={handleUserInput}
               />
             </div>
@@ -126,7 +123,7 @@ const page = () => {
               <textarea
                 className="w-full h-28 resize-none border border-[#e4e4e4] pl-4 py-2.5 rounded-2xl bg-white text-[#161e2d] font-medium text-sm outline-none focus:border-[#1563df]"
                 name="description"
-                value={description || ""}
+                value={description}
                 id="description"
                 onChange={handleUserInput}
               />
@@ -140,7 +137,7 @@ const page = () => {
                   className="md:w-[320px] w-full border border-[#e4e4e4] pl-4 py-2.5 rounded-[99px] bg-white text-[#161e2d] font-medium text-sm outline-none focus:border-[#1563df]"
                   type="text"
                   name="occupation"
-                  value={occupation || ""}
+                  value={occupation}
                   id="occupation"
                   onChange={handleUserInput}
                 />
@@ -153,7 +150,7 @@ const page = () => {
                   className="md:w-[320px] w-full border border-[#e4e4e4] pl-4 py-2.5 rounded-[99px] bg-white text-[#161e2d] font-medium text-sm outline-none focus:border-[#1563df]"
                   type="tel"
                   name="phoneNumber"
-                  value={phoneNumber || ""}
+                  value={phoneNumber}
                   id="phoneNumber"
                   onChange={handleUserInput}
                 />
@@ -167,7 +164,7 @@ const page = () => {
                   type="text"
                   name="address"
                   id="address"
-                  value={address || ""}
+                  value={address}
                   onChange={handleUserInput}
                 />
               </div>
