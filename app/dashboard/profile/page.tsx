@@ -18,6 +18,8 @@ const page = () => {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [passwords, setPasswords] = useState({
     old_password: "",
@@ -30,11 +32,10 @@ const page = () => {
     description: "",
     occupation: "",
     phoneNumber: "",
-    address: "",
+    address: ""
   });
 
   const { old_password, new_password, confirm_password } = passwords;
-  const { fullName, description, occupation, phoneNumber, address } = inputFields;
 
   const handleUserInput = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -68,13 +69,17 @@ const page = () => {
         new_password,
         confirm_password,
       });
-      console.log(req.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleUpdateUserDetails = async () => {
+    const { fullName, description, occupation, phoneNumber, address } = inputFields;
+
+    setErrorMessage('');
+    setShowError(false);
+
     if (!session?.user?.id) {
       console.error("User is not logged in or session is not loaded");
       return;
@@ -87,11 +92,16 @@ const page = () => {
       phoneNumber,
       address
     };
+
     try {
       const res = await axios.post("/api/account-details", payload);
-      console.log("Update success:", res.data);
+      if(res) {
+        setErrorMessage(res.data.message);
+        setShowError(true);
+      }
     } catch (error) {
       console.error("Update Error:", error);
+      setShowError(true);
     }
   };
 
@@ -112,7 +122,7 @@ const page = () => {
                 type="text"
                 name="fullName"
                 id="fullName"
-                value={fullName}
+                value={inputFields.fullName}
                 onChange={handleUserInput}
               />
             </div>
@@ -123,7 +133,7 @@ const page = () => {
               <textarea
                 className="w-full h-28 resize-none border border-[#e4e4e4] pl-4 py-2.5 rounded-2xl bg-white text-[#161e2d] font-medium text-sm outline-none focus:border-[#1563df]"
                 name="description"
-                value={description}
+                value={inputFields.description}
                 id="description"
                 onChange={handleUserInput}
               />
@@ -137,7 +147,7 @@ const page = () => {
                   className="md:w-[320px] w-full border border-[#e4e4e4] pl-4 py-2.5 rounded-[99px] bg-white text-[#161e2d] font-medium text-sm outline-none focus:border-[#1563df]"
                   type="text"
                   name="occupation"
-                  value={occupation}
+                  value={inputFields.occupation}
                   id="occupation"
                   onChange={handleUserInput}
                 />
@@ -150,7 +160,7 @@ const page = () => {
                   className="md:w-[320px] w-full border border-[#e4e4e4] pl-4 py-2.5 rounded-[99px] bg-white text-[#161e2d] font-medium text-sm outline-none focus:border-[#1563df]"
                   type="tel"
                   name="phoneNumber"
-                  value={phoneNumber}
+                  value={inputFields.phoneNumber}
                   id="phoneNumber"
                   onChange={handleUserInput}
                 />
@@ -164,7 +174,7 @@ const page = () => {
                   type="text"
                   name="address"
                   id="address"
-                  value={address}
+                  value={inputFields.address}
                   onChange={handleUserInput}
                 />
               </div>
@@ -173,10 +183,15 @@ const page = () => {
               onClick={handleUpdateUserDetails}
               type="button"
               className="bg-[#1563df] text-white font-medium text-base rounded-full w-44 mt-7 py-3.5 transition-colors hover:bg-[#0e49a6]"
-            >
+              >
               Save & Update
             </button>
           </form>
+          {showError && (
+            <div className={`mt-4 text-base font-semibold ${errorMessage === "Details updated successfully" ? "text-green-600" : "text-red-600"}`}>
+              {errorMessage}
+            </div>
+          )}
           <h3 className="text-[#161e2d] mt-7 text-2xl font-semibold">
             Change Password
           </h3>

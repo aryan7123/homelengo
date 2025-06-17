@@ -20,23 +20,23 @@ export async function POST(req: NextRequest) {
         const isPasswordValid = await compare(old_password, user.password);
 
         if(!old_password) {
-            return NextResponse.json({ message: "Old Password is empty" });
+            return NextResponse.json({ message: "Old Password is empty*" });
         }
 
         else if(!new_password) {
-            return NextResponse.json({ message: "New Password is empty" });
+            return NextResponse.json({ message: "New Password is empty*" });
         }
 
         else if(!confirm_password) {
-            return NextResponse.json({ message: "Confirm Password is empty" });
+            return NextResponse.json({ message: "Confirm Password is empty*" });
         }
 
         else if(!isPasswordValid) {
-            return NextResponse.json({ message: "Password is incorrect" });
+            return NextResponse.json({ message: "Password is incorrect*" });
         }
 
         else if (new_password !== confirm_password) {
-            return NextResponse.json({ message: "Your new password did'nt matched" });
+            return NextResponse.json({ message: "Your new password did'nt matched*" });
         }
 
         else {
