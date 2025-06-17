@@ -23,6 +23,7 @@ model User {
   occupation      String?    @db.VarChar(255)
   phoneNumber     String?    @db.VarChar(255)
   address         String?    @db.VarChar(255)
+  avatar          String?
   reviews         Review[]
   likedProperties Property[] @relation("UserLikes")
 }
