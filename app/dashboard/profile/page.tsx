@@ -18,8 +18,12 @@ const page = () => {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [showError, setShowError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorState, setErrorState] = useState({
+    showFormError: false,
+    showPasswordError: false,
+    errorFormMessage: '',
+    errorPasswordMessage: '',
+  });
 
   const [passwords, setPasswords] = useState({
     old_password: "",
@@ -69,6 +73,13 @@ const page = () => {
         new_password,
         confirm_password,
       });
+      if(req) {
+        setErrorState(prev => ({
+          ...prev,
+          showPasswordError: true,
+          errorPasswordMessage: req.data.message,
+        }));
+      }
     } catch (error) {
       console.log(error);
     }
@@ -76,9 +87,6 @@ const page = () => {
 
   const handleUpdateUserDetails = async () => {
     const { fullName, description, occupation, phoneNumber, address } = inputFields;
-
-    setErrorMessage('');
-    setShowError(false);
 
     if (!session?.user?.id) {
       console.error("User is not logged in or session is not loaded");
@@ -96,12 +104,14 @@ const page = () => {
     try {
       const res = await axios.post("/api/account-details", payload);
       if(res) {
-        setErrorMessage(res.data.message);
-        setShowError(true);
+        setErrorState(prev => ({
+          ...prev,
+          showFormError: true,
+          errorFormMessage: res.data.message,
+        }));
       }
     } catch (error) {
       console.error("Update Error:", error);
-      setShowError(true);
     }
   };
 
@@ -187,9 +197,9 @@ const page = () => {
               Save & Update
             </button>
           </form>
-          {showError && (
-            <div className={`mt-4 text-base font-semibold ${errorMessage === "Details updated successfully" ? "text-green-600" : "text-red-600"}`}>
-              {errorMessage}
+          {errorState.showFormError && (
+            <div className={`mt-4 text-base font-semibold ${errorState.errorFormMessage === "Details updated successfully" ? "text-green-600" : "text-red-600"}`}>
+              {errorState.errorFormMessage}
             </div>
           )}
           <h3 className="text-[#161e2d] mt-7 text-2xl font-semibold">
@@ -279,6 +289,11 @@ const page = () => {
                 </div>
               </div>
             </div>
+            {errorState.showPasswordError && (
+              <div className={`mt-4 text-base font-semibold ${errorState.errorPasswordMessage === "Password updated successfully" ? "text-green-600" : "text-red-600"}`}>
+                {errorState.errorPasswordMessage}
+              </div>
+            )}
             <button
               onClick={handleUpdatePassword}
               type="button"
