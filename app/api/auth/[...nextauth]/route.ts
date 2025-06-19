@@ -39,6 +39,7 @@ export const authOptions: NextAuthOptions = {
           id: user.id.toString(),
           email: user.email,
           name: user.username,
+          avatar: user?.avatar
         };
       },
     }),
@@ -47,15 +48,17 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    async jwt({ token, user }: { token: object; user?: { id: number } }) {
+    async jwt({ token, user }: { token: any; user?: any }) {
       if (user) {
-        token.id = user.id.toString();
+        token.id = user.id;
+        token.avatar = user.avatar;
       }
       return token;
     },
-    async session({ session, token }: { session: any; token: { id?: string } }) {
+    async session({ session, token }: { session: any; token: any }) {
       if (session.user) {
         session.user.id = token.id ?? "";
+        session.user.avatar = token.avatar ?? null;
       }
       return session;
     },

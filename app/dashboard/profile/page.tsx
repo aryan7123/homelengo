@@ -99,8 +99,7 @@ const page = () => {
   };
 
   const handleUpdateUserDetails = async () => {
-    const { fullName, description, occupation, phoneNumber, address, avatar } =
-      inputFields;
+    const { fullName, description, occupation, phoneNumber, address, avatar } = inputFields;
 
     if (!session?.user?.id) {
       console.error("User is not logged in or session is not loaded");
@@ -108,6 +107,7 @@ const page = () => {
     }
 
     const formData = new FormData();
+    
     formData.append("userId", session?.user?.id);
     formData.append("fullName", fullName);
     formData.append("description", description);

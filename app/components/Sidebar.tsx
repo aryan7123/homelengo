@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react'
 import { MobileSidebar } from '@/components/ui/MobileSidebar';
 import { UserIcon, LayoutDashboard, Edit2Icon, HeartIcon, HouseIcon, LogOutIcon, MenuIcon, CopyIcon } from 'lucide-react';
@@ -26,11 +25,9 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ showSidebar, session, handleSidebar }) => {
     const pathname = usePathname();
-    const router = useRouter();
 
-    const handleLogout = async() => {
-        const data = await signOut({ redirect: false, callbackUrl: '/' });
-        router.push(data.url);
+    const handleLogout = async () => {
+        await signOut({ callbackUrl: '/' });
     }
 
     return (
@@ -124,7 +121,16 @@ const Sidebar: React.FC<SidebarProps> = ({ showSidebar, session, handleSidebar }
                     </ul>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="outline">{session?.user?.name}</Button>
+                            <Button variant="outline" className='flex items-center'>
+                                <Image 
+                                    src={session?.user?.avatar}
+                                    width={25}
+                                    height={25}
+                                    className='rounded-full'
+                                    alt={session?.user?.name}
+                                />
+                                {session?.user?.name}
+                            </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-56 z-[1000]">
                             <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
