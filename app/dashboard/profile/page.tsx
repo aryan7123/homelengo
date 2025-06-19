@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 type UserFields = {
   fullName: string;
@@ -11,6 +12,7 @@ type UserFields = {
   occupation: string;
   phoneNumber: string;
   address: string;
+  avatar: File | null;
 };
 
 const page = () => {
@@ -21,8 +23,8 @@ const page = () => {
   const [errorState, setErrorState] = useState({
     showFormError: false,
     showPasswordError: false,
-    errorFormMessage: '',
-    errorPasswordMessage: '',
+    errorFormMessage: "",
+    errorPasswordMessage: "",
   });
 
   const [passwords, setPasswords] = useState({
@@ -36,7 +38,8 @@ const page = () => {
     description: "",
     occupation: "",
     phoneNumber: "",
-    address: ""
+    address: "",
+    avatar: null,
   });
 
   const { old_password, new_password, confirm_password } = passwords;
@@ -49,6 +52,16 @@ const page = () => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setInputFields((prev) => ({
+        ...prev,
+        avatar: file,
+      }));
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,8 +86,8 @@ const page = () => {
         new_password,
         confirm_password,
       });
-      if(req) {
-        setErrorState(prev => ({
+      if (req) {
+        setErrorState((prev) => ({
           ...prev,
           showPasswordError: true,
           errorPasswordMessage: req.data.message,
@@ -86,25 +99,35 @@ const page = () => {
   };
 
   const handleUpdateUserDetails = async () => {
-    const { fullName, description, occupation, phoneNumber, address } = inputFields;
+    const { fullName, description, occupation, phoneNumber, address, avatar } =
+      inputFields;
 
     if (!session?.user?.id) {
       console.error("User is not logged in or session is not loaded");
       return;
     }
-    const payload = {
-      userId: session.user.id,
-      fullName,
-      description,
-      occupation,
-      phoneNumber,
-      address
-    };
+
+    const formData = new FormData();
+    formData.append("userId", session?.user?.id);
+    formData.append("fullName", fullName);
+    formData.append("description", description);
+    formData.append("occupation", occupation);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("address", address);
+
+    if (avatar) {
+      formData.append("avatar", avatar);
+    }
 
     try {
-      const res = await axios.post("/api/account-details", payload);
-      if(res) {
-        setErrorState(prev => ({
+      const res = await axios.post("/api/account-details", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (res) {
+        setErrorState((prev) => ({
           ...prev,
           showFormError: true,
           errorFormMessage: res.data.message,
@@ -119,6 +142,28 @@ const page = () => {
     <>
       <div className="max-w-7xl mx-auto md:px-[120px] px-6 transition-[padding] duration-300 py-10">
         <div className="bg-white w-full shadow-md rounded-2xl p-6 mt-8">
+          <h3 className="text-[#161e2d] mb-7 text-2xl font-semibold">Avatar</h3>
+          <div className="flex md:flex-row flex-col items-start md:gap-10 gap-5 mb-7">
+            <Image
+              src="/avatar/account.jpg"
+              className="rounded-full"
+              width={100}
+              height={100}
+              alt="user-avatar"
+            />
+            <div className="flex flex-col gap-3">
+              <span>Upload a new avatar</span>
+              <input
+                type="file"
+                name="avatar"
+                accept="image/jpeg,image/jpg,image/png"
+                id="avatar"
+                onChange={handleFileChange}
+                className="border border-[#e4e4e4] rounded-2xl pl-4 py-2.5"
+              />
+              <span>JPEG 100x100</span>
+            </div>
+          </div>
           <h3 className="text-[#161e2d] mb-7 text-2xl font-semibold">
             Account Settings
           </h3>
@@ -193,12 +238,18 @@ const page = () => {
               onClick={handleUpdateUserDetails}
               type="button"
               className="bg-[#1563df] text-white font-medium text-base rounded-full w-44 mt-7 py-3.5 transition-colors hover:bg-[#0e49a6]"
-              >
+            >
               Save & Update
             </button>
           </form>
           {errorState.showFormError && (
-            <div className={`mt-4 text-base font-semibold ${errorState.errorFormMessage === "Details updated successfully" ? "text-green-600" : "text-red-600"}`}>
+            <div
+              className={`mt-4 text-base font-semibold ${
+                errorState.errorFormMessage === "Details updated successfully"
+                  ? "text-green-600"
+                  : "text-red-600"
+              }`}
+            >
               {errorState.errorFormMessage}
             </div>
           )}
@@ -290,7 +341,14 @@ const page = () => {
               </div>
             </div>
             {errorState.showPasswordError && (
-              <div className={`mt-4 text-base font-semibold ${errorState.errorPasswordMessage === "Password updated successfully" ? "text-green-600" : "text-red-600"}`}>
+              <div
+                className={`mt-4 text-base font-semibold ${
+                  errorState.errorPasswordMessage ===
+                  "Password updated successfully"
+                    ? "text-green-600"
+                    : "text-red-600"
+                }`}
+              >
                 {errorState.errorPasswordMessage}
               </div>
             )}
