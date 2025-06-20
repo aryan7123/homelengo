@@ -145,14 +145,14 @@ const page = () => {
           <h3 className="text-[#161e2d] mb-7 text-2xl font-semibold">Avatar</h3>
           <div className="flex md:flex-row flex-col items-start md:gap-10 gap-5 mb-7">
             <Image
-              src="/avatar/account.jpg"
+              src={session?.user?.avatar ?? "/avatar/account.jpg"}
               className="rounded-full"
               width={100}
               height={100}
               alt="user-avatar"
             />
             <div className="flex flex-col gap-3">
-              <span>Upload a new avatar</span>
+              <span className="text-xs">Upload a new avatar</span>
               <input
                 type="file"
                 name="avatar"
@@ -161,7 +161,7 @@ const page = () => {
                 onChange={handleFileChange}
                 className="border border-[#e4e4e4] rounded-2xl pl-4 py-2.5"
               />
-              <span>JPEG 100x100</span>
+              <span className="text-xs">JPEG 100x100</span>
             </div>
           </div>
           <h3 className="text-[#161e2d] mb-7 text-2xl font-semibold">
