@@ -10,27 +10,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { userId, propertyId } = body;
 
-    if(userId) {
-      const user = await prisma.user.findUnique({
-        where: { id: Number(userId) },
-        include: {
-          likedProperties: true,
-        },
-      });
-
-      if(user) {
-        return NextResponse.json({
-          likedProperties: user?.likedProperties,
-          message: "All liked properties by a user is fetched",
-        });
-      }
-      else {
-        return NextResponse.json({
-          message: "Liked properties is not fetched",
-        });
-      }
-    }
-    else if(userId && propertyId) {
+    if (userId && propertyId) {
       const user = await prisma.user.findUnique({
         where: { id: Number(userId) },
         select: {
@@ -44,17 +24,29 @@ export async function POST(request: NextRequest) {
         (property) => property.id === Number(propertyId)
       );
 
-      if(hasLiked) {
+      return NextResponse.json({
+        liked: hasLiked,
+        likedProperties: user?.likedProperties,
+        message: hasLiked
+          ? "You have liked this property"
+          : "You have not liked this property",
+      });
+    } else if (userId) {
+      const user = await prisma.user.findUnique({
+        where: { id: Number(userId) },
+        include: {
+          likedProperties: true,
+        },
+      });
+
+      if (user) {
         return NextResponse.json({
-          liked: true,
-          likedProperties: user?.likedProperties,
-          message: "You have liked this property",
+          likedProperties: user.likedProperties,
+          message: "All liked properties by a user is fetched",
         });
-      }
-      else {
+      } else {
         return NextResponse.json({
-          liked: false,
-          message: "You have not liked this property",
+          message: "Liked properties not fetched",
         });
       }
     }
