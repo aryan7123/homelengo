@@ -31,7 +31,8 @@ export async function POST(request: NextRequest) {
           ? "You have liked this property"
           : "You have not liked this property",
       });
-    } else if (userId) {
+    } 
+    else if (userId) {
       const user = await prisma.user.findUnique({
         where: { id: Number(userId) },
         include: {
