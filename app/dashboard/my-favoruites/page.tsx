@@ -21,6 +21,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 interface Property {
   id: number
@@ -31,6 +32,7 @@ interface Property {
 }
 
 const page = () => {
+  const { data: session } = useSession();
   const [properties, setProperties] = useState<Property[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [btnTextMap, setBtnTextMap] = useState<{ [key: number]: boolean }>({});
@@ -50,7 +52,8 @@ const page = () => {
 
   const fetchFavoruites = async() => {
     try {
-      
+      const res = await axios.post("/api/fetch-like-property", { userId: session?.user?.id });
+      setProperties(res.data.likedProperties);
     } catch (error) {
       console.log(error);
     }
@@ -79,10 +82,14 @@ const page = () => {
     }
   }
 
+  useEffect(() => {
+    fetchFavoruites()
+  }, []);
+
   return (
     <>
       <div className="max-w-7xl mx-auto md:px-[120px] px-6 transition-[padding] duration-300 py-10">
-        <div className="w-full flex md:flex-row flex-col md:items-center items-start gap-6">
+        <div className="w-full">
           <div className="bg-white shadow-md rounded-2xl p-6 mt-8">
             <h3 className="text-[#161e2d] text-2xl font-semibold">
               My Favoruites
