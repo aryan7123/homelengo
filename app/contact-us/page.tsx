@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Link from "next/link";
+import axios from "axios";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -13,6 +14,23 @@ import {
 } from "lucide-react";
 
 const page = () => {
+  const [contactForm, setContactForm] = useState({
+    full_name: "",
+    email_address: "",
+    phone_number: "",
+    subject: "",
+    form_message: "",
+    responseMessage: ""
+  });
+
+  const handleContactForm = async() => {
+    try {
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <Navbar />
@@ -100,17 +118,21 @@ const page = () => {
                 <div className="w-full flex flex-col gap-1 mt-6">
                   <label
                     className="text-sm text-[#161e2d] font-semibold mb-1"
-                    htmlFor=""
+                    htmlFor="form_message"
                   >
                     Your Message:
                   </label>
                   <textarea
                     className="w-full h-28 rounded-lg text-sm py-3 pl-3 text-[#161e2d] font-medium outline-none border border-[#e4e4e4]"
-                    name="message"
-                    id="message"
+                    name="form_message"
+                    id="form_message"
                   ></textarea>
                 </div>
+                {/* <div className="mt-6 text-sm text-[#161e2d] font-semibold">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, inventore?
+                </div> */}
                 <button
+                  onClick={handleContactForm}
                   type="button"
                   className="w-full bg-[#1563df] text-white font-medium text-base rounded-full mt-6 py-3.5 transition-colors hover:bg-[#0e49a6]"
                 >
