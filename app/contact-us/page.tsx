@@ -20,8 +20,18 @@ const page = () => {
     phone_number: "",
     subject: "",
     form_message: "",
-    responseMessage: ""
   });
+
+  const [responseMessage, setResponseMessage] = useState(null);
+  const { full_name, email_address, phone_number, subject, form_message } = contactForm;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setContactForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  };
 
   const handleContactForm = async() => {
     try {
@@ -66,6 +76,8 @@ const page = () => {
                     <input
                       className="w-full rounded-3xl text-sm py-3 pl-3 text-[#161e2d] font-medium outline-none border border-[#e4e4e4]"
                       type="text"
+                      value={full_name}
+                      onChange={handleChange}
                       name="full_name"
                       id="full_name"
                     />
@@ -80,6 +92,8 @@ const page = () => {
                     <input
                       className="w-full rounded-3xl text-sm py-3 pl-3 text-[#161e2d] font-medium outline-none border border-[#e4e4e4]"
                       type="email"
+                      value={email_address}
+                      onChange={handleChange}
                       name="email_address"
                       id="email_address"
                     />
@@ -96,6 +110,8 @@ const page = () => {
                     <input
                       className="w-full rounded-3xl text-sm py-3 pl-3 text-[#161e2d] font-medium outline-none border border-[#e4e4e4]"
                       type="tel"
+                      value={phone_number}
+                      onChange={handleChange}
                       name="phone_number"
                       id="phone_number"
                     />
@@ -110,6 +126,8 @@ const page = () => {
                     <input
                       className="w-full rounded-3xl text-sm py-3 pl-3 text-[#161e2d] font-medium outline-none border border-[#e4e4e4]"
                       type="text"
+                      value={subject}
+                      onChange={handleChange}
                       name="subject"
                       id="subject"
                     />
@@ -125,6 +143,8 @@ const page = () => {
                   <textarea
                     className="w-full h-28 rounded-lg text-sm py-3 pl-3 text-[#161e2d] font-medium outline-none border border-[#e4e4e4]"
                     name="form_message"
+                    value={form_message}
+                    onChange={handleChange}
                     id="form_message"
                   ></textarea>
                 </div>
