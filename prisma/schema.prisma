@@ -74,3 +74,12 @@ model Review {
   user       User     @relation(fields: [userId], references: [id])
   createdAt  DateTime @default(now())
 }
+
+model Contact {
+  id          Int    @id @default(autoincrement())
+  fullName    String @db.VarChar(255)
+  email       String @unique @db.VarChar(255)
+  phoneNumber String @db.VarChar(255)
+  subject     String @db.VarChar(255)
+  formMessage String @db.Text
+}
