@@ -10,7 +10,7 @@ import {
   InstagramIcon,
   LinkedinIcon,
   TwitterIcon,
-  YoutubeIcon,
+  YoutubeIcon
 } from "lucide-react";
 
 const page = () => {
@@ -19,7 +19,7 @@ const page = () => {
     email_address: "",
     phone_number: "",
     subject: "",
-    form_message: "",
+    form_message: ""
   });
 
   const [responseMessage, setResponseMessage] = useState(null);
@@ -31,11 +31,16 @@ const page = () => {
       ...prevForm,
       [name]: value,
     }));
+
+    if (responseMessage !== null) {
+      setResponseMessage(null);
+    }
   };
 
   const handleContactForm = async() => {
     try {
-      
+      const req = await axios.post("/api/contact-form", { contactForm });
+      setResponseMessage(req.data.message);
     } catch (error) {
       console.log(error);
     }
@@ -148,9 +153,11 @@ const page = () => {
                     id="form_message"
                   ></textarea>
                 </div>
-                {/* <div className="mt-6 text-sm text-[#161e2d] font-semibold">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, inventore?
-                </div> */}
+                {responseMessage !== null && (
+                  <div className="mt-6 text-sm text-[#161e2d] font-semibold">
+                    {responseMessage}
+                  </div>
+                )}
                 <button
                   onClick={handleContactForm}
                   type="button"
