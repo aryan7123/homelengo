@@ -10,8 +10,14 @@ import {
   InstagramIcon,
   LinkedinIcon,
   TwitterIcon,
-  YoutubeIcon
+  YoutubeIcon,
 } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const page = () => {
   const [contactForm, setContactForm] = useState({
@@ -19,13 +25,16 @@ const page = () => {
     email_address: "",
     phone_number: "",
     subject: "",
-    form_message: ""
+    form_message: "",
   });
 
   const [responseMessage, setResponseMessage] = useState(null);
-  const { full_name, email_address, phone_number, subject, form_message } = contactForm;
+  const { full_name, email_address, phone_number, subject, form_message } =
+    contactForm;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setContactForm((prevForm) => ({
       ...prevForm,
@@ -37,14 +46,14 @@ const page = () => {
     }
   };
 
-  const handleContactForm = async() => {
+  const handleContactForm = async () => {
     try {
       const req = await axios.post("/api/contact-form", { contactForm });
       setResponseMessage(req.data.message);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <>
@@ -246,8 +255,85 @@ const page = () => {
               referrerPolicy="no-referrer-when-downgrade"
               style={{ border: "0" }}
             ></iframe>
-            {/* Black transparent overlay */}
-            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10" style={{ pointerEvents: "none" }}></div>
+            <div
+              className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10"
+              style={{ pointerEvents: "none" }}
+            ></div>
+          </div>
+          <div className="w-full py-10">
+            <div className="flex items-center mx-auto justify-center flex-col">
+              <span className="text-[#1563df] font-medium">FAQS</span>
+              <h2 className="mt-2 text-[#161e2d] font-semibold md:text-4xl text-2xl">
+                Frequently Asked Questions
+              </h2>
+            </div>
+            <Accordion
+              type="single"
+              collapsible
+              className="w-full mt-10"
+              defaultValue="item-1"
+            >
+              <AccordionItem
+                className="border border-[#e4e4e4] rounded-2xl py-1 px-6 mb-3 data-[state=open]:shadow-md"
+                value="item-1"
+              >
+                <AccordionTrigger className="text-xl text-[#161e2d] font-semibold data-[state=open]:text-blue-600">
+                  Product Information
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-2 text-balance">
+                  <p className="text-sm text-[#5c6368] font-medium">
+                    Our flagship product combines cutting-edge technology with
+                    sleek design. Built with premium materials, it offers
+                    unparalleled performance and reliability.
+                  </p>
+                  <p className="text-sm text-[#5c6368] font-medium">
+                    Key features include advanced processing capabilities, and
+                    an intuitive user interface designed for both beginners and
+                    experts.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem
+                className="border border-[#e4e4e4] rounded-2xl py-1 px-6 mb-3 data-[state=open]:shadow-md"
+                value="item-2"
+              >
+                <AccordionTrigger className="text-xl text-[#161e2d] font-semibold data-[state=open]:text-blue-600">
+                  Shipping Details
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-2 text-balance">
+                  <p className="text-sm text-[#5c6368] font-medium">
+                    We offer worldwide shipping through trusted courier
+                    partners. Standard delivery takes 3-5 business days, while
+                    express shipping ensures delivery within 1-2 business days.
+                  </p>
+                  <p className="text-sm text-[#5c6368] font-medium">
+                    All orders are carefully packaged and fully insured. Track
+                    your shipment in real-time through our dedicated tracking
+                    portal.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem
+                className="border border-[#e4e4e4] rounded-2xl py-1 px-6 data-[state=open]:shadow-md"
+                value="item-3"
+              >
+                <AccordionTrigger className="text-xl text-[#161e2d] font-semibold data-[state=open]:text-blue-600">
+                  Return Policy
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-2 text-balance">
+                  <p className="text-sm text-[#5c6368] font-medium">
+                    We stand behind our products with a comprehensive 30-day
+                    return policy. If you&apos;re not completely satisfied, simply
+                    return the item in its original condition.
+                  </p>
+                  <p className="text-sm text-[#5c6368] font-medium">
+                    Our hassle-free return process includes free return shipping
+                    and full refunds processed within 48 hours of receiving the
+                    returned item.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
       </section>
