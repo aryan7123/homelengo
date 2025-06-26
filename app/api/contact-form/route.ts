@@ -9,9 +9,12 @@ const prisma = new PrismaClient();
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    
+
     if (!body || !body.contactForm) {
-      return NextResponse.json({ message: "Invalid or missing contact form data" }, { status: 400 });
+      return NextResponse.json(
+        { message: "Invalid or missing contact form data" },
+        { status: 400 }
+      );
     }
 
     const { full_name, email_address, phone_number, subject, form_message } = body.contactForm;
@@ -38,56 +41,45 @@ export async function POST(request: NextRequest) {
       });
 
       if (insertContactForm) {
-        // Email configuration
         const transporter = nodemailer.createTransport({
-          host: process.env.EMAIL_HOST,
-          port: parseInt(process.env.EMAIL_PORT || "587"),
-          secure: process.env.EMAIL_PORT === "465" ? true: false, // true for 465, false for other ports
+          host: "smtp.gmail.com",
+          port: 465,
+          secure: true,
           auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS,
           },
         });
 
-        // Send email with proper error handling
+        const mailOptions = {
+          from: process.env.EMAIL_USER,
+          to: email_address,
+          subject: `Thank you for contacting us - ${subject}`,
+          text: "Thank you for using our services!",
+          html: form_message.replace(/\n/g, "<br>"),
+        };
+
         try {
-          const info = await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: email_address,
-            subject: `Thank you for contacting us - ${subject}`,
-            html: `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-              <h2 style="color: #333;">Thank you for your message!</h2>
-              <p>Hi ${full_name},</p>
-              <p>We have received your message and will get back to you soon.</p>
-              
-              <div style="background-color: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
-                <h3>Your message:</h3>
-                <p><strong>Subject:</strong> ${subject}</p>
-                <p><strong>Message:</strong></p>
-                <p>${form_message.replace(/\n/g, "<br>")}</p>
-              </div>
-              
-              <p>Best regards,<br>Your Support Team</p>
-            </div>
-          `,
-          });
+          /* nodemailer returns a Promise if you omit the callback */
+          const info = await transporter.sendMail(mailOptions);
+
+          return NextResponse.json(
+            {
+              success: true,
+              messageId: info.messageId,
+              formDetails: insertContactForm,
+              message: "Contact form saved and e-mail sent",
+            },
+            { status: 200 }
+          );
+        } catch (err) {
+          console.error("Error sending e-mail:", err);
 
           return NextResponse.json({
-            success: true,
-            messageId: info.messageId,
+            success: true, // DB write still succeeded
             formDetails: insertContactForm,
-            message: "Contact Form Details Submitted Successfully and email sent",
-          });
-        } catch (emailError) {
-          console.error("Email sending error:", emailError);
-
-          // Even if email fails, we still saved the form data
-          return NextResponse.json({
-            success: true,
-            formDetails: insertContactForm,
-            message: "Contact Form Details Submitted Successfully (email delivery failed)",
-            emailError: "Failed to send confirmation email",
+            message:
+              "Contact Form Details submitted successfully (e-mail delivery failed)",
           });
         }
       } else {
@@ -98,6 +90,14 @@ export async function POST(request: NextRequest) {
       }
     }
   } catch (error) {
-    console.log(error);
+    console.error("Contact-form POST failed:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Server error while processing contact form",
+      },
+      { status: 500 }
+    );
   }
 }

@@ -29,8 +29,7 @@ const page = () => {
   });
 
   const [responseMessage, setResponseMessage] = useState(null);
-  const { full_name, email_address, phone_number, subject, form_message } =
-    contactForm;
+  const { full_name, email_address, phone_number, subject, form_message } = contactForm;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
