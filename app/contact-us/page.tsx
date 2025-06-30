@@ -272,6 +272,7 @@ const page = () => {
               type="single"
               collapsible
               className="w-full mt-10"
+              defaultValue="item-1"
             >
               <AccordionItem
                 className="border border-[#e4e4e4] rounded-2xl py-1 px-6 mb-3 data-[state=open]:shadow-md"
@@ -347,11 +348,11 @@ const page = () => {
               </AccordionItem>
             </Accordion>
           </div>
-          <div className="w-full my-20 bg-[#f3f7fd] rounded-2xl relative">
+          <div className="w-full mb-20 mt-14 bg-[#f3f7fd] rounded-2xl relative">
             <div className="flex md:flex-row flex-col md:items-center items-start md:justify-between md:gap-0 gap-10 justify-start">
               <div className="md:pl-20 pl-6 md:pt-0 pt-10 pr-5">
                 <span className="uppercase text-sm font-medium text-[#1563df]">become partners</span>
-                <h3 className="md:text-4xl text-2xl mt-4 text-[#161e2d] text-balance font-semibold">List your Properties on Homelengo, join Us Now!</h3>
+                <h3 className="md:text-4xl text-2xl mt-3 text-[#161e2d] text-balance font-semibold">List your Properties on Homelengo, join Us Now!</h3>
                 <button type="button" className="w-[250px] flex items-center justify-center gap-1 bg-[#1563df] text-white font-semibold text-base rounded-full mt-6 py-3.5 transition-colors hover:bg-[#0e49a6] capitalize">become a hosting <ArrowRight size={20}/> </button>
               </div>
               <div>
