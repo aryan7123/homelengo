@@ -13,7 +13,6 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Menu, Mail, PhoneCallIcon } from 'lucide-react';
 
-
 export function MobileSidebar() {
   return (
     <Sheet>
@@ -36,6 +35,7 @@ export function MobileSidebar() {
               <Link href="/" className="text-sm mb-2.5 hover:text-[#1563df]">Home</Link>
               <Link href="/about-us" className="text-sm mb-2.5 hover:text-[#1563df]">About Us</Link>
               <Link href="/properties" className="text-sm mb-2.5 hover:text-[#1563df]">Properties</Link>
+              <Link href="/our-services" className="text-sm mb-2.5 hover:text-[#1563df]">Our Services</Link>
               <Link href="/" className="text-sm mb-2.5 hover:text-[#1563df]">Blog</Link>
               <Link href="/contact-us" className="text-sm hover:text-[#1563df]">Contact Us</Link>
             </nav>

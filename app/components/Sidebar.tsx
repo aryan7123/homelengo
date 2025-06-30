@@ -113,6 +113,9 @@ const Sidebar: React.FC<SidebarProps> = ({ showSidebar, session, handleSidebar }
                             <Link href="/properties">Properties</Link>
                         </li>
                         <li className={`text-base font-medium relative hover:text-[#1563df] transition-colors`}>
+                            <Link href="/our-services">Our Services</Link>
+                        </li>
+                        <li className={`text-base font-medium relative hover:text-[#1563df] transition-colors`}>
                             <Link href="/blog">Blog</Link>
                         </li>
                         <li className={`text-base font-medium relative hover:text-[#1563df] transition-colors`}>

@@ -27,6 +27,9 @@ const Navbar = () => {
                             <li className={`${pathname === '/properties' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-medium relative`}>
                                 <Link href="/properties">Properties</Link>
                             </li>
+                            <li className={`${pathname === '/our-services' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-medium relative`}>
+                                <Link href="/our-services">Our Services</Link>
+                            </li>
                             <li className={`${pathname === '/blog' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-medium relative`}>
                                 <Link href="/blog">Blog</Link>
                             </li>
