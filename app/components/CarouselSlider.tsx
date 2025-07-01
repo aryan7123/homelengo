@@ -60,7 +60,7 @@ const CarouselSlider = () => {
           <div key={index} className="px-3">
             <Image
               src={src}
-              width={200}
+              width={100}
               height={100}
               alt={`Logo ${index + 1}`}
               className="max-h-24 w-[inherit] text-center object-contain"

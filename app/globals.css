@@ -179,3 +179,38 @@ body {
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 0;
 }
+
+.service-page-title {
+  width: 100%;
+  height: 22rem;
+  background-image: url(/banner/page-title-5.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  border-radius: 15px;
+  position: relative;
+}
+
+.service-page-title::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+.slick-dots {
+  bottom: -50px !important;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #1563df !important;
+}
+
+.slick-dots li button:before {
+  font-size: 8px !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+
