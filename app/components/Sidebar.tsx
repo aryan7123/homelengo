@@ -156,10 +156,6 @@ const Sidebar: React.FC<SidebarProps> = ({ showSidebar, session, handleSidebar }
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <button type="button" className='flex items-center justify-center bg-[#1563df] transition-colors hover:bg-[#0e49a6] text-white text-sm gap-3 rounded-full w-52 py-4'>
-                        <CopyIcon />
-                        <span>Submit Property</span>
-                    </button>
                     <MobileSidebar />
                 </div>
             </nav>

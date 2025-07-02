@@ -4,10 +4,13 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CarouselSlider from "../components/CarouselSlider";
+import Testimonials from "../components/Testimonials";
 import Link from "next/link";
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Faqs from "../components/Faqs";
+import Partners from "../components/Partners";
 
 const page = () => {
   return (
@@ -127,6 +130,9 @@ const page = () => {
             </div>
             <CarouselSlider />
           </div>
+          <Testimonials />
+          <Faqs />
+          <Partners />
         </div>
       </section>
       <Footer />
