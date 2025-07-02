@@ -63,7 +63,7 @@ const CarouselSlider = () => {
               width={100}
               height={100}
               alt={`Logo ${index + 1}`}
-              className="max-h-24 w-[inherit] text-center object-contain"
+              className="max-h-20 w-[inherit] text-center object-contain"
             />
           </div>
         ))}

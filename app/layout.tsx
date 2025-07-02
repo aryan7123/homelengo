@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const manrope = Manrope({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -18,7 +14,7 @@ export const metadata: Metadata = {
   description: "Homelengo - A Real Estate Company",
   icons: {
     icon: "/favicon.png",
-  }
+  },
 };
 
 export default function RootLayout({
@@ -26,15 +22,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Providers>
-          {children}
-        </Providers>
+      <body className={`${manrope.variable} font-sans antialiased`}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
