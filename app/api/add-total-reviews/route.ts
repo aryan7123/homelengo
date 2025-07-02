@@ -16,14 +16,22 @@ export async function POST(request: NextRequest) {
             }
         });
 
-        const totalRating = getReviews.map((item) => item.rating);
-        const averageRating = (totalRating.reduce((a, b) => a + b)) / 2;
-
-        return NextResponse.json({
-            sucess: true,
-            ratings: averageRating,
-            message: "Review fetched successfully",
-        });
+        if(getReviews.length > 0) {
+            const totalRating = getReviews.map((item) => item.rating);
+            const averageRating = (totalRating.reduce((a, b) => a + b)) / 2;
+            return NextResponse.json({
+                sucess: true,
+                ratings: averageRating,
+                message: "Review fetched successfully",
+            });
+        }
+        else {
+            return NextResponse.json({
+                sucess: true,
+                ratings: 0,
+                message: "Reviews not found"
+            });
+        }
     } catch (error) {
         console.error(error);
     }
