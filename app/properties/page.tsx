@@ -86,7 +86,7 @@ const page = () => {
         </div>
       </section>
       <section className="w-full bg-white py-24">
-        
+
       </section>
       <Footer />
     </>
