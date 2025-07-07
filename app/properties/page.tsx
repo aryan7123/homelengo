@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 import { Input } from "@/components/ui/input";
-import { SearchIcon, MapPin } from "lucide-react";
+import { SearchIcon, MapPin, Grid3x3, Logs } from "lucide-react";
 
 import {
   Select,
@@ -88,7 +88,28 @@ const page = () => {
         </div>
       </section>
       <section className="w-full bg-white py-24">
-
+        <div className="max-w-7xl mx-auto px-6 md:px-0">
+          <div className="flex md:items-center items-start justify-between md:flex-row flex-col md:gap-0 gap-5">
+            <div className="flex md:flex-row flex-col md:items-center items-start gap-4">
+              <h3 className="text-[#161e2d] font-bold md:text-4xl text-2xl">Property Listing</h3>
+              <span className="text-[#161e2d] font-medium text-sm">There are currently 164,814 properties.</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <button type="button" className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2"><Grid3x3 /></button>
+              <button type="button" className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2"><Logs /></button>
+              <Select>
+                <SelectTrigger className="w-[140px] rounded-lg border border-[#e4e4e4] p-5 outline-none">
+                  <SelectValue placeholder="Show: 30" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="10">10</SelectItem>
+                  <SelectItem value="20">20</SelectItem>
+                  <SelectItem value="40">40</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
       </section>
       <Footer />
     </>
