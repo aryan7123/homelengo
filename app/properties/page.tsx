@@ -33,6 +33,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import axios from "axios";
 
 const page = () => {
@@ -148,18 +149,16 @@ const page = () => {
               </span>
             </div>
             <div className="flex items-center gap-4">
-              <button
-                type="button"
-                className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2"
-              >
-                <Grid3x3 />
-              </button>
-              <button
-                type="button"
-                className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2"
-              >
-                <Logs />
-              </button>
+              <Tabs>
+                <TabsList className="bg-transparent">
+                  <TabsTrigger className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2 mr-2.5 data-[state=active]:bg-[#1563df] data-[state=active]:text-white" value="gridLayout">
+                    <Grid3x3 />
+                  </TabsTrigger>
+                  <TabsTrigger className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2 data-[state=active]:bg-[#1563df] data-[state=active]:text-white" value="listLayout">
+                    <Logs />
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
               <Select>
                 <SelectTrigger className="w-[140px] rounded-lg border border-[#e4e4e4] p-5 outline-none">
                   <SelectValue placeholder="Show: 30" />
