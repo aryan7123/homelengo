@@ -1,12 +1,15 @@
-'use client';
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 import { Input } from "@/components/ui/input";
-import { SearchIcon, MapPin, Grid3x3, Logs } from "lucide-react";
-
+import { SearchIcon, MapPin, Grid3x3, Logs, BedDouble, Bath, LandPlot } from "lucide-react";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
 import {
   Select,
   SelectContent,
@@ -15,8 +18,36 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import axios from "axios";
 
 const page = () => {
+  const [allProperties, setAllProperties] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const propertiesPerPage = 6;
+
+  const indexOfLastProperty = currentPage * propertiesPerPage;
+  const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
+  const currentProperties = allProperties.slice(indexOfFirstProperty, indexOfLastProperty);
+  const totalPages = Math.ceil(allProperties.length / propertiesPerPage);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  }
+
+  const fetchAllProperties = async () => {
+    try {
+      const req = await axios.get("/api/fetch-property");
+      console.log(req.data);
+      setAllProperties(req.data.property);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllProperties();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -91,12 +122,26 @@ const page = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-0">
           <div className="flex md:items-center items-start justify-between md:flex-row flex-col md:gap-0 gap-5">
             <div className="flex md:flex-row flex-col md:items-center items-start gap-4">
-              <h3 className="text-[#161e2d] font-bold md:text-4xl text-2xl">Property Listing</h3>
-              <span className="text-[#161e2d] font-medium text-sm">There are currently 164,814 properties.</span>
+              <h3 className="text-[#161e2d] font-bold md:text-4xl text-2xl">
+                Property Listing
+              </h3>
+              <span className="text-[#161e2d] font-medium text-sm">
+                There are currently {allProperties.length} properties.
+              </span>
             </div>
             <div className="flex items-center gap-4">
-              <button type="button" className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2"><Grid3x3 /></button>
-              <button type="button" className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2"><Logs /></button>
+              <button
+                type="button"
+                className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2"
+              >
+                <Grid3x3 />
+              </button>
+              <button
+                type="button"
+                className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2"
+              >
+                <Logs />
+              </button>
               <Select>
                 <SelectTrigger className="w-[140px] rounded-lg border border-[#e4e4e4] p-5 outline-none">
                   <SelectValue placeholder="Show: 30" />
@@ -109,6 +154,108 @@ const page = () => {
               </Select>
             </div>
           </div>
+          <div className="mt-10">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {currentProperties.map((item, index) => (
+                <Link
+                  href={`/property-details/${item?.id}`}
+                  key={index}
+                  className="shadow-md border border-[#e4e4e4] rounded-t-2xl cursor-pointer"
+                >
+                  <div className="relative overflow-hidden rounded-t-2xl">
+                    <div className="absolute inset-0 bg-black/30 z-10"></div>
+                    <Image
+                      src={item?.photos[0]}
+                      alt={item?.title}
+                      width={400}
+                      height={400}
+                      className="object-cover w-full h-[250px]"
+                    />
+                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4 text-white z-20">
+                      <p className="text-sm flex items-center gap-1">
+                        <MapPin size={14} className="text-white" />
+                        {item?.location}, {item?.country}
+                      </p>
+                    </div>
+                    <div className="absolute top-0 w-full h-full left-0 z-20">
+                      <div className="pl-5 pt-3 w-full flex items-center justify-start gap-3">
+                        <button
+                          className="bg-[#1563df] font-medium text-white text-sm p-2 rounded-2xl"
+                          type="button"
+                        >
+                          Featured
+                        </button>
+                        <button
+                          className="bg-[#0000004d] font-medium text-white text-sm p-2 rounded-2xl transition-colors hover:bg-[#1563df]"
+                          type="button"
+                        >
+                          {item?.propertyStatus}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-5 rounded-b-2xl overflow-hidden bg-white">
+                    <h3 className="text-[#161e2d] text-sm md:text-lg font-medium">
+                      {item?.title}
+                    </h3>
+                    <div className="mt-3">
+                      <div className="flex items-center gap-4 border-b border-[#e4e4e4] pb-5">
+                        <div className="flex items-center gap-1">
+                          <BedDouble size={18} className="text-[#a3abb0]" />
+                          <span className="text-[#a3abb0] text-sm">
+                            Beds:{" "}
+                            <small className="text-[#1e1e2d] text-sm font-bold">
+                              {item?.bedrooms}
+                            </small>
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Bath size={18} className="text-[#a3abb0]" />
+                          <span className="text-[#a3abb0] text-sm">
+                            Baths:{" "}
+                            <small className="text-[#1e1e2d] text-sm font-bold">
+                              {item?.bathrooms}
+                            </small>
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <LandPlot size={18} className="text-[#a3abb0]" />
+                          <span className="text-[#a3abb0] text-sm">
+                            Sqft:{" "}
+                            <small className="text-[#1e1e2d] text-sm font-bold">
+                              {item?.size}
+                            </small>
+                          </span>
+                        </div>
+                      </div>
+                      <h4 className="text-[#1e1e2d] text-lg font-semibold pt-5">
+                        Price: ${item?.price}
+                      </h4>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </motion.div>
+          </div>
+          {totalPages > 1 && (
+            <Pagination className="mt-10">
+              <PaginationContent>
+                <PaginationPrevious className="cursor-pointer" onClick={() => handlePageChange(Math.max(1, currentPage - 1))} />
+                {[...Array(totalPages)].map((_, index) => (
+                  <PaginationItem key={index}>
+                    <PaginationLink className="cursor-pointer" onClick={() => handlePageChange(index + 1)}>{index + 1}</PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationNext className="cursor-pointer" onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))} />
+              </PaginationContent>
+            </Pagination>
+          )}
         </div>
       </section>
       <Footer />
