@@ -232,22 +232,37 @@ const PropertiesClient = () => {
         </div>
 
         {totalPages > 1 && (
-          <Pagination>
+          <Pagination className="mt-10">
             <PaginationContent>
               <PaginationPrevious
+                className="cursor-pointer hover:bg-[#1563ef] hover:text-white"
                 onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
               />
-              {[...Array(totalPages)].map((_, index) => (
-                <PaginationItem key={index}>
-                  <PaginationLink onClick={() => handlePageChange(index + 1)}>
-                    {index + 1}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
+              {[...Array(totalPages)].map((_, index) => {
+                const pageNumber = index + 1;
+                return (
+                  <PaginationItem key={index}>
+                    <PaginationLink
+                      className={`cursor-pointer hover:bg-[#1563ef] hover:text-white ${
+                        currentPage === pageNumber
+                          ? "bg-[#1563ef] text-white"
+                          : ""
+                      }`}
+                      onClick={() => handlePageChange(pageNumber)}
+                      isActive={currentPage === pageNumber}
+                    >
+                      {pageNumber}
+                    </PaginationLink>
+                  </PaginationItem>
+                );
+              })}
               <PaginationNext
+                className="cursor-pointer hover:bg-[#1563ef] hover:text-white"
                 onClick={() =>
                   handlePageChange(Math.min(totalPages, currentPage + 1))
                 }
+                disabled={currentPage === totalPages}
               />
             </PaginationContent>
           </Pagination>

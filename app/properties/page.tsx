@@ -139,127 +139,220 @@ const page = () => {
       </section>
       <section className="w-full bg-white py-24">
         <div className="max-w-7xl mx-auto px-6 md:px-0">
-          <div className="flex md:items-center items-start justify-between md:flex-row flex-col md:gap-0 gap-5">
-            <div className="flex md:flex-row flex-col md:items-center items-start gap-4">
+          <div className="relative flex items-center justify-between">
+            <div className="flex md:flex-row flex-col md:items-center items-start gap-5">
               <h3 className="text-[#161e2d] font-bold md:text-4xl text-2xl">
-                Property Listing
+              Property Listing
               </h3>
               <span className="text-[#161e2d] font-medium text-sm">
                 There are currently {allProperties.length} properties.
               </span>
             </div>
-            <div className="flex items-center gap-4">
-              <Tabs>
-                <TabsList className="bg-transparent">
-                  <TabsTrigger className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2 mr-2.5 data-[state=active]:bg-[#1563df] data-[state=active]:text-white" value="gridLayout">
-                    <Grid3x3 />
-                  </TabsTrigger>
-                  <TabsTrigger className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2 data-[state=active]:bg-[#1563df] data-[state=active]:text-white" value="listLayout">
-                    <Logs />
-                  </TabsTrigger>
-                </TabsList>
-              </Tabs>
-              <Select>
-                <SelectTrigger className="w-[140px] rounded-lg border border-[#e4e4e4] p-5 outline-none">
-                  <SelectValue placeholder="Show: 30" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="10">10</SelectItem>
-                  <SelectItem value="20">20</SelectItem>
-                  <SelectItem value="40">40</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+            <Select>
+              <SelectTrigger className="w-[140px] rounded-lg border border-[#e4e4e4] p-5 outline-none">
+                <SelectValue placeholder="Show: 30" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="10">10</SelectItem>
+                <SelectItem value="20">20</SelectItem>
+                <SelectItem value="40">40</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
-          <div className="mt-10">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {currentProperties.map((item, index) => (
-                <Link
-                  href={`/property-details/${item?.id}`}
-                  key={index}
-                  className="shadow-md border border-[#e4e4e4] rounded-t-2xl cursor-pointer"
-                >
-                  <div className="relative overflow-hidden rounded-t-2xl">
-                    <div className="absolute inset-0 bg-black/30 z-10"></div>
-                    <Image
-                      src={item?.photos[0]}
-                      alt={item?.title}
-                      width={400}
-                      height={400}
-                      className="object-cover w-full h-[250px]"
-                    />
-                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4 text-white z-20">
-                      <p className="text-sm flex items-center gap-1">
-                        <MapPin size={14} className="text-white" />
-                        {item?.location}, {item?.country}
-                      </p>
-                    </div>
-                    <div className="absolute top-0 w-full h-full left-0 z-20">
-                      <div className="pl-5 pt-3 w-full flex items-center justify-start gap-3">
-                        <button
-                          className="bg-[#1563df] font-medium text-white text-sm p-2 rounded-2xl"
-                          type="button"
-                        >
-                          Featured
-                        </button>
-                        <button
-                          className="bg-[#0000004d] font-medium text-white text-sm p-2 rounded-2xl transition-colors hover:bg-[#1563df]"
-                          type="button"
-                        >
-                          {item?.propertyStatus}
-                        </button>
+          <Tabs defaultValue="gridLayout">
+            <TabsList className="bg-transparent mt-5 pl-0">
+              <TabsTrigger
+                className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2 mr-2.5 data-[state=active]:bg-[#1563df] data-[state=active]:text-white"
+                value="gridLayout"
+              >
+                <Grid3x3 />
+              </TabsTrigger>
+              <TabsTrigger
+                className="w-10 h-10 rounded-lg border border-[#e4e4e4] flex items-center justify-center p-2 data-[state=active]:bg-[#1563df] data-[state=active]:text-white"
+                value="listLayout"
+              >
+                <Logs />
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="gridLayout" className="mt-10">
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              >
+                {currentProperties.map((item, index) => (
+                  <Link
+                    href={`/property-details/${item?.id}`}
+                    key={index}
+                    className="shadow-md border border-[#e4e4e4] rounded-t-2xl cursor-pointer"
+                  >
+                    <div className="relative overflow-hidden rounded-t-2xl">
+                      <div className="absolute inset-0 bg-black/30 z-10"></div>
+                      <Image
+                        src={item?.photos[0]}
+                        alt={item?.title}
+                        width={400}
+                        height={400}
+                        className="object-cover w-full h-[250px]"
+                      />
+                      <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4 text-white z-20">
+                        <p className="text-sm flex items-center gap-1">
+                          <MapPin size={14} className="text-white" />
+                          {item?.location}, {item?.country}
+                        </p>
+                      </div>
+                      <div className="absolute top-0 w-full h-full left-0 z-20">
+                        <div className="pl-5 pt-3 w-full flex items-center justify-start gap-3">
+                          <button
+                            className="bg-[#1563df] font-medium text-white text-sm p-2 rounded-2xl"
+                            type="button"
+                          >
+                            Featured
+                          </button>
+                          <button
+                            className="bg-[#0000004d] font-medium text-white text-sm p-2 rounded-2xl transition-colors hover:bg-[#1563df]"
+                            type="button"
+                          >
+                            {item?.propertyStatus}
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="p-5 rounded-b-2xl overflow-hidden bg-white">
-                    <h3 className="text-[#161e2d] text-sm md:text-lg font-medium">
-                      {item?.title}
-                    </h3>
-                    <div className="mt-3">
-                      <div className="flex items-center gap-4 border-b border-[#e4e4e4] pb-5">
-                        <div className="flex items-center gap-1">
-                          <BedDouble size={18} className="text-[#a3abb0]" />
-                          <span className="text-[#a3abb0] text-sm">
-                            Beds:{" "}
-                            <small className="text-[#1e1e2d] text-sm font-bold">
-                              {item?.bedrooms}
-                            </small>
-                          </span>
+                    <div className="p-5 rounded-b-2xl overflow-hidden bg-white">
+                      <h3 className="text-[#161e2d] text-sm md:text-lg font-medium">
+                        {item?.title}
+                      </h3>
+                      <div className="mt-3">
+                        <div className="flex items-center gap-4 border-b border-[#e4e4e4] pb-5">
+                          <div className="flex items-center gap-1">
+                            <BedDouble size={18} className="text-[#a3abb0]" />
+                            <span className="text-[#a3abb0] text-sm">
+                              Beds:{" "}
+                              <small className="text-[#1e1e2d] text-sm font-bold">
+                                {item?.bedrooms}
+                              </small>
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Bath size={18} className="text-[#a3abb0]" />
+                            <span className="text-[#a3abb0] text-sm">
+                              Baths:{" "}
+                              <small className="text-[#1e1e2d] text-sm font-bold">
+                                {item?.bathrooms}
+                              </small>
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <LandPlot size={18} className="text-[#a3abb0]" />
+                            <span className="text-[#a3abb0] text-sm">
+                              Sqft:{" "}
+                              <small className="text-[#1e1e2d] text-sm font-bold">
+                                {item?.size}
+                              </small>
+                            </span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Bath size={18} className="text-[#a3abb0]" />
-                          <span className="text-[#a3abb0] text-sm">
-                            Baths:{" "}
-                            <small className="text-[#1e1e2d] text-sm font-bold">
-                              {item?.bathrooms}
-                            </small>
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <LandPlot size={18} className="text-[#a3abb0]" />
-                          <span className="text-[#a3abb0] text-sm">
-                            Sqft:{" "}
-                            <small className="text-[#1e1e2d] text-sm font-bold">
-                              {item?.size}
-                            </small>
-                          </span>
+                        <h4 className="text-[#1e1e2d] text-lg font-semibold pt-5">
+                          Price: ${item?.price}
+                        </h4>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </motion.div>
+            </TabsContent>
+            <TabsContent value="listLayout" className="mt-10">
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+              >
+                {currentProperties.map((item, index) => (
+                  <Link
+                    href={`/property-details/${item?.id}`}
+                    key={index}
+                    className="shadow-md border border-[#e4e4e4] rounded-t-2xl cursor-pointer"
+                  >
+                    <div className="relative overflow-hidden rounded-t-2xl">
+                      <div className="absolute inset-0 bg-black/30 z-10"></div>
+                      <Image
+                        src={item?.photos[0]}
+                        alt={item?.title}
+                        width={400}
+                        height={400}
+                        className="object-cover w-full h-[250px]"
+                      />
+                      <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4 text-white z-20">
+                        <p className="text-sm flex items-center gap-1">
+                          <MapPin size={14} className="text-white" />
+                          {item?.location}, {item?.country}
+                        </p>
+                      </div>
+                      <div className="absolute top-0 w-full h-full left-0 z-20">
+                        <div className="pl-5 pt-3 w-full flex items-center justify-start gap-3">
+                          <button
+                            className="bg-[#1563df] font-medium text-white text-sm p-2 rounded-2xl"
+                            type="button"
+                          >
+                            Featured
+                          </button>
+                          <button
+                            className="bg-[#0000004d] font-medium text-white text-sm p-2 rounded-2xl transition-colors hover:bg-[#1563df]"
+                            type="button"
+                          >
+                            {item?.propertyStatus}
+                          </button>
                         </div>
                       </div>
-                      <h4 className="text-[#1e1e2d] text-lg font-semibold pt-5">
-                        Price: ${item?.price}
-                      </h4>
                     </div>
-                  </div>
-                </Link>
-              ))}
-            </motion.div>
-          </div>
+                    <div className="p-5 rounded-b-2xl overflow-hidden bg-white">
+                      <h3 className="text-[#161e2d] text-sm md:text-lg font-medium">
+                        {item?.title}
+                      </h3>
+                      <div className="mt-3">
+                        <div className="flex items-center gap-4 border-b border-[#e4e4e4] pb-5">
+                          <div className="flex items-center gap-1">
+                            <BedDouble size={18} className="text-[#a3abb0]" />
+                            <span className="text-[#a3abb0] text-sm">
+                              Beds:{" "}
+                              <small className="text-[#1e1e2d] text-sm font-bold">
+                                {item?.bedrooms}
+                              </small>
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Bath size={18} className="text-[#a3abb0]" />
+                            <span className="text-[#a3abb0] text-sm">
+                              Baths:{" "}
+                              <small className="text-[#1e1e2d] text-sm font-bold">
+                                {item?.bathrooms}
+                              </small>
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <LandPlot size={18} className="text-[#a3abb0]" />
+                            <span className="text-[#a3abb0] text-sm">
+                              Sqft:{" "}
+                              <small className="text-[#1e1e2d] text-sm font-bold">
+                                {item?.size}
+                              </small>
+                            </span>
+                          </div>
+                        </div>
+                        <h4 className="text-[#1e1e2d] text-lg font-semibold pt-5">
+                          Price: ${item?.price}
+                        </h4>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </motion.div>
+            </TabsContent>
+          </Tabs>
           {totalPages > 1 && (
             <Pagination className="mt-10">
               <PaginationContent>
