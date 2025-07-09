@@ -453,8 +453,12 @@ export default function Home() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
+
+              {/* Responsive arrow controls */}
+              <div className="hidden sm:flex">
+                <CarouselPrevious />
+                <CarouselNext />
+              </div>
             </Carousel>
           </div>
         </div>
