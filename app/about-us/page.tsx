@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, PhoneCallIcon } from "lucide-react";
 import { motion } from "framer-motion";
-
+import CarouselSlider from "../components/CarouselSlider";
 import {
   FacebookIcon,
   TwitterIcon,
@@ -251,6 +251,10 @@ const page = () => {
                   </div>
                 </div>
               </motion.div>
+            </div>
+            <div className="mt-20 pb-10">
+              <h3 className="capitalize text-[#161e2d] font-semibold text-xl text-center mb-10">Trusted by over 150+ major companies</h3>
+              <CarouselSlider />
             </div>
           </div>
         </div>
