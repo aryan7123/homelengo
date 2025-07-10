@@ -39,15 +39,14 @@ const page = () => {
                 Our Location For You
               </h3>
             </div>
-            <div className="w-[inherit] mt-10 flex md:flex-row flex-col items-center justify-between gap-6">
-              <div className="w-full flex flex-col px-6 py-10 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl">
+            <div className="w-[inherit] mt-10 flex md:flex-row flex-col items-center justify-between gap-8">
+              <div className="w-full flex flex-col px-6 py-10 justify-center items-center md:w-1/3 border group border-[#e4e4e4] transition-all rounded-2xl hover:scale-105 hover:shadow-xl hover:border-0">
                 <motion.img
                   src="/banner/home-1.png"
                   width={200}
                   height={200}
                   alt="buy new home"
-                  whileHover={{ rotateY: 360 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="transition-transform duration-700 group-hover:[transform:rotateY(360deg)]"
                 />
                 <h3 className="text-[#161e2d] text-2xl font-medium mt-5">
                   Buy a New Home
@@ -59,22 +58,24 @@ const page = () => {
                 </span>
                 <button
                   type="button"
-                  className="flex mt-5 items-center justify-center rounded-full transition-all py-3 px-11 gap-2 border border-[#1563df]"
+                  className="flex mt-5 items-center justify-center rounded-full transition-all py-3 px-11 gap-2 border border-[#1563df] group-hover:bg-[#1563df]"
                 >
-                  <span className="text-base font-medium text-[#161e2d]">
+                  <span className="text-base font-medium text-[#161e2d] group-hover:text-white">
                     Learn More
                   </span>
-                  <ArrowRight size={20} className="text-[#161e2d]" />
+                  <ArrowRight
+                    size={20}
+                    className="text-[#161e2d] group-hover:text-white"
+                  />
                 </button>
               </div>
-              <div className="w-full flex flex-col px-6 py-10 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl">
+              <div className="w-full flex flex-col px-6 py-10 group justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl hover:scale-105 hover:shadow-xl hover:border-0">
                 <motion.img
                   src="/banner/home-2.png"
                   width={200}
                   height={200}
                   alt="sell new home"
-                  whileHover={{ rotateY: 360 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="transition-transform duration-700 group-hover:[transform:rotateY(360deg)]"
                 />
                 <h3 className="text-[#161e2d] text-2xl font-medium mt-5">
                   Sell a Home
@@ -86,22 +87,24 @@ const page = () => {
                 </span>
                 <button
                   type="button"
-                  className="flex mt-5 items-center justify-center rounded-full transition-all py-3 px-11 gap-2 border border-[#1563df]"
+                  className="flex mt-5 items-center justify-center rounded-full transition-all py-3 px-11 gap-2 border border-[#1563df] group-hover:bg-[#1563df]"
                 >
-                  <span className="text-base font-medium text-[#161e2d]">
+                  <span className="text-base font-medium text-[#161e2d] group-hover:text-white">
                     Learn More
                   </span>
-                  <ArrowRight size={20} className="text-[#161e2d]" />
+                  <ArrowRight
+                    size={20}
+                    className="text-[#161e2d] group-hover:text-white"
+                  />
                 </button>
               </div>
-              <div className="w-full flex flex-col px-6 py-10 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl">
+              <div className="w-full flex flex-col group px-6 py-10 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl hover:scale-105 hover:shadow-xl hover:border-0">
                 <motion.img
                   src="/banner/home-3.png"
                   width={200}
                   height={200}
                   alt="rent new home"
-                  whileHover={{ rotateY: 360 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="transition-transform duration-700 group-hover:[transform:rotateY(360deg)]"
                 />
                 <h3 className="text-[#161e2d] text-2xl font-medium mt-5">
                   Rent a Home
@@ -113,12 +116,15 @@ const page = () => {
                 </span>
                 <button
                   type="button"
-                  className="flex mt-5 items-center justify-center rounded-full transition-all py-3 px-11 gap-2 border border-[#1563df]"
+                  className="flex mt-5 items-center justify-center rounded-full transition-all py-3 px-11 gap-2 border border-[#1563df] group-hover:bg-[#1563df]"
                 >
-                  <span className="text-base font-medium text-[#161e2d]">
+                  <span className="text-base font-medium text-[#161e2d] group-hover:text-white">
                     Learn More
                   </span>
-                  <ArrowRight size={20} className="text-[#161e2d]" />
+                  <ArrowRight
+                    size={20}
+                    className="text-[#161e2d] group-hover:text-white"
+                  />
                 </button>
               </div>
             </div>
