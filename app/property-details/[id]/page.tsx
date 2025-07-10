@@ -25,6 +25,8 @@ import {
   HammerIcon,
   RulerIcon,
 } from "lucide-react";
+
+import ScrollUpButton from "@/app/components/ScrollUpButton";
 interface RatingProps {
   onRatingSelect?: (ratings: number[]) => void;
 }
@@ -506,6 +508,7 @@ const page: React.FC<RatingProps> = ({ onRatingSelect }) => {
           </section>
         </div>
       </main>
+      <ScrollUpButton />
       <Footer />
     </>
   );

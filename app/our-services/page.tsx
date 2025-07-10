@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Faqs from "../components/Faqs";
 import Partners from "../components/Partners";
+import ScrollUpButton from "../components/ScrollUpButton";
 
 const page = () => {
   return (
@@ -135,6 +136,7 @@ const page = () => {
           <Partners />
         </div>
       </section>
+      <ScrollUpButton />
       <Footer />
     </>
   );

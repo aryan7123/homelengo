@@ -35,6 +35,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import axios from "axios";
+import ScrollUpButton from "../components/ScrollUpButton";
 
 const page = () => {
   const [allProperties, setAllProperties] = useState([]);
@@ -391,6 +392,7 @@ const page = () => {
           )}
         </div>
       </section>
+      <ScrollUpButton />
       <Footer />
     </>
   );

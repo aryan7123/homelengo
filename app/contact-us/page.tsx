@@ -14,6 +14,7 @@ import {
   TwitterIcon,
   YoutubeIcon,
 } from "lucide-react";
+import ScrollUpButton from "../components/ScrollUpButton";
 
 const page = () => {
   const [contactForm, setContactForm] = useState({
@@ -259,6 +260,7 @@ const page = () => {
           <Partners />
         </div>
       </section>
+      <ScrollUpButton />
       <Footer />
     </>
   );
