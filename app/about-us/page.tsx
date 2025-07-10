@@ -15,6 +15,9 @@ import {
   InstagramIcon,
   Mail,
 } from "lucide-react";
+import ScrollUpButton from "../components/ScrollUpButton";
+import Testimonials from "../components/Testimonials";
+import Partners from "../components/Partners";
 
 const page = () => {
   return (
@@ -253,12 +256,122 @@ const page = () => {
               </motion.div>
             </div>
             <div className="mt-20 pb-10">
-              <h3 className="capitalize text-[#161e2d] font-semibold text-xl text-center mb-10">Trusted by over 150+ major companies</h3>
+              <h3 className="capitalize text-[#161e2d] font-semibold text-xl text-center mb-10">
+                Trusted by over 150+ major companies
+              </h3>
               <CarouselSlider />
             </div>
           </div>
         </div>
       </section>
+      <section className="w-[inherit] bg-[#f3f7fd] py-28">
+        <div className="relative max-w-7xl mx-auto px-6 md:px-0">
+          <div className="w-full flex md:flex-row flex-col md:gap-[140px] gap-[100px] items-start justify-between">
+            <div className="relative w-full md:w-[50%]">
+              <Image
+                src="/banner/banner-account1.jpg"
+                alt="Discover what sets our Real Estate expertise apart"
+                width={600}
+                height={600}
+                sizes="(max-width: 767px) 100vw, 600px"
+                className="object-cover h-[350px] md:h-[570px] rounded-3xl w-full"
+                priority
+              />
+              <Image
+                src="/banner/banner-account2.jpg"
+                alt="Discover what sets our Real Estate expertise apart"
+                width={160}
+                height={150}
+                className="absolute md:-top-10 -top-8 md:-right-12 -right-4
+                w-24 h-24
+                md:w-60 md:h-56
+                object-cover rounded-3xl z-20"
+              />
+              <Image
+                src="/banner/img-w-text-sm2.jpg"
+                alt="Discover what sets our Real Estate expertise apart"
+                width={160}
+                height={110}
+                className="absolute md:-bottom-10 -bottom-8 md:-left-12 -left-4
+                w-24 h-24
+                md:w-60 md:h-auto
+                object-cover rounded-3xl z-20"
+              />
+            </div>
+            <div className="w-full md:w-[50%]">
+              <span className="uppercase text-[#1563ef] font-bold text-base">our benefit</span>
+              <h2 className="capitalize mt-2 text-[#161e2d] text-4xl leading-10 font-bold">Discover what sets our Real Estate expertise apart</h2>
+              <p className="mt-5 text-[#5c6368] text-sm">Our seasoned professionals, armed with extensive market knowledge, walk alongside you through every phase of your property endeavor.</p>
+              <div className="flex flex-col gap-7 mt-10">
+                <div className="bg-white flex items-start gap-5 shadow-sm rounded-2xl p-7 transition-transform group cursor-pointer hover:scale-105">
+                  <Image 
+                    src="/logo/home.png"
+                    alt="home-logo"
+                    width={60}
+                    height={60}
+                    className="transition-transform duration-700 group-hover:[transform:rotateY(360deg)]"
+                  />
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-2xl font-semibold text-[#161e2d]">Buy A New Home</h3>
+                    <p className="text-sm text-[#5c6368]">Explore diverse properties and expert guidance for a seamless buying experience.</p>
+                    <div className="flex items-center gap-1">
+                      <span className="relative text-base font-semibold text-[#161e2d]
+                      after:content-[''] after:absolute after:left-0 after:-bottom-0.5
+                      after:h-0.5 after:w-0 after:bg-[#161e2d]
+                      after:transition-all after:duration-300 after:ease-out
+                      group-hover:after:w-full">Explore Now</span>
+                      <ArrowRight size={16} className="text-[#1563ef]"/>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-white flex items-start gap-5 shadow-sm rounded-2xl p-7 transition-transform group cursor-pointer hover:scale-105">
+                  <Image 
+                    src="/logo/keys.png"
+                    alt="key-logo"
+                    width={60}
+                    height={60}
+                    className="transition-transform duration-700 group-hover:[transform:rotateY(360deg)]"
+                  />
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-2xl font-semibold text-[#161e2d]">Rent a Home</h3>
+                    <p className="text-sm text-[#5c6368]">Explore a diverse variety of listings tailored precisely to suit your unique lifestyle needs.</p>
+                    <div className="flex items-center gap-1">
+                      <span className="relative text-base font-semibold text-[#161e2d]
+                      after:content-[''] after:absolute after:left-0 after:-bottom-0.5
+                      after:h-0.5 after:w-0 after:bg-[#161e2d]
+                      after:transition-all after:duration-300 after:ease-out
+                      group-hover:after:w-full">Explore Now</span>
+                      <ArrowRight size={16} className="text-[#1563ef]"/>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-white flex items-start gap-5 shadow-sm rounded-2xl p-7 transition-transform group cursor-pointer hover:scale-105">
+                  <Image 
+                    src="/logo/location.png"
+                    alt="location-logo"
+                    width={60}
+                    height={60}
+                    className="transition-transform duration-700 group-hover:[transform:rotateY(360deg)]"
+                  />
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-2xl font-semibold text-[#161e2d]">Sell Your Home</h3>
+                    <p className="text-sm text-[#5c6368]">Showcasing your property&apos;s best features for a rapid and successful sale.</p>
+                    <div className="flex items-center gap-1">
+                      <span className="relative text-base font-semibold text-[#161e2d]
+                      after:content-[''] after:absolute after:left-0 after:-bottom-0.5
+                      after:h-0.5 after:w-0 after:bg-[#161e2d]
+                      after:transition-all after:duration-300 after:ease-out
+                      group-hover:after:w-full">Explore Now</span>
+                      <ArrowRight size={16} className="text-[#1563ef]"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <ScrollUpButton />
       <Footer />
     </>
   );

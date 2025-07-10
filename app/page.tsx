@@ -37,6 +37,7 @@ import axios from "axios";
 import Link from "next/link";
 import RotatingText from "./components/RotatingText";
 import ScrollUpButton from "./components/ScrollUpButton";
+import Partners from "./components/Partners";
 
 export default function Home() {
   const locations = [
