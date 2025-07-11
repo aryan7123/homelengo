@@ -11,8 +11,8 @@ const CarouselSlider = () => {
     "/partners/partner-3.png",
     "/partners/partner-4.png",
     "/partners/partner-5.png",
-    "/partners/partner-6.png"
-  ]
+    "/partners/partner-6.png",
+  ];
 
   const settings = {
     dots: true,
