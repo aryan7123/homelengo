@@ -11,10 +11,10 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: 'Credentials',
       credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
+        email: { label: 'Email', type: 'text' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -30,41 +30,47 @@ export const authOptions: NextAuthOptions = {
         }
 
         const isPasswordValid = await compare(credentials.password, user.password);
-
         if (!isPasswordValid) {
           return null;
         }
+
+        console.log("Authorized user:", user);
 
         return {
           id: user.id.toString(),
           email: user.email,
           name: user.username,
-          avatar: user?.avatar
+          avatar: user.avatar ?? null,
         };
       },
     }),
   ],
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token, user }: { token: any; user?: any }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.avatar = user.avatar;
+        token.avatar = user.avatar ?? null;
       }
+
+      console.log("JWT token:", token);
+
       return token;
     },
-    async session({ session, token }: { session: any; token: any }) {
+    async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id ?? "";
+        session.user.id = token.id;
         session.user.avatar = token.avatar ?? null;
       }
+
+      console.log("Session object:", session);
+
       return session;
     },
   },
 };
 
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST };

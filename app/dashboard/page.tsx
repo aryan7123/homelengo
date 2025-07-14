@@ -76,7 +76,7 @@ const page = () => {
 
   const fetchProperties = async () => {
     try {
-      const response = await axios.get("/api/fetch-property");
+      const response = await axios.post("/api/fetch-property", { userId: session?.user?.id });
       setProperties(response.data.property);
     } catch (error) {
       console.error(error);
