@@ -30,6 +30,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 interface Property {
   id: number;
   title: string;
@@ -38,6 +39,7 @@ interface Property {
   photos: string[];
 }
 const PropertiesClient = () => {
+  const { data: session } = useSession();
   const [properties, setProperties] = useState<Property[]>([]);
   const [btnTextMap, setBtnTextMap] = useState<{ [key: number]: boolean }>({});
   const [searchText, setSearchText] = useState("");
@@ -65,7 +67,7 @@ const PropertiesClient = () => {
 
   const fetchProperties = async () => {
     try {
-      const response = await axios.get("/api/fetch-property");
+      const response = await axios.post("/api/fetch-property", { userId: session?.user?.id });
       setProperties(response.data.property);
     } catch (error) {
       console.error(error);
