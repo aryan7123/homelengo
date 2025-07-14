@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -36,74 +36,142 @@ const page = () => {
             <div className="w-full mt-12 flex md:flex-row flex-col items-center gap-10">
               <div className="group w-full md:w-1/4 p-7 rounded-2xl border border-[#e4e4e4] shadow-sm cursor-pointer transition-all duration-300 hover:bg-[#1563df] hover:scale-105">
                 <div className="flex items-end mb-5">
-                  <h3 className="text-[#161e2d] text-4xl font-semibold group-hover:text-white">$20</h3>
-                  <span className="text-[#5c6368] text-sm group-hover:text-white">/month</span>
+                  <h3 className="text-[#161e2d] text-4xl font-semibold group-hover:text-white">
+                    $20
+                  </h3>
+                  <span className="text-[#5c6368] text-sm group-hover:text-white">
+                    /month
+                  </span>
                 </div>
-                <h3 className="text-[#161e2d] text-2xl font-semibold mb-2 group-hover:text-white">Intro</h3>
+                <h3 className="text-[#161e2d] text-2xl font-semibold mb-2 group-hover:text-white">
+                  Intro
+                </h3>
                 <span className="text-[#5c6368] text-sm group-hover:text-white">
                   Join us every month for a very reasonable price
                 </span>
                 <ul className="mt-5">
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-[#1563df] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">Transportation for you</span>
-                    </li>
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-[#1563df] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">A hotel or homestay</span>
-                    </li>
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-[#1563df] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">Free meals and drinks</span>
-                    </li>
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-[#a3abb0] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">24/7 Support</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                        <CircleCheck size={14} className="text-[#a3abb0] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">Unlimited users</span>
-                    </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#1563df] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      Transportation for you
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#1563df] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      A hotel or homestay
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#1563df] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      Free meals and drinks
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#a3abb0] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      24/7 Support
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#a3abb0] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      Unlimited users
+                    </span>
+                  </li>
                 </ul>
-                <button type="button" className="w-full group-hover:bg-white group-hover:text-[#161e2d] mt-5 rounded-3xl bg-[#1563df] text-white transition-colors text-base font-semibold flex items-center justify-center gap-1.5 py-3.5">
-                    <span>View All Properties</span>
-                    <ArrowRight />
+                <button
+                  type="button"
+                  className="w-full group-hover:bg-white group-hover:text-[#161e2d] mt-5 rounded-3xl bg-[#1563df] text-white transition-colors text-base font-semibold flex items-center justify-center gap-1.5 py-3.5"
+                >
+                  <span>View All Properties</span>
+                  <ArrowRight />
                 </button>
               </div>
               <div className="w-full md:w-1/4 p-7 rounded-2xl border border-[#e4e4e4] shadow-sm group cursor-pointer transition-all duration-300 hover:bg-[#1563df] hover:scale-105">
                 <div className="flex items-end mb-5">
-                  <h3 className="text-[#161e2d] text-4xl font-semibold group-hover:text-white">$99</h3>
-                  <span className="text-[#5c6368] text-sm group-hover:text-white">/month</span>
+                  <h3 className="text-[#161e2d] text-4xl font-semibold group-hover:text-white">
+                    $99
+                  </h3>
+                  <span className="text-[#5c6368] text-sm group-hover:text-white">
+                    /month
+                  </span>
                 </div>
-                <h3 className="text-[#161e2d] text-2xl font-semibold mb-2 group-hover:text-white">Base</h3>
+                <h3 className="text-[#161e2d] text-2xl font-semibold mb-2 group-hover:text-white">
+                  Base
+                </h3>
                 <span className="text-[#5c6368] text-sm group-hover:text-white">
                   Join us every month for a very reasonable price
                 </span>
                 <ul className="mt-5">
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-[#1563df] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">Transportation for you</span>
-                    </li>
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-[#1563df] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">A hotel or homestay</span>
-                    </li>
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-[#1563df] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">Free meals and drinks</span>
-                    </li>
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-[#a3abb0] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">24/7 Support</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                        <CircleCheck size={14} className="text-[#a3abb0] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">Unlimited users</span>
-                    </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#1563df] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      Transportation for you
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#1563df] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      A hotel or homestay
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#1563df] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      Free meals and drinks
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#a3abb0] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      24/7 Support
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#a3abb0] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      Unlimited users
+                    </span>
+                  </li>
                 </ul>
-                <button type="button" className="w-full group-hover:bg-white group-hover:text-[#161e2d] mt-5 rounded-3xl bg-[#1563df] text-white transition-colors text-base font-semibold flex items-center justify-center gap-1.5 py-3.5">
-                    <span>View All Properties</span>
-                    <ArrowRight />
+                <button
+                  type="button"
+                  className="w-full group-hover:bg-white group-hover:text-[#161e2d] mt-5 rounded-3xl bg-[#1563df] text-white transition-colors text-base font-semibold flex items-center justify-center gap-1.5 py-3.5"
+                >
+                  <span>View All Properties</span>
+                  <ArrowRight />
                 </button>
               </div>
               <div className="w-full bg-[#1563df] md:w-1/4 p-7 rounded-2xl border border-[#e4e4e4] shadow-sm group cursor-pointer md:scale-105">
@@ -116,66 +184,109 @@ const page = () => {
                   Join us every month for a very reasonable price
                 </span>
                 <ul className="mt-5">
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-white" />
-                        <span className="text-sm text-white">Transportation for you</span>
-                    </li>
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-white" />
-                        <span className="text-sm text-white">A hotel or homestay</span>
-                    </li>
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-white" />
-                        <span className="text-sm text-white">Free meals and drinks</span>
-                    </li>
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-white" />
-                        <span className="text-sm text-white">24/7 Support</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                        <CircleCheck size={14} className="text-white" />
-                        <span className="text-sm text-white">Unlimited users</span>
-                    </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck size={14} className="text-white" />
+                    <span className="text-sm text-white">
+                      Transportation for you
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck size={14} className="text-white" />
+                    <span className="text-sm text-white">
+                      A hotel or homestay
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck size={14} className="text-white" />
+                    <span className="text-sm text-white">
+                      Free meals and drinks
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck size={14} className="text-white" />
+                    <span className="text-sm text-white">24/7 Support</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CircleCheck size={14} className="text-white" />
+                    <span className="text-sm text-white">Unlimited users</span>
+                  </li>
                 </ul>
-                <button type="button" className="w-full mt-5 rounded-3xl bg-white text-[#161e2d] transition-colors text-base font-semibold flex items-center justify-center gap-1.5 py-3.5">
-                    <span>View All Properties</span>
-                    <ArrowRight />
+                <button
+                  type="button"
+                  className="w-full mt-5 rounded-3xl bg-white text-[#161e2d] transition-colors text-base font-semibold flex items-center justify-center gap-1.5 py-3.5"
+                >
+                  <span>View All Properties</span>
+                  <ArrowRight />
                 </button>
               </div>
               <div className="group w-full md:w-1/4 p-7 rounded-2xl border border-[#e4e4e4] shadow-sm group cursor-pointer transition-all duration-300 hover:bg-[#1563df] hover:scale-105">
                 <div className="flex items-end mb-5">
-                  <h3 className="text-[#161e2d] text-4xl font-semibold group-hover:text-white">$200</h3>
-                  <span className="text-[#5c6368] text-sm group-hover:text-white">/month</span>
+                  <h3 className="text-[#161e2d] text-4xl font-semibold group-hover:text-white">
+                    $200
+                  </h3>
+                  <span className="text-[#5c6368] text-sm group-hover:text-white">
+                    /month
+                  </span>
                 </div>
-                <h3 className="text-[#161e2d] text-2xl font-semibold mb-2 group-hover:text-white">Enterprise</h3>
+                <h3 className="text-[#161e2d] text-2xl font-semibold mb-2 group-hover:text-white">
+                  Enterprise
+                </h3>
                 <span className="text-[#5c6368] text-sm group-hover:text-white">
                   Join us every month for a very reasonable price
                 </span>
                 <ul className="mt-5">
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-[#1563df] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">Transportation for you</span>
-                    </li>
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-[#1563df] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">A hotel or homestay</span>
-                    </li>
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-[#1563df] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">Free meals and drinks</span>
-                    </li>
-                    <li className="flex items-center gap-2 mb-2">
-                        <CircleCheck size={14} className="text-[#1563df] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">24/7 Support</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                        <CircleCheck size={14} className="text-[#1563df] group-hover:text-white" />
-                        <span className="text-sm group-hover:text-white">Unlimited users</span>
-                    </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#1563df] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      Transportation for you
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#1563df] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      A hotel or homestay
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#1563df] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      Free meals and drinks
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2 mb-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#1563df] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      24/7 Support
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CircleCheck
+                      size={14}
+                      className="text-[#1563df] group-hover:text-white"
+                    />
+                    <span className="text-sm group-hover:text-white">
+                      Unlimited users
+                    </span>
+                  </li>
                 </ul>
-                <button type="button" className="w-full group-hover:bg-white group-hover:text-[#161e2d] mt-5 rounded-3xl bg-[#1563df] text-white transition-colors text-base font-semibold flex items-center justify-center gap-1.5 py-3.5">
-                    <span>View All Properties</span>
-                    <ArrowRight />
+                <button
+                  type="button"
+                  className="w-full group-hover:bg-white group-hover:text-[#161e2d] mt-5 rounded-3xl bg-[#1563df] text-white transition-colors text-base font-semibold flex items-center justify-center gap-1.5 py-3.5"
+                >
+                  <span>View All Properties</span>
+                  <ArrowRight />
                 </button>
               </div>
             </div>

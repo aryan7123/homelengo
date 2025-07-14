@@ -30,6 +30,15 @@ import {
   Bath,
   LandPlot,
   ArrowRight,
+  PackageSearch,
+  CalendarClock,
+  Handshake,
+  PhoneCallIcon,
+  Mail,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+  InstagramIcon,
 } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -37,7 +46,7 @@ import axios from "axios";
 import Link from "next/link";
 import RotatingText from "./components/RotatingText";
 import ScrollUpButton from "./components/ScrollUpButton";
-import Partners from "./components/Partners";
+import CarouselSlider from "./components/CarouselSlider";
 
 export default function Home() {
   const locations = [
@@ -504,7 +513,10 @@ export default function Home() {
                 <span className="text-base font-medium text-[#161e2d] group-hover:text-white">
                   Learn More
                 </span>
-                <ArrowRight size={20} className="text-[#161e2d] group-hover:text-white" />
+                <ArrowRight
+                  size={20}
+                  className="text-[#161e2d] group-hover:text-white"
+                />
               </button>
             </div>
             <div className="w-full flex flex-col px-6 py-10 group justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl hover:scale-105 hover:shadow-xl hover:border-0">
@@ -520,7 +532,8 @@ export default function Home() {
               </h3>
               <span className="text-[#5c6368] mt-5 text-center text-[15px]">
                 Sell confidently with expert guidance and effective strategies,
-                showcasing your property&apos;s best features for a successful sale.
+                showcasing your property&apos;s best features for a successful
+                sale.
               </span>
               <button
                 type="button"
@@ -529,7 +542,10 @@ export default function Home() {
                 <span className="text-base font-medium text-[#161e2d] group-hover:text-white">
                   Learn More
                 </span>
-                <ArrowRight size={20} className="text-[#161e2d] group-hover:text-white" />
+                <ArrowRight
+                  size={20}
+                  className="text-[#161e2d] group-hover:text-white"
+                />
               </button>
             </div>
             <div className="w-full flex flex-col group px-6 py-10 justify-center items-center md:w-1/3 border border-[#e4e4e4] transition-all rounded-2xl hover:scale-105 hover:shadow-xl hover:border-0">
@@ -555,12 +571,306 @@ export default function Home() {
                 <span className="text-base font-medium text-[#161e2d] group-hover:text-white">
                   Learn More
                 </span>
-                <ArrowRight size={20} className="text-[#161e2d] group-hover:text-white" />
+                <ArrowRight
+                  size={20}
+                  className="text-[#161e2d] group-hover:text-white"
+                />
               </button>
             </div>
           </div>
         </div>
       </motion.section>
+      <div className="px-6 md:px-0">
+        <section className="w-full bg-[#f3f7fd] overflow-hidden rounded-3xl">
+          <div className="max-w-full flex items-start md:justify-center justify-start md:flex-row flex-col">
+            <div className="w-full md:w-1/2">
+              <Image
+                src="/banner/img-w-text1.jpg"
+                alt="benefit-banner"
+                width={720}
+                height={800}
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover w-full h-full rounded-3xl"
+                priority
+              />
+            </div>
+            <div className="w-full md:w-1/2 md:pl-12 py-12 md:pr-[200px] px-6">
+              <span className="text-[#1563df] text-sm font-semibold uppercase">
+                our benefit
+              </span>
+              <h3 className="text-4xl font-extrabold mt-2 text-[#161e2d]">
+                Why Choose HomeLengo
+              </h3>
+              <p className="text-sm font-medium text-[#5c6368] mt-5">
+                Our seasoned team excels in real estate with years of successful
+                market navigation, offering informed decisions and optimal
+                results.
+              </p>
+              <div className="w-full mt-10 flex flex-col items-start justify-start gap-6">
+                <div className="w-full group hover:scale-105 duration-500 transition-transform bg-white shadow rounded-2xl p-8 flex items-start gap-5 cursor-pointer">
+                  <PackageSearch
+                    size={100}
+                    className="text-[#1563df] font-semibold transition-transform duration-500 group-hover:[transform:rotateY(360deg)]"
+                  />
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-2xl font-semibold text-[#161e2d]">
+                      Proven Expertise
+                    </h3>
+                    <p className="text-sm font-medium text-[#5c6368]">
+                      Our seasoned team excels in real estate with years of
+                      successful market navigation, offering informed decisions
+                      and optimal results.
+                    </p>
+                  </div>
+                </div>
+                <div className="w-full group hover:scale-105 duration-500 transition-transform bg-white shadow rounded-2xl p-8 flex items-center gap-5 cursor-pointer">
+                  <CalendarClock
+                    size={100}
+                    className="text-[#1563df] font-semibold transition-transform duration-500 group-hover:[transform:rotateY(360deg)]"
+                  />
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-2xl font-semibold text-[#161e2d]">
+                      Customized Solutions
+                    </h3>
+                    <p className="text-sm font-medium text-[#5c6368]">
+                      We pride ourselves on crafting personalized strategies to
+                      match your unique goals, ensuring a seamless real estate
+                      journey.
+                    </p>
+                  </div>
+                </div>
+                <div className="w-full group hover:scale-105 duration-500 transition-transform bg-white shadow rounded-2xl p-8 flex items-center gap-5 cursor-pointer">
+                  <Handshake
+                    size={100}
+                    className="text-[#1563df] font-semibold transition-transform duration-500 group-hover:[transform:rotateY(360deg)]"
+                  />
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-2xl font-semibold text-[#161e2d]">
+                      Transparent Partnerships
+                    </h3>
+                    <p className="text-sm font-medium text-[#5c6368]">
+                      Transparency is key in our client relationships. We
+                      prioritize clear communication and ethical practices,
+                      fostering trust and reliability throughout.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section className="w-full bg-white py-24">
+        <div className="flex items-center mx-auto justify-center flex-col">
+          <span className="text-[#1563df] font-semibold">OUR TEAMS</span>
+          <h2 className="mt-2 text-[#161e2d] font-extrabold md:text-4xl text-2xl">
+            Meet Our Agents
+          </h2>
+        </div>
+
+        <div className="w-full mt-12">
+          <div className="max-w-7xl mx-auto md:px-0 px-6 gap-10 flex md:flex-row flex-col items-center justify-between">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.21, duration: 0.5 }}
+              className="w-full md:w-1/4 relative group overflow-hidden"
+            >
+              <Link href="#" className="block relative">
+                <Image
+                  src="/agents/agent-1.jpg"
+                  width={100}
+                  height={100}
+                  alt="image-agent"
+                  className="w-full h-auto rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <ul className="bg-[#0033] w-[220px] py-1 z-10 absolute bottom-4 left-1/2 -translate-x-1/2 rounded-lg grid grid-cols-4 backdrop-blur-sm transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
+                  <li className="flex items-center justify-center border-r border-[#e4e4e4] hover:text-[#1563ef]">
+                    <FacebookIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                  <li className="flex items-center justify-center border-r border-[#e4e4e4] hover:text-[#1563ef]">
+                    <TwitterIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                  <li className="flex items-center justify-center border-r border-[#e4e4e4] hover:text-[#1563ef]">
+                    <LinkedinIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                  <li className="flex items-center justify-center hover:text-[#1563ef]">
+                    <InstagramIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                </ul>
+              </Link>
+
+              <div className="content p-4 text-center">
+                <div className="info mb-3">
+                  <h5 className="text-xl font-semibold">
+                    <a href="#" className="hover:text-blue-600">
+                      Sarah Rose
+                    </a>
+                  </h5>
+                  <p className="text-sm text-gray-500">Administrative Staff</p>
+                </div>
+                <div className="flex items-center justify-center gap-4">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center border border-[#e4e4e4] text-[#a3abb0] bg-white transition-colors group-hover:bg-[#1563ef] group-hover:text-white cursor-pointer">
+                    <PhoneCallIcon size={16} />
+                  </div>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center border border-[#e4e4e4] text-[#a3abb0] bg-white transition-colors group-hover:bg-[#1563ef] group-hover:text-white cursor-pointer">
+                    <Mail size={16} />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.21, duration: 0.5 }}
+              className="w-full md:w-1/4 relative group overflow-hidden"
+            >
+              <Link href="#" className="block relative">
+                <Image
+                  src="/agents/agent-2.jpg"
+                  width={100}
+                  height={100}
+                  alt="image-agent"
+                  className="w-full h-auto rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <ul className="bg-[#0033] w-[220px] py-1 z-10 absolute bottom-4 left-1/2 -translate-x-1/2 rounded-lg grid grid-cols-4 backdrop-blur-sm transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
+                  <li className="flex items-center justify-center border-r border-[#e4e4e4] hover:text-[#1563ef]">
+                    <FacebookIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                  <li className="flex items-center justify-center border-r border-[#e4e4e4] hover:text-[#1563ef]">
+                    <TwitterIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                  <li className="flex items-center justify-center border-r border-[#e4e4e4] hover:text-[#1563ef]">
+                    <LinkedinIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                  <li className="flex items-center justify-center hover:text-[#1563ef]">
+                    <InstagramIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                </ul>
+              </Link>
+
+              <div className="content p-4 text-center">
+                <div className="info mb-3">
+                  <h5 className="text-xl font-semibold">
+                    <a href="#" className="hover:text-blue-600">
+                      Esther Howard
+                    </a>
+                  </h5>
+                  <p className="text-sm text-gray-500">Administrative Staff</p>
+                </div>
+                <div className="flex items-center justify-center gap-4">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center border border-[#e4e4e4] text-[#a3abb0] bg-white transition-colors group-hover:bg-[#1563ef] group-hover:text-white cursor-pointer">
+                    <PhoneCallIcon size={16} />
+                  </div>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center border border-[#e4e4e4] text-[#a3abb0] bg-white transition-colors group-hover:bg-[#1563ef] group-hover:text-white cursor-pointer">
+                    <Mail size={16} />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.21, duration: 0.5 }}
+              className="w-full md:w-1/4 relative group overflow-hidden"
+            >
+              <Link href="#" className="block relative">
+                <Image
+                  src="/agents/agent-3.jpg"
+                  width={100}
+                  height={100}
+                  alt="image-agent"
+                  className="w-full h-auto rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <ul className="bg-[#0033] w-[220px] py-1 z-10 absolute bottom-4 left-1/2 -translate-x-1/2 rounded-lg grid grid-cols-4 backdrop-blur-sm transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
+                  <li className="flex items-center justify-center border-r border-[#e4e4e4] hover:text-[#1563ef]">
+                    <FacebookIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                  <li className="flex items-center justify-center border-r border-[#e4e4e4] hover:text-[#1563ef]">
+                    <TwitterIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                  <li className="flex items-center justify-center border-r border-[#e4e4e4] hover:text-[#1563ef]">
+                    <LinkedinIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                  <li className="flex items-center justify-center hover:text-[#1563ef]">
+                    <InstagramIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                </ul>
+              </Link>
+
+              <div className="content p-4 text-center">
+                <div className="info mb-3">
+                  <h5 className="text-xl font-semibold">
+                    <a href="#" className="hover:text-blue-600">
+                      Darell Steward
+                    </a>
+                  </h5>
+                  <p className="text-sm text-gray-500">Administrative Staff</p>
+                </div>
+                <div className="flex items-center justify-center gap-4">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center border border-[#e4e4e4] text-[#a3abb0] bg-white transition-colors group-hover:bg-[#1563ef] group-hover:text-white cursor-pointer">
+                    <PhoneCallIcon size={16} />
+                  </div>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center border border-[#e4e4e4] text-[#a3abb0] bg-white transition-colors group-hover:bg-[#1563ef] group-hover:text-white cursor-pointer">
+                    <Mail size={16} />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.21, duration: 0.5 }}
+              className="w-full md:w-1/4 relative group overflow-hidden"
+            >
+              <Link href="#" className="block relative">
+                <Image
+                  src="/agents/agent-4.jpg"
+                  width={100}
+                  height={100}
+                  alt="image-agent"
+                  className="w-full h-auto rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <ul className="bg-[#0033] w-[220px] py-1 z-10 absolute bottom-4 left-1/2 -translate-x-1/2 rounded-lg grid grid-cols-4 backdrop-blur-sm transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
+                  <li className="flex items-center justify-center border-r border-[#e4e4e4] hover:text-[#1563ef]">
+                    <FacebookIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                  <li className="flex items-center justify-center border-r border-[#e4e4e4] hover:text-[#1563ef]">
+                    <TwitterIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                  <li className="flex items-center justify-center border-r border-[#e4e4e4] hover:text-[#1563ef]">
+                    <LinkedinIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                  <li className="flex items-center justify-center hover:text-[#1563ef]">
+                    <InstagramIcon className="text-white p-2 rounded-full w-8 h-8" />
+                  </li>
+                </ul>
+              </Link>
+
+              <div className="content p-4 text-center">
+                <div className="info mb-3">
+                  <h5 className="text-xl font-semibold">
+                    <a href="#" className="hover:text-blue-600">
+                      Yelena Jones
+                    </a>
+                  </h5>
+                  <p className="text-sm text-gray-500">Administrative Staff</p>
+                </div>
+                <div className="flex items-center justify-center gap-4">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center border border-[#e4e4e4] text-[#a3abb0] bg-white transition-colors group-hover:bg-[#1563ef] group-hover:text-white cursor-pointer">
+                    <PhoneCallIcon size={16} />
+                  </div>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center border border-[#e4e4e4] text-[#a3abb0] bg-white transition-colors group-hover:bg-[#1563ef] group-hover:text-white cursor-pointer">
+                    <Mail size={16} />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       <ScrollUpButton />
       <Footer />
     </>
