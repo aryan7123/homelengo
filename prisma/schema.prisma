@@ -26,6 +26,7 @@ model User {
   avatar          String?
   reviews         Review[]
   likedProperties Property[] @relation("UserLikes")
+  blogs           Blog[]     @relation("UserBlogs")
 }
 
 model Property {
@@ -82,4 +83,18 @@ model Contact {
   phoneNumber String @db.VarChar(255)
   subject     String @db.VarChar(255)
   formMessage String @db.Text
+}
+
+model Blog {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.Text
+  tags        String[]
+  photos      String[]
+  category    String
+  description String   @db.Text
+  createdAt   DateTime @default(now())
+  authorId    Int
+  author      User     @relation("UserBlogs", fields: [authorId], references: [id])
+
+  @@index([authorId])
 }
