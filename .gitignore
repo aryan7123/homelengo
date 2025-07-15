@@ -21,6 +21,7 @@
 /build
 public/uploads
 public/avatar
+public/blogs
 
 # misc
 .DS_Store

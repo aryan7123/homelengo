@@ -13,6 +13,7 @@ import {
   HouseIcon,
   LogOutIcon,
   MenuIcon,
+  NotebookPen,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -148,6 +149,19 @@ const Sidebar: React.FC<SidebarProps> = ({
               >
                 <HouseIcon />
                 <span>Add Property</span>
+              </Link>
+            </li>
+            <li className="mb-2">
+              <Link
+                href="/dashboard/add-blog"
+                className={`flex ${
+                  pathname === "/dashboard/add-property"
+                    ? "bg-[#1563df]"
+                    : "bg-transparent"
+                } items-center gap-2.5 transition-colors hover:bg-[#1563df] text-white px-6 py-4`}
+              >
+                <NotebookPen />
+                <span>Add Blog</span>
               </Link>
             </li>
             <li className="mb-2">
