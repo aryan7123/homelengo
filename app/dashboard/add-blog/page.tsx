@@ -23,6 +23,7 @@ const initialBlog: BlogForm = {
 const page = () => {
   const { data: session } = useSession();
   const [blog, setBlog] = useState<BlogForm>(initialBlog);
+  const [responseMessage, setResponseMessage] = useState("");
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -62,7 +63,12 @@ const page = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      console.log(request);
+      if(request.status === 200) {
+        setResponseMessage("Blog Added Successfully");
+      }
+      else {
+        setResponseMessage(request.data.message);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -178,7 +184,7 @@ const page = () => {
                   onClick={handleFileChange}
                 />
               </div>
-              <div className="flex flex-col gap-3 mb-7">
+              <div className="flex flex-col gap-3">
                 <label className="text-sm font-semibold" htmlFor="description">
                   Description *
                 </label>
@@ -190,6 +196,9 @@ const page = () => {
                   onChange={handleInputChange}
                 />
               </div>
+              {responseMessage && (
+                <p className="mt-4 text-sm font-bold">{responseMessage}</p>
+              )}
               <button
                 onClick={handleAddBlog}
                 type="button"

@@ -45,21 +45,33 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const saveBlog = await prisma.blog.create({
-      data: {
-        title,
-        category,
-        description,
-        authorId: Number(userId),
-        tags: tagsArr,
-        photos: fileUrls,
-      },
-    });
+    if (!title) {
+      return NextResponse.json({ message: "Title is required" });
+    } else if (!category) {
+      return NextResponse.json({ message: "Category is required" });
+    } else if (!tags) {
+      return NextResponse.json({ message: "Tags are required" });
+    } else if (!photos) {
+      return NextResponse.json({ message: "Images are required" });
+    } else if (!description) {
+      return NextResponse.json({ message: "Description is required" });
+    } else {
+      const saveBlog = await prisma.blog.create({
+        data: {
+          title,
+          category,
+          description,
+          authorId: Number(userId),
+          tags: tagsArr,
+          photos: fileUrls,
+        },
+      });
 
-    return NextResponse.json({
-      blog: saveBlog,
-      message: "Blog Added Successfully",
-    });
+      return NextResponse.json({
+        blog: saveBlog,
+        message: "Blog Added Successfully",
+      });
+    }
   } catch (error) {
     console.error("Error creating blog:", error);
     return NextResponse.json(
