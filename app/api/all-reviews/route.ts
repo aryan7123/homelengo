@@ -12,18 +12,16 @@ export async function GET() {
       select: { rating: true, comment: true, username: true },
     });
 
-    if(reviews.length > 0) {
-        return NextResponse.json({
-            reviews: reviews,
-            message: "Reviews successfully found"
-        });
+    if (reviews.length > 0) {
+      return NextResponse.json({
+        reviews: reviews,
+        message: "Reviews successfully found",
+      });
+    } else {
+      return NextResponse.json({
+        message: "No Reviews Found",
+      });
     }
-    else {
-        return NextResponse.json({
-            message: "No Reviews Found"
-        });
-    }
-
   } catch (error) {
     console.log(error);
   }

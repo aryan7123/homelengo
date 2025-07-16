@@ -48,6 +48,7 @@ const page = () => {
   };
 
   const handleAddBlog = async () => {
+    setResponseMessage("");
     try {
       const formData = new FormData();
 
@@ -63,12 +64,7 @@ const page = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      if(request.status === 200) {
-        setResponseMessage("Blog Added Successfully");
-      }
-      else {
-        setResponseMessage(request.data.message);
-      }
+      setResponseMessage(request.data.message);
     } catch (error) {
       console.log(error);
     }
@@ -181,7 +177,7 @@ const page = () => {
                   accept="image/*"
                   name="photos"
                   id="photos"
-                  onClick={handleFileChange}
+                  onChange={handleFileChange}
                 />
               </div>
               <div className="flex flex-col gap-3">
