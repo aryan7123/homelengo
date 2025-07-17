@@ -113,30 +113,35 @@ const page = () => {
                   />
                   <div className="mt-8 border-b border-[#e4e4e4]">
                     {blog?.description &&
-                      blog.description
-                        .split(/\n\s*\n/)
-                        .map((para, index) => (
-                          <p
-                            key={index}
-                            className="text-[#1c1c1e] text-sm font-medium my-3.5"
-                          >
-                            {para.trim()}
-                          </p>
-                    ))}
+                      blog.description.split(/\n\s*\n/).map((para, index) => (
+                        <p
+                          key={index}
+                          className="text-[#1c1c1e] text-sm font-medium my-3.5"
+                        >
+                          {para.trim()}
+                        </p>
+                      ))}
                   </div>
                   <div className="w-full flex md:flex-row flex-col md:items-center items-start md:justify-between justify-start mt-4 md:gap-0 gap-6">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[#161e2d] text-sm font-semibold">Tags: </span>
-                      <ul className="flex items-center justify-center gap-2">
+                    <div className="flex items-start md:items-center gap-2">
+                      <span className="text-[#161e2d] text-sm font-semibold">
+                        Tags:
+                      </span>
+                      <ul className="flex flex-wrap items-center justify-start gap-2">
                         {blog?.tags.map((tag, index) => (
-                          <li key={index} className="border text-xs whitespace-nowrap bg-transparent rounded-full text-[#5c6368] border-[#e4e4e4] cursor-pointer transition-colors duration-300 hover:bg-[#1563df] p-3 hover:text-white">
+                          <li
+                            key={index}
+                            className="border text-xs whitespace-nowrap bg-transparent rounded-full text-[#5c6368] border-[#e4e4e4] cursor-pointer transition-colors duration-300 hover:bg-[#1563df] p-3 hover:text-white"
+                          >
                             {tag}
                           </li>
                         ))}
                       </ul>
                     </div>
                     <div className="flex items-center gap-4">
-                      <span className="text-[#161e2d] text-sm font-semibold">Share: </span>
+                      <span className="text-[#161e2d] text-sm font-semibold">
+                        Share:{" "}
+                      </span>
                       <ul className="flex items-center justify-center gap-2">
                         <li className="border text-xs whitespace-nowrap bg-transparent rounded-full text-[#5c6368] border-[#e4e4e4] cursor-pointer transition-colors duration-300 hover:bg-[#1563df] p-3 hover:text-white">
                           <Facebook size={16} />
