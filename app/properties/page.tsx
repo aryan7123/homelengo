@@ -56,7 +56,7 @@ const page = () => {
 
   const fetchAllProperties = async () => {
     try {
-      const req = await axios.get("/api/fetch-property");
+      const req = await axios.get("/api/properties-list");
       console.log(req.data);
       setAllProperties(req.data.property);
     } catch (error) {

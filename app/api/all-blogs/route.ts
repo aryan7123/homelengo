@@ -8,7 +8,6 @@ const prisma = new PrismaClient();
 export async function GET() {
   try {
     const blogs = await prisma.blog.findMany({
-      take: 9,
       include: {
         author: {
           select: {
