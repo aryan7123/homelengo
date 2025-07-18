@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     if (allProperties && allProperties.length > 0) {
       return NextResponse.json({
         message: "Properties Found",
-        property: allProperties,
+        property: allProperties
       });
     } else {
       return NextResponse.json({

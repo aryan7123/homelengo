@@ -54,9 +54,6 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id;
         token.avatar = user.avatar ?? null;
       }
-
-      console.log("JWT token:", token);
-
       return token;
     },
     async session({ session, token }) {
@@ -64,9 +61,6 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.avatar = token.avatar ?? null;
       }
-
-      console.log("Session object:", session);
-
       return session;
     },
   },

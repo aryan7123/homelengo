@@ -123,7 +123,7 @@ const page = () => {
                       ))}
                   </div>
                   <div className="w-full flex md:flex-row flex-col md:items-center items-start md:justify-between justify-start mt-4 md:gap-0 gap-6">
-                    <div className="flex items-start md:items-center gap-2">
+                    <div className="flex items-start md:items-center gap-3">
                       <span className="text-[#161e2d] text-sm font-semibold">
                         Tags:
                       </span>
@@ -140,7 +140,7 @@ const page = () => {
                     </div>
                     <div className="flex items-center gap-4">
                       <span className="text-[#161e2d] text-sm font-semibold">
-                        Share:{" "}
+                        Share:
                       </span>
                       <ul className="flex items-center justify-center gap-2">
                         <li className="border text-xs whitespace-nowrap bg-transparent rounded-full text-[#5c6368] border-[#e4e4e4] cursor-pointer transition-colors duration-300 hover:bg-[#1563df] p-3 hover:text-white">
