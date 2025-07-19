@@ -15,6 +15,7 @@ import {
   Instagram,
   Linkedin,
   SearchIcon,
+  SendHorizontal,
   Twitter,
   UserCircleIcon,
 } from "lucide-react";
@@ -261,6 +262,14 @@ const page = () => {
                       Legal Guidance
                     </li>
                   </ul>
+                </div>
+                <div className="mt-8">
+                  <h3 className="text-[#1c1c1e] text-2xl font-bold mb-3">Join our newsletter</h3>
+                  <span className="text-[#5c6368] text-xs font-medium">Signup to be the first to hear about exclusive deals, special offers and upcoming collections.</span>
+                  <div className="w-full flex items-center justify-between mt-4 border border-[#e4e4e4] rounded-2xl px-2.5 py-3">
+                    <input type="email" name="email" id="email" placeholder="Enter your email" className="w-[inherit] text-[#5c6368] text-sm font-semibold outline-none" />
+                    <SendHorizontal size={18} className="text-[#1563df] cursor-pointer" />
+                  </div>
                 </div>
               </div>
             </div>
