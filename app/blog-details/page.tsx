@@ -24,16 +24,30 @@ const page = () => {
   const blogId = searchParams.get("id");
 
   const [blog, setBlog] = useState(null);
+  const [randomBlogs, setRandomBlogs] = useState(null);
 
   const handleGetBlog = async () => {
     try {
       const request = await axios.post("/api/blog-details", { blogId });
-      console.log(request);
       setBlog(request.data.blog);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handleRandomBlogs = async () => {
+    try {
+      const request = await axios.get("/api/featured-blog-listings");
+      setRandomBlogs(request.data.randomBlogs);
+      console.log(request);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleRandomBlogs();
+  }, []);
 
   useEffect(() => {
     if (blogId) handleGetBlog();
@@ -158,6 +172,49 @@ const page = () => {
                       </ul>
                     </div>
                   </div>
+                  <div className="w-[inherit] mt-10">
+                    <h3 className="text-[#1c1c1e] text-2xl font-bold">
+                      Featured Listings
+                    </h3>
+                    <div className="flex flex-col mt-5">
+                      {randomBlogs &&
+                        randomBlogs.map((item, index) => {
+                          const isoDate = item?.createdAt;
+                          const date = new Date(isoDate);
+
+                          const formatted = date.toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          });
+
+                          return (
+                            <Link
+                              className="flex items-center gap-4 border-t py-4 border-[#e4e4e4]"
+                              key={index}
+                              href={`/blog-details?id=${
+                                item.id
+                              }&title=${encodeURIComponent(item.title)}`}
+                            >
+                              <Image
+                                src={item.photos[0]}
+                                alt={item.title}
+                                width={120}
+                                height={80}
+                                className="object-cover rounded-2xl"
+                              />
+                              <div className="flex flex-col">
+                                <h4 className="text-[#1c1c1e] font-bold text-sm mb-2.5">{item.title}</h4>
+                                <div className="flex items-center gap-1 text-sm font-medium text-[#a3abb0]">
+                                  <Calendar1Icon size={12} />
+                                  <span>{formatted}</span>
+                                </div>
+                              </div>                         
+                            </Link>
+                          );
+                        })}
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="w-[inherit] md:w-3/12 md:sticky md:top-24 md:right-0">
@@ -179,14 +236,30 @@ const page = () => {
                     Categories
                   </h3>
                   <ul className="mt-5">
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Market Updates</li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Buying Tips</li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Investment Insights</li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Accommodation</li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Home Construction</li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Interior Aspirations</li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Community Spotlight</li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Legal Guidance</li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
+                      Market Updates
+                    </li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
+                      Buying Tips
+                    </li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
+                      Investment Insights
+                    </li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
+                      Accommodation
+                    </li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
+                      Home Construction
+                    </li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
+                      Interior Aspirations
+                    </li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
+                      Community Spotlight
+                    </li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
+                      Legal Guidance
+                    </li>
                   </ul>
                 </div>
               </div>
