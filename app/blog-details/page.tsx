@@ -78,7 +78,7 @@ const page = () => {
             </div>
 
             {/* Content */}
-            <div className="w-full py-24 flex md:flex-row flex-col items-start justify-start md:gap-16 gap-10">
+            <div className="w-full py-24 flex md:flex-row flex-col items-start justify-start md:gap-16 gap-10 relative">
               <div className="w-[inherit] md:w-3/4">
                 <h3 className="text-4xl text-[#161e2d] font-extrabold">
                   {blog?.title}
@@ -160,7 +160,7 @@ const page = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-[inherit] md:w-3/12">
+              <div className="w-[inherit] md:w-3/12 md:sticky md:top-24 md:right-0">
                 <div className="flex flex-col gap-6">
                   <h3 className="text-[#1c1c1e] text-2xl font-bold">
                     Search Blog
@@ -173,6 +173,21 @@ const page = () => {
                       placeholder="Search..."
                     />
                   </div>
+                </div>
+                <div className="flex flex-col mt-8">
+                  <h3 className="text-[#1c1c1e] text-2xl font-bold">
+                    Categories
+                  </h3>
+                  <ul className="mt-5">
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Market Updates</li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Buying Tips</li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Investment Insights</li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Accommodation</li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Home Construction</li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Interior Aspirations</li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Community Spotlight</li>
+                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">Legal Guidance</li>
+                  </ul>
                 </div>
               </div>
             </div>
