@@ -39,6 +39,7 @@ import {
   TwitterIcon,
   LinkedinIcon,
   InstagramIcon,
+  CircleUserRound,
 } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -75,6 +76,7 @@ export default function Home() {
   const [propertyType, setPropertyType] = useState("");
   const [propertyTypeDetails, setPropertyTypeDetails] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [blogs, setBlogs] = useState([]);
 
   const fetchPropertyType = async (propertyValue: string) => {
     setLoading(true);
@@ -91,8 +93,22 @@ export default function Home() {
     }
   };
 
+  const handleFetchBlogs = async () => {
+    try {
+      const request = await axios.get("/api/all-blogs");
+      setBlogs(request.data.blogs);
+      console.log(request);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchPropertyType("All");
+  }, []);
+
+  useEffect(() => {
+    handleFetchBlogs();
   }, []);
 
   return (
@@ -867,6 +883,76 @@ export default function Home() {
                 </div>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full bg-[#f3f7fd] py-24">
+        <div className="flex items-center mx-auto justify-center flex-col">
+          <span className="text-[#1563df] font-semibold uppercase">
+            latest news
+          </span>
+          <h2 className="mt-2 text-[#161e2d] font-extrabold md:text-4xl text-2xl">
+            Our Blogs
+          </h2>
+        </div>
+        <div className="max-w-7xl mx-auto px-6 md:px-0 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {blogs?.slice(0, 3).map((items, index) => {
+              const isoDate = items?.createdAt;
+              const date = new Date(isoDate);
+
+              const formatted = date.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              });
+
+              return (
+                <Link
+                  className="group block"
+                  key={index}
+                  href={`/blog-details?id=${
+                    items.id
+                  }&title=${encodeURIComponent(items.title)}`}
+                >
+                  <div className="relative overflow-hidden rounded-2xl w-full h-[220px] sm:h-[280px]">
+                    <Image
+                      src={items?.photos?.[0]}
+                      alt={items?.title}
+                      layout="fill"
+                      objectFit="cover"
+                      className="transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute tracking-widest top-3 left-3 bg-[#1563df] z-10 text-white font-bold text-sm rounded-full px-3 py-1">
+                      {formatted}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 mt-5">
+                    <div className="flex items-center gap-2">
+                      <CircleUserRound className="text-[#1563df]" size={18} />
+                      <span className="text-[#161e2d] text-base font-semibold">
+                        {items?.author.fullName}
+                      </span>
+                    </div>
+                    <div className="relative pl-3 before:content-[''] before:absolute before:w-px before:bg-[#e4e4e4] before:top-[5px] before:bottom-[5px] before:left-0">
+                      <span className="text-[#161e2d] text-base font-semibold">
+                        {items?.category}
+                      </span>
+                    </div>
+                  </div>
+                  <h3 className="text-[#161e2d] group-hover:text-[#1563df] transition-colors text-xl md:text-2xl font-bold mt-2">
+                    {items?.title?.slice(0, 60)}
+                    {items?.title?.length > 60 ? "..." : ""}
+                  </h3>
+                  <p className="text-sm font-medium mt-3 text-[#5c6368]">
+                    {items?.description?.slice(0, 100)}
+                    {items?.description?.length > 100 ? "..." : ""}
+                  </p>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

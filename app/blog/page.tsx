@@ -27,7 +27,6 @@ const page = () => {
     try {
       const request = await axios.get("/api/all-blogs");
       setBlogs(request.data.blogs);
-      console.log(request);
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +66,7 @@ const page = () => {
       </section>
 
       <section className="w-full bg-white">
-        <div className="max-w-7xl mx-auto px-6 py-12 md:px-0">
+        <div className="max-w-7xl mx-auto px-6 md:px-0 mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {blogs &&
               currentBlogs.map((items, index) => {
@@ -88,7 +87,7 @@ const page = () => {
                       items.id
                     }&title=${encodeURIComponent(items.title)}`}
                   >
-                    <div className="relative overflow-hidden rounded-2xl w-[400px] h-[280px]">
+                    <div className="relative overflow-hidden rounded-2xl w-full h-[220px] sm:h-[280px]">
                       <Image
                         src={items?.photos?.[0]}
                         alt={items?.title}
