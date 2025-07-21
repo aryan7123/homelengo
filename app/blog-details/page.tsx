@@ -26,6 +26,7 @@ const page = () => {
 
   const [blog, setBlog] = useState(null);
   const [randomBlogs, setRandomBlogs] = useState(null);
+  const [categories, setCategories] = useState<{ category: string; count: number }[]>([]);
 
   const handleGetBlog = async () => {
     try {
@@ -45,6 +46,31 @@ const page = () => {
       console.log(error);
     }
   };
+
+  const handleFetchCategories = async () => {
+    try {
+      const request = await axios.post("/api/categories-count", {
+        categories: [
+          "Market Updates",
+          "Buying Tips",
+          "Investment Insights",
+          "Accommodation",
+          "Home Construction",
+          "Interior Aspirations",
+          "Community Spotlight",
+          "Legal Guidance",
+        ],
+      });
+      console.log(request);
+      setCategories(request.data.groupedCounts);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleFetchCategories();
+  }, []);
 
   useEffect(() => {
     handleRandomBlogs();
@@ -205,12 +231,14 @@ const page = () => {
                                 className="object-cover rounded-2xl"
                               />
                               <div className="flex flex-col">
-                                <h4 className="text-[#1c1c1e] font-bold text-sm mb-2.5">{item.title}</h4>
+                                <h4 className="text-[#1c1c1e] font-bold text-sm mb-2.5">
+                                  {item.title}
+                                </h4>
                                 <div className="flex items-center gap-1 text-sm font-medium text-[#a3abb0]">
                                   <Calendar1Icon size={12} />
                                   <span>{formatted}</span>
                                 </div>
-                              </div>                         
+                              </div>
                             </Link>
                           );
                         })}
@@ -236,39 +264,40 @@ const page = () => {
                   <h3 className="text-[#1c1c1e] text-2xl font-bold">
                     Categories
                   </h3>
-                  <ul className="mt-5">
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
-                      Market Updates
+                  {categories.map((item, index) => (
+                    <li
+                      key={index}
+                      className="flex items-center justify-between border-b border-[#e4e4e4] py-3 cursor-pointer"
+                    >
+                      <span className="text-[#1c1c1e] font-semibold">
+                        {item.category}
+                      </span>
+                      <span className="text-[#a3abb0] text-sm font-semibold">
+                        ({item._count?.category ?? 0})
+                      </span>
                     </li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
-                      Buying Tips
-                    </li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
-                      Investment Insights
-                    </li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
-                      Accommodation
-                    </li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
-                      Home Construction
-                    </li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
-                      Interior Aspirations
-                    </li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
-                      Community Spotlight
-                    </li>
-                    <li className="text-[#1c1c1e] border-b border-[#e4e4e4] py-3 font-semibold cursor-pointer">
-                      Legal Guidance
-                    </li>
-                  </ul>
+                  ))}
                 </div>
                 <div className="mt-8">
-                  <h3 className="text-[#1c1c1e] text-2xl font-bold mb-3">Join our newsletter</h3>
-                  <span className="text-[#5c6368] text-xs font-medium">Signup to be the first to hear about exclusive deals, special offers and upcoming collections.</span>
+                  <h3 className="text-[#1c1c1e] text-2xl font-bold mb-3">
+                    Join our newsletter
+                  </h3>
+                  <span className="text-[#5c6368] text-xs font-medium">
+                    Signup to be the first to hear about exclusive deals,
+                    special offers and upcoming collections.
+                  </span>
                   <div className="w-full flex items-center justify-between mt-4 border border-[#e4e4e4] rounded-2xl px-2.5 py-3">
-                    <input type="email" name="email" id="email" placeholder="Enter your email" className="w-[inherit] text-[#5c6368] text-sm font-medium outline-none" />
-                    <SendHorizontal size={18} className="text-[#1563df] cursor-pointer" />
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="Enter your email"
+                      className="w-[inherit] text-[#5c6368] text-sm font-medium outline-none"
+                    />
+                    <SendHorizontal
+                      size={18}
+                      className="text-[#1563df] cursor-pointer"
+                    />
                   </div>
                 </div>
               </div>
