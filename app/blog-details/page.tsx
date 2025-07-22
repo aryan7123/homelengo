@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Navbar from "../components/Navbar";
 import ScrollUpButton from "../components/ScrollUpButton";
@@ -23,10 +23,56 @@ import {
 const page = () => {
   const searchParams = useSearchParams();
   const blogId = searchParams.get("id");
-
   const [blog, setBlog] = useState(null);
   const [randomBlogs, setRandomBlogs] = useState(null);
-  const [categories, setCategories] = useState<{ category: string; count: number }[]>([]);
+  const [categories, setCategories] = useState<
+    { category: string; count: number }[]
+  >([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [allBlogs, setAllBlogs] = useState([]);
+  const [debouncedTerm, setDebouncedTerm] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedTerm(searchTerm);
+    }, 400);
+
+    return () => clearTimeout(handler);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `/api/all-blogs?search=${debouncedTerm}`
+        );
+        setAllBlogs(response.data.blogs);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (debouncedTerm.length > 3) {
+      fetchBlogs();
+    } else {
+      setAllBlogs([]);
+    }
+  }, [debouncedTerm]);
+
+  const filteredBlogs = useMemo(() => {
+    if (!Array.isArray(allBlogs)) return [];
+    return allBlogs.filter((item) =>
+      item?.title?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [allBlogs, searchTerm]);
 
   const handleGetBlog = async () => {
     try {
@@ -255,10 +301,50 @@ const page = () => {
                     <SearchIcon size={16} />
                     <input
                       type="text"
+                      value={searchTerm}
                       className="w-full outline-none"
                       placeholder="Search..."
+                      onChange={handleInputChange}
                     />
                   </div>
+                  {loading ? (
+                    <h3 className="text-[#1c1c1e] text-sm font-semibold">
+                      Loading...
+                    </h3>
+                  ) : searchTerm.length > 3 ? (
+                    filteredBlogs.length > 0 ? (
+                      filteredBlogs.map((item, index) => (
+                        <Link
+                          className="flex items-center gap-4 border-t py-4 border-[#e4e4e4]"
+                          key={index}
+                          href={`/blog-details?id=${
+                            item.id
+                          }&title=${encodeURIComponent(item.title)}`}
+                        >
+                          <Image
+                            src={item.photos[0]}
+                            alt={item.title}
+                            width={120}
+                            height={80}
+                            className="object-cover rounded-2xl"
+                          />
+                          <div className="flex flex-col">
+                            <h4 className="text-[#1c1c1e] font-bold text-sm mb-2.5">
+                              {item.title}
+                            </h4>
+                            <div className="flex items-center gap-1 text-sm font-medium text-[#a3abb0]">
+                              <Calendar1Icon size={12} />
+                              <span>{formatted}</span>
+                            </div>
+                          </div>
+                        </Link>
+                      ))
+                    ) : (
+                      <h3 className="text-[#1c1c1e] text-sm font-semibold">
+                        No Blogs Found
+                      </h3>
+                    )
+                  ) : null}
                 </div>
                 <div className="flex flex-col mt-8">
                   <h3 className="text-[#1c1c1e] text-2xl font-bold">
