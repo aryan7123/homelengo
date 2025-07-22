@@ -1,17 +1,28 @@
 "use server";
 
 import { PrismaClient } from "@prisma/client";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const { searchParams } = new URL(req.url);
+    const search = searchParams.get("search");
+
     const blogs = await prisma.blog.findMany({
+      where: search
+        ? {
+            title: {
+              contains: search,
+              mode: "insensitive",
+            },
+          }
+        : undefined,
       include: {
         author: {
           select: {
-            fullName: true
+            fullName: true,
           },
         },
       },
