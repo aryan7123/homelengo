@@ -273,3 +273,23 @@ body {
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 0;
 }
+
+.faqs-page-title {
+  width: 100%;
+  height: 22rem;
+  background-image: url(/banner/page-title-3.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  border-radius: 15px;
+  position: relative;
+}
+
+.faqs-page-title::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
