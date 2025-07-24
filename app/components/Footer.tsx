@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { FacebookIcon, InstagramIcon, LinkedinIcon, LocateIcon, Mail, PhoneCallIcon, TwitterIcon, YoutubeIcon, SendHorizontal } from 'lucide-react';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -51,41 +52,41 @@ const Footer = () => {
               </div>
             </div>
             <div>
-              <h4 className='text-white font-medium mb-4'>Categories</h4>
+              <h4 className='text-white font-semibold mb-4'>Categories</h4>
               <ul className='flex flex-col gap-2'>
-                <li className='nav-link text-base font-medium relative text-[#a3abb0]'>
+                <Link href="/pricing" className='nav-link text-base font-medium relative text-[#a3abb0]'>
                   Pricing Plans
-                </li>
-                <li className='nav-link text-base font-medium relative text-[#a3abb0]'>
+                </Link>
+                <Link href="/our-services" className='nav-link text-base font-medium relative text-[#a3abb0]'>
                   Our Services
-                </li>
-                <li className='nav-link text-base font-medium relative text-[#a3abb0]'>
+                </Link>
+                <Link href="/about-us" className='nav-link text-base font-medium relative text-[#a3abb0]'>
                   About Us
-                </li>
-                <li className='nav-link text-base font-medium relative text-[#a3abb0]'>
+                </Link>
+                <Link href="/contact-us" className='nav-link text-base font-medium relative text-[#a3abb0]'>
                   Contact Us
-                </li>
+                </Link>
               </ul>
             </div>
             <div>
-              <h4 className='text-white font-medium mb-4'>Our Company</h4>
+              <h4 className='text-white font-semibold mb-4'>Our Company</h4>
               <ul className='flex flex-col gap-2'>
-                <li className='nav-link text-base font-medium relative text-[#a3abb0]'>
+                <Link href="/properties" className='nav-link text-base font-medium relative text-[#a3abb0]'>
                   Property For Sale
-                </li>
-                <li className='nav-link text-base font-medium relative text-[#a3abb0]'>
+                </Link>
+                <Link href="/properties" className='nav-link text-base font-medium relative text-[#a3abb0]'>
                   Property For Rent
-                </li>
-                <li className='nav-link text-base font-medium relative text-[#a3abb0]'>
+                </Link>
+                <Link href="/properties" className='nav-link text-base font-medium relative text-[#a3abb0]'>
                   Property For Buy
-                </li>
-                <li className='nav-link text-base font-medium relative text-[#a3abb0]'>
+                </Link>
+                <Link href="/contact-us" className='nav-link text-base font-medium relative text-[#a3abb0]'>
                   Our Agents
-                </li>
+                </Link>
               </ul>
             </div>
             <div>
-              <h4 className='text-white font-medium mb-4'>Newsletter</h4>
+              <h4 className='text-white font-semibold mb-4'>Newsletter</h4>
               <ul className='flex flex-col gap-2'>
                 <li className='text-[#a3abb0]'>Your Weekly / Monthly Dose of Knowledge and Inspiration</li>
               </ul>
@@ -100,9 +101,9 @@ const Footer = () => {
               © {new Date().getFullYear()} Homelengo. All Rights Reserved.
             </div>
             <div className='flex items-center justify-between gap-5'>
-              <span className='text-[#a3abb0] md:text-sm text-xs'>Terms & Conditions</span>
-              <span className='text-[#a3abb0] md:text-sm text-xs'>Privacy and Policy</span>
-              <span className='text-[#a3abb0] md:text-sm text-xs'>Cookie Policy</span>
+              <Link href="/privacy-policy" className='text-[#a3abb0] hover:text-[#1563df] md:text-sm text-xs'>Terms & Conditions</Link>
+              <Link href="/privacy-policy" className='text-[#a3abb0] hover:text-[#1563df] md:text-sm text-xs'>Privacy and Policy</Link>
+              <Link href="/contact-us" className='text-[#a3abb0] hover:text-[#1563df] md:text-sm text-xs'>Cookie Policy</Link>
             </div>
           </div>
         </div>

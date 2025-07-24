@@ -18,22 +18,22 @@ const Navbar = () => {
                             <Image src="/logo/logo@2x.png" width={160} height={80} alt='logo'></Image>
                         </Link>
                         <ul className='md:flex hidden items-center justify-between gap-12'>
-                            <li className={`${pathname === '/' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-medium relative`}>
+                            <li className={`${pathname === '/' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-bold relative`}>
                                 <Link href="/">Home</Link>
                             </li>
-                            <li className={`${pathname === '/about-us' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-medium relative`}>
+                            <li className={`${pathname === '/about-us' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-bold relative`}>
                                 <Link href="/about-us">About Us</Link>
                             </li>
-                            <li className={`${pathname === '/properties' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-medium relative`}>
+                            <li className={`${pathname === '/properties' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-bold relative`}>
                                 <Link href="/properties">Properties</Link>
                             </li>
-                            <li className={`${pathname === '/our-services' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-medium relative`}>
+                            <li className={`${pathname === '/our-services' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-bold relative`}>
                                 <Link href="/our-services">Our Services</Link>
                             </li>
-                            <li className={`${pathname === '/blog' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-medium relative`}>
+                            <li className={`${pathname === '/blog' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-bold relative`}>
                                 <Link href="/blog">Blog</Link>
                             </li>
-                            <li className={`${pathname === '/contact-us' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-medium relative`}>
+                            <li className={`${pathname === '/contact-us' ? 'text-[#1563df] active-nav' : 'text-[#161e2d] nav-link'} text-base font-bold relative`}>
                                 <Link href="/contact-us">Contact Us</Link>
                             </li>
                             <AuthModals />
