@@ -33,7 +33,7 @@ export function AuthModals() {
       {session && (status === "authenticated") ? (
         <Link
           href="/dashboard"
-          className="w-40 flex text-[#161e2d] items-center justify-center gap-1.5 border-[#1563df] border-2 rounded-3xl py-3 hover:bg-[#1563df] hover:text-white transition-colors"
+          className="w-40 flex text-[#161e2d] font-bold items-center justify-center gap-1.5 border-[#1563df] border-2 rounded-3xl py-3 hover:bg-[#1563df] hover:text-white transition-colors"
         >
           <User size={18} />
           <span>Dashboard</span>
@@ -42,7 +42,7 @@ export function AuthModals() {
         <>
           <button
             type="button"
-            className="w-32 flex text-[#161e2d] items-center justify-center gap-1.5 border-[#1563df] border-2 rounded-3xl py-3 hover:bg-[#1563df] hover:text-white transition-colors"
+            className="w-32 flex text-[#161e2d] font-bold items-center justify-center gap-1.5 border-[#1563df] border-2 rounded-3xl py-3 hover:bg-[#1563df] hover:text-white transition-colors"
             onClick={handleOpenLogin}
           >
             <User size={18} />
