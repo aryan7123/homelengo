@@ -8,10 +8,10 @@ const Partners = () => {
       <div className="w-full mb-20 mt-14 bg-[#f3f7fd] rounded-2xl relative">
         <div className="flex md:flex-row flex-col md:items-center items-start md:justify-between md:gap-0 gap-10 justify-start">
           <div className="md:pl-20 pl-6 md:pt-0 pt-10 pr-5">
-            <span className="uppercase text-sm font-medium text-[#1563df]">
+            <span className="uppercase text-sm font-semibold text-[#1563df]">
               become partners
             </span>
-            <h3 className="md:text-4xl text-2xl mt-3 text-[#161e2d] text-balance font-semibold">
+            <h3 className="md:text-4xl text-2xl mt-3 text-[#161e2d] text-balance font-bold">
               List your Properties on Homelengo, join Us Now!
             </h3>
             <button

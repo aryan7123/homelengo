@@ -5,7 +5,14 @@ import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ArrowRight, CircleCheck } from "lucide-react";
-import Faqs from "../components/Faqs";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import Partners from "../components/Partners";
 
 const page = () => {
   return (
@@ -24,7 +31,7 @@ const page = () => {
               </h2>
             </div>
           </div>
-          <div className="w-[inherit] mx-auto py-24">
+          <div className="w-[inherit] mx-auto py-12">
             <div className="flex flex-col items-center justify-center">
               <span className="text-[#1563df] uppercase text-sm font-semibold mb-2">
                 pricing
@@ -290,6 +297,103 @@ const page = () => {
                 </button>
               </div>
             </div>
+          </div>
+          <div className="w-[inherit] mx-auto py-6">
+            <div className="flex flex-col">
+              <span className="text-[#1563df] text-center uppercase text-sm font-semibold">
+                faqs
+              </span>
+              <h2 className="mt-2 text-[#161e2d] text-center font-extrabold md:text-4xl text-2xl">
+                Frequently Asked Questions
+              </h2>
+            </div>
+            <Accordion
+              type="single"
+              collapsible
+              className="w-full mt-10"
+              defaultValue="item-1"
+            >
+              <AccordionItem
+                className="border border-[#e4e4e4] rounded-2xl py-1 px-6 mb-3 data-[state=open]:shadow-md"
+                value="item-1"
+              >
+                <AccordionTrigger className="text-xl text-[#161e2d] font-semibold data-[state=open]:text-blue-600">
+                  What upfront costs should I expect when renting a property?
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-2">
+                  <p className="text-sm text-[#5c6368] font-medium">
+                    Most rental agreements require a security deposit (typically
+                    1–2 months’ rent), the first month’s rent, and occasionally
+                    a non-refundable application or service fee.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem
+                className="border border-[#e4e4e4] rounded-2xl py-1 px-6 mb-3 data-[state=open]:shadow-md"
+                value="item-2"
+              >
+                <AccordionTrigger className="text-xl text-[#161e2d] font-semibold data-[state=open]:text-blue-600">
+                  Are there any hidden charges in rental or property agreements?
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-2">
+                  <p className="text-sm text-[#5c6368] font-medium">
+                    Always review the lease agreement. Some landlords may charge
+                    for maintenance, utilities, or parking separately. Clarify
+                    these before signing to avoid surprises.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem
+                className="border border-[#e4e4e4] rounded-2xl mb-3 py-1 px-6 data-[state=open]:shadow-md"
+                value="item-3"
+              >
+                <AccordionTrigger className="text-xl text-[#161e2d] font-semibold data-[state=open]:text-blue-600">
+                  Can I negotiate the rental price or payment terms?
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-2">
+                  <p className="text-sm text-[#5c6368] font-medium">
+                    Yes, in many cases. Depending on market demand and the
+                    landlord&apos;s flexibility, you may negotiate rent, payment
+                    deadlines, or include certain utilities in the monthly
+                    price.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem
+                className="border border-[#e4e4e4] rounded-2xl mb-3 py-1 px-6 data-[state=open]:shadow-md"
+                value="item-4"
+              >
+                <AccordionTrigger className="text-xl text-[#161e2d] font-semibold data-[state=open]:text-blue-600">
+                  What payment methods are accepted for rent or property
+                  purchases?
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-2">
+                  <p className="text-sm text-[#5c6368] font-medium">
+                    Landlords or agencies typically accept bank transfers,
+                    online payment portals, post-dated cheques, or credit/debit
+                    cards. Always get receipts or digital confirmations.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem
+                className="border border-[#e4e4e4] rounded-2xl py-1 px-6 data-[state=open]:shadow-md"
+                value="item-5"
+              >
+                <AccordionTrigger className="text-xl text-[#161e2d] font-semibold data-[state=open]:text-blue-600">
+                  Is the security deposit refundable?
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-2">
+                  <p className="text-sm text-[#5c6368] font-medium">
+                    Yes, if there are no damages or unpaid dues. The deposit is
+                    usually refunded after a final inspection, as per the terms
+                    in the rental agreement.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+          <div className="mt-6">
+            <Partners />
           </div>
         </div>
       </section>
