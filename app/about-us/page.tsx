@@ -1,13 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, PhoneCallIcon } from "lucide-react";
+import { ArrowRight, PhoneCallIcon, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import CarouselSlider from "../components/CarouselSlider";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import axios from "axios";
 import {
   FacebookIcon,
   TwitterIcon,
@@ -16,10 +20,59 @@ import {
   Mail,
 } from "lucide-react";
 import ScrollUpButton from "../components/ScrollUpButton";
-import Testimonials from "../components/Testimonials";
-import Partners from "../components/Partners";
 
 const page = () => {
+  const [allReviews, setAllReviews] = useState([]);
+
+  const fetchAllReviews = async () => {
+    try {
+      const req = await axios.get("/api/all-reviews");
+      setAllReviews(req.data.reviews);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const settings = {
+    infinite: true, // changed to true
+    speed: 800, // smoother transition
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2500, // slightly slower for readability
+    cssEase: "ease-in-out", // smoother easing
+    pauseOnHover: true, // better UX
+    lazyLoad: "ondemand", // improves performance
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  useEffect(() => {
+    fetchAllReviews();
+  }, []);
   return (
     <>
       <Navbar />
@@ -58,7 +111,7 @@ const page = () => {
               >
                 <Link href="#" className="block relative">
                   <Image
-                    src="/agents/agent-1.jpg"
+                    src="/agents/agent-5.jpg"
                     width={100}
                     height={100}
                     alt="image-agent"
@@ -299,12 +352,20 @@ const page = () => {
               />
             </div>
             <div className="w-full md:w-[50%]">
-              <span className="uppercase text-[#1563ef] font-bold text-base">our benefit</span>
-              <h2 className="capitalize mt-2 text-[#161e2d] text-4xl leading-10 font-bold">Discover what sets our Real Estate expertise apart</h2>
-              <p className="mt-5 text-[#5c6368] text-sm">Our seasoned professionals, armed with extensive market knowledge, walk alongside you through every phase of your property endeavor.</p>
+              <span className="uppercase text-[#1563ef] font-bold text-base">
+                our benefit
+              </span>
+              <h2 className="capitalize mt-2 text-[#161e2d] text-4xl leading-10 font-bold">
+                Discover what sets our Real Estate expertise apart
+              </h2>
+              <p className="mt-5 text-[#5c6368] text-sm">
+                Our seasoned professionals, armed with extensive market
+                knowledge, walk alongside you through every phase of your
+                property endeavor.
+              </p>
               <div className="flex flex-col gap-7 mt-10">
                 <div className="bg-white flex items-start gap-5 shadow-sm rounded-2xl p-7 transition-transform group cursor-pointer hover:scale-105">
-                  <Image 
+                  <Image
                     src="/logo/home.png"
                     alt="home-logo"
                     width={60}
@@ -312,20 +373,29 @@ const page = () => {
                     className="transition-transform duration-700 group-hover:[transform:rotateY(360deg)]"
                   />
                   <div className="flex flex-col gap-3">
-                    <h3 className="text-2xl font-semibold text-[#161e2d]">Buy A New Home</h3>
-                    <p className="text-sm text-[#5c6368]">Explore diverse properties and expert guidance for a seamless buying experience.</p>
+                    <h3 className="text-2xl font-semibold text-[#161e2d]">
+                      Buy A New Home
+                    </h3>
+                    <p className="text-sm text-[#5c6368]">
+                      Explore diverse properties and expert guidance for a
+                      seamless buying experience.
+                    </p>
                     <div className="flex items-center gap-1">
-                      <span className="relative text-base font-semibold text-[#161e2d]
+                      <span
+                        className="relative text-base font-semibold text-[#161e2d]
                       after:content-[''] after:absolute after:left-0 after:-bottom-0.5
                       after:h-0.5 after:w-0 after:bg-[#161e2d]
                       after:transition-all after:duration-300 after:ease-out
-                      group-hover:after:w-full">Explore Now</span>
-                      <ArrowRight size={16} className="text-[#1563ef]"/>
+                      group-hover:after:w-full"
+                      >
+                        Explore Now
+                      </span>
+                      <ArrowRight size={16} className="text-[#1563ef]" />
                     </div>
                   </div>
                 </div>
                 <div className="bg-white flex items-start gap-5 shadow-sm rounded-2xl p-7 transition-transform group cursor-pointer hover:scale-105">
-                  <Image 
+                  <Image
                     src="/logo/keys.png"
                     alt="key-logo"
                     width={60}
@@ -333,20 +403,29 @@ const page = () => {
                     className="transition-transform duration-700 group-hover:[transform:rotateY(360deg)]"
                   />
                   <div className="flex flex-col gap-3">
-                    <h3 className="text-2xl font-semibold text-[#161e2d]">Rent a Home</h3>
-                    <p className="text-sm text-[#5c6368]">Explore a diverse variety of listings tailored precisely to suit your unique lifestyle needs.</p>
+                    <h3 className="text-2xl font-semibold text-[#161e2d]">
+                      Rent a Home
+                    </h3>
+                    <p className="text-sm text-[#5c6368]">
+                      Explore a diverse variety of listings tailored precisely
+                      to suit your unique lifestyle needs.
+                    </p>
                     <div className="flex items-center gap-1">
-                      <span className="relative text-base font-semibold text-[#161e2d]
+                      <span
+                        className="relative text-base font-semibold text-[#161e2d]
                       after:content-[''] after:absolute after:left-0 after:-bottom-0.5
                       after:h-0.5 after:w-0 after:bg-[#161e2d]
                       after:transition-all after:duration-300 after:ease-out
-                      group-hover:after:w-full">Explore Now</span>
-                      <ArrowRight size={16} className="text-[#1563ef]"/>
+                      group-hover:after:w-full"
+                      >
+                        Explore Now
+                      </span>
+                      <ArrowRight size={16} className="text-[#1563ef]" />
                     </div>
                   </div>
                 </div>
                 <div className="bg-white flex items-start gap-5 shadow-sm rounded-2xl p-7 transition-transform group cursor-pointer hover:scale-105">
-                  <Image 
+                  <Image
                     src="/logo/location.png"
                     alt="location-logo"
                     width={60}
@@ -354,20 +433,90 @@ const page = () => {
                     className="transition-transform duration-700 group-hover:[transform:rotateY(360deg)]"
                   />
                   <div className="flex flex-col gap-3">
-                    <h3 className="text-2xl font-semibold text-[#161e2d]">Sell Your Home</h3>
-                    <p className="text-sm text-[#5c6368]">Showcasing your property&apos;s best features for a rapid and successful sale.</p>
+                    <h3 className="text-2xl font-semibold text-[#161e2d]">
+                      Sell Your Home
+                    </h3>
+                    <p className="text-sm text-[#5c6368]">
+                      Showcasing your property&apos;s best features for a rapid
+                      and successful sale.
+                    </p>
                     <div className="flex items-center gap-1">
-                      <span className="relative text-base font-semibold text-[#161e2d]
+                      <span
+                        className="relative text-base font-semibold text-[#161e2d]
                       after:content-[''] after:absolute after:left-0 after:-bottom-0.5
                       after:h-0.5 after:w-0 after:bg-[#161e2d]
                       after:transition-all after:duration-300 after:ease-out
-                      group-hover:after:w-full">Explore Now</span>
-                      <ArrowRight size={16} className="text-[#1563ef]"/>
+                      group-hover:after:w-full"
+                      >
+                        Explore Now
+                      </span>
+                      <ArrowRight size={16} className="text-[#1563ef]" />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="bg-white w-full">
+        <div className="flex md:flex-row flex-col items-start">
+          <div className="relative w-full md:w-[45%] md:h-[600px] h-[400px]">
+            <Image
+              src="/banner/banner-tes.jpg"
+              alt="testimonial-banner"
+              fill
+              className="object-cover"
+              priority
+              quality={100}
+            />
+            <div className="absolute left-12 bottom-12 right-6">
+              <h3 className="text-white font-bold text-3xl mb-5">
+                Our Testimonials
+              </h3>
+              <span className="text-white text-sm font-semibold">
+                Our seasoned team excels in real estate with years of successful
+                market navigation, offering informed decisions and optimal
+                results.
+              </span>
+            </div>
+          </div>
+          <div className="w-full h-full md:w-[55%] md:py-24 md:pl-12 md:pr-28 px-6 py-12">
+            <Slider {...settings}>
+              {allReviews &&
+                allReviews.map((review, index) => (
+                  <div key={index} className="px-3">
+                    <div className="bg-[#f3f7fd] rounded-2xl p-6 h-[270px] w-full flex flex-col justify-between">
+                      {/* Review Text */}
+                      <p className="text-base font-semibold text-balance line-clamp-5 overflow-hidden">
+                        &quot;{review?.comment}&quot;
+                      </p>
+                      {/* User Info and Stars */}
+                      <div className="mt-4">
+                        <h3 className="text-[#161e2d] font-bold">
+                          {review?.username}
+                        </h3>
+                        <div className="flex items-center mt-2">
+                          {[...Array(5)].map((_, i) => {
+                            const starValue = i + 1;
+                            return (
+                              <Star
+                                key={starValue}
+                                size={16}
+                                className={`${
+                                  review?.rating >= starValue
+                                    ? "fill-yellow-400 text-yellow-400"
+                                    : "fill-gray-400 text-gray-400"
+                                }`}
+                              />
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </Slider>
           </div>
         </div>
       </section>
