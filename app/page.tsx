@@ -695,7 +695,7 @@ export default function Home() {
             >
               <Link href="#" className="block relative">
                 <Image
-                  src="/agents/agent-1.jpg"
+                  src="/agents/agent-5.jpg"
                   width={100}
                   height={100}
                   alt="image-agent"
