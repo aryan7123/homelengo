@@ -486,9 +486,9 @@ const page = () => {
               {allReviews &&
                 allReviews.map((review, index) => (
                   <div key={index} className="px-3">
-                    <div className="bg-[#f3f7fd] rounded-2xl p-6 h-[270px] w-full flex flex-col justify-between">
+                    <div className="w-full flex flex-col justify-between">
                       {/* Review Text */}
-                      <p className="text-base font-semibold text-balance line-clamp-5 overflow-hidden">
+                      <p className="text-base md:text-3xl md:leading-10 capitalize font-semibold text-balance line-clamp-5 overflow-hidden">
                         &quot;{review?.comment}&quot;
                       </p>
                       {/* User Info and Stars */}
